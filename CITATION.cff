@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "Hierarchical Latent Workspace Model: two negative-results preprints"
+abstract: >-
+  Two preprints from a twenty-day, ten-experiment preregistered attempt to build a
+  latent-workspace language model on a frozen Qwen3-0.6B decoder wrapped in trainable
+  sidecars. All three proposed mechanisms failed their preregistered gates. With the
+  operative premise deleted from the decoder's input token ids, generation through the
+  latent channel scored 0.000 on all 99 masked rows on both seeds while a linear probe
+  recovered roughly 0.30 of the withheld premise: the channel was readable but not usable.
+authors:
+  - family-names: Yaddanapudi
+    given-names: Karthik
+    email: karthikyaddana@gmail.com
+    affiliation: Independent Researcher
+repository-code: "https://github.com/karthikyaddana/hierarchical-latent-workspace-model"
+license: CC-BY-4.0
+date-released: 2026-09-05
+keywords:
+  - machine learning
+  - language models
+  - latent reasoning
+  - interpretability
+  - negative results
+  - preregistration
