@@ -1,5 +1,8 @@
 # Hierarchical Latent Workspace Model — papers
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22343152.svg)](https://doi.org/10.5281/zenodo.22343152)
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+
 Two preprints from a twenty-day, ten-experiment preregistered attempt to build a
 latent-workspace language model: a frozen Qwen3-0.6B decoder wrapped in 73M–132M
 trainable sidecars implementing a root-preserving expert graph, isolated parallel
@@ -64,6 +67,21 @@ tectonic -X compile paper/hlwm-paper.tex
 ```
 
 `pdflatex` twice also works (the papers use `lastpage`, so a second pass is needed).
+
+## Citing
+
+```bibtex
+@misc{yaddanapudi2026hlwm,
+  author       = {Karthik Yaddanapudi},
+  title        = {Hierarchical Latent Workspace Model: two negative-results preprints},
+  year         = {2026},
+  publisher    = {Zenodo},
+  doi          = {10.5281/zenodo.22343152},
+  url          = {https://doi.org/10.5281/zenodo.22343152}
+}
+```
+
+The DOI above is the concept DOI and always resolves to the latest version.
 
 ## License
 
