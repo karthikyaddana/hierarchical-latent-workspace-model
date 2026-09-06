@@ -44,7 +44,7 @@ its underlying episode records, the v5.6 splits and the evaluation packets.
 ### 1. Readable but Not Usable — [`paper/postmortem-paper.pdf`](paper/postmortem-paper.pdf)
 
 *A Preregistered Post-Mortem of a Latent-Workspace Language Model, Including Its Own
-Novelty Audit* (28 pp)
+Novelty Audit* (28 pp) · [doi:10.5281/zenodo.22538269](https://doi.org/10.5281/zenodo.22538269)
 
 The decisive experiment deleted the operative premise from the decoder's input token
 ids, so the latent channel was the only route from evidence to answer. Generation
@@ -64,7 +64,8 @@ classes, including gates hardcoded to pass and an expert graph the trainer never
 
 ### 2. The Hierarchical Latent Workspace Model — [`paper/hlwm-paper.pdf`](paper/hlwm-paper.pdf)
 
-*Root-Preserving Variable-Depth Expertise for Parallel Diffusion Reasoning* (56 pp)
+*Root-Preserving Variable-Depth Expertise for Parallel Diffusion Reasoning* (56 pp) ·
+[doi:10.5281/zenodo.22538271](https://doi.org/10.5281/zenodo.22538271)
 
 The full technical report: the proposed architecture, and the ten preregistered
 prototype experiments that falsified it at this scale. Routing passed its load gates on
@@ -138,25 +139,45 @@ the uploadable run bundles. Credentials are read from environment variables only
 
 ## Citing
 
-`10.5281/zenodo.22343152` is the concept DOI and always resolves to the latest version.
-Per-paper DOIs are being minted as separate Zenodo preprint records; until they resolve,
-both entries below carry the concept DOI.
+Each paper has its own DOI; the repository has a third for the code and experimental
+record. Every DOI below is a **concept DOI** — it always resolves to the latest version.
+Cite the version DOI instead only if you need to pin an exact revision.
+
+| Record | Concept DOI | v1 |
+| --- | --- | --- |
+| Readable but Not Usable | [10.5281/zenodo.22538269](https://doi.org/10.5281/zenodo.22538269) | `10.5281/zenodo.22538270` |
+| The Hierarchical Latent Workspace Model | [10.5281/zenodo.22538271](https://doi.org/10.5281/zenodo.22538271) | `10.5281/zenodo.22538272` |
+| Code and experimental record (this repo) | [10.5281/zenodo.22343152](https://doi.org/10.5281/zenodo.22343152) | `10.5281/zenodo.22343153` |
 
 ```bibtex
 @misc{yaddanapudi2026postmortem,
-  author = {Karthik Yaddanapudi},
-  title  = {Readable but Not Usable: A Preregistered Post-Mortem of a
-            Latent-Workspace Language Model, Including Its Own Novelty Audit},
-  year   = {2026},
-  doi    = {10.5281/zenodo.22343152}
+  author    = {Karthik Yaddanapudi},
+  title     = {Readable but Not Usable: A Preregistered Post-Mortem of a
+               Latent-Workspace Language Model, Including Its Own Novelty Audit},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.22538269},
+  url       = {https://doi.org/10.5281/zenodo.22538269}
 }
 
 @misc{yaddanapudi2026hlwm,
-  author = {Karthik Yaddanapudi},
-  title  = {The Hierarchical Latent Workspace Model: Root-Preserving
-            Variable-Depth Expertise for Parallel Diffusion Reasoning},
-  year   = {2026},
-  doi    = {10.5281/zenodo.22343152}
+  author    = {Karthik Yaddanapudi},
+  title     = {The Hierarchical Latent Workspace Model: Root-Preserving
+               Variable-Depth Expertise for Parallel Diffusion Reasoning},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.22538271},
+  url       = {https://doi.org/10.5281/zenodo.22538271}
+}
+
+@misc{yaddanapudi2026hlwmrecord,
+  author    = {Karthik Yaddanapudi},
+  title     = {Hierarchical Latent Workspace Model: code, experimental record
+               and two negative-results preprints},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.22343152},
+  url       = {https://doi.org/10.5281/zenodo.22343152}
 }
 ```
 

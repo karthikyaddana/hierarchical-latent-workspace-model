@@ -38,7 +38,13 @@ references:
     authors:
       - family-names: Yaddanapudi
         given-names: Karthik
+        affiliation: Independent Researcher
     year: 2026
+    doi: "10.5281/zenodo.22538269"
+    url: "https://doi.org/10.5281/zenodo.22538269"
+    publisher:
+      name: Zenodo
+    license: CC-BY-4.0
   - type: article
     title: >-
       The Hierarchical Latent Workspace Model: Root-Preserving Variable-Depth
@@ -46,4 +52,10 @@ references:
     authors:
       - family-names: Yaddanapudi
         given-names: Karthik
+        affiliation: Independent Researcher
     year: 2026
+    doi: "10.5281/zenodo.22538271"
+    url: "https://doi.org/10.5281/zenodo.22538271"
+    publisher:
+      name: Zenodo
+    license: CC-BY-4.0
