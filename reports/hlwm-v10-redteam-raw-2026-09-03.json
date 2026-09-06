@@ -1,0 +1,198 @@
+[
+ {
+  "key": "gate-winnability",
+  "kills": [
+   {
+    "severity": "fatal",
+    "claim": "Step-1,200 go/no-go: masked acc > 0 (gate guarding 4.9h of downstream spend and the abort branch)",
+    "evidence": "The gate is vacuous under the guess floor. With ~99 masked rows split over 4 families, a stone-dead channel scores masked acc ~0.17 by chance alone: ordering of 3 items guesses at 1/6 (~4/25 rows), abstention family at ~1/2 if the label space is binary (~12/25 rows). Even a uniform 2% guess rate on pure numerics passes '>0' with probability 0.865 (P(0 of 99)=0.135). v9's 0.000 happened only because the model emitted scaffold garbage instead of answer-shaped strings; any model that emits plausible answers clears >0 with a dead channel. Consequence: the abort branch (fully-powered abstention audit + plain-LoRA control, the plan's best deliverable in the dead-channel world) is unreachable in exactly the failure mode it was built for.",
+    "fix": "Gate on numeric/unit families only (guess rate ~0) with a count threshold above noise, e.g. masked numeric acc >= 5/60, OR gate on masked minus shuffled-prefix > 0 at step 1,200 using a quick paired eval."
+   },
+   {
+    "severity": "fatal",
+    "claim": "Primary B conjunct: 'the w/o-L1 ablation shows a material drop' via a checkpoint trained <=300 extra steps with gamma=0 from the main checkpoint, gated at ablation - full <= -0.10",
+    "evidence": "The cited CODI evidence (43.7 -> 24.5) is a FROM-SCRATCH w/o-L1 training run. The plan's arm instead continues training a converged checkpoint for 300 steps with the L1 term removed but CE_student and CE_CoLaR retained \u2014 losses that condition on the already-working latents and therefore actively PRESERVE channel function. Removing a regularizer is not pressure to unlearn; expected drop ~= 0 by mechanism, and even a real drop must exceed 0.10 on ~99 rows where SE(delta) ~= 0.068 (a true -0.10 drop passes only 25% both-seed). Since Claim B is an AND of margin gates and this conjunct, Claim B is structurally unwinnable even when the channel is genuinely live \u2014 the exact v8 unwinnable-headline pattern (N\u00b7p\u00b7(1-p)^(N-1)) recurring.",
+    "fix": "Retrain the w/o-L1 arm from the WARM checkpoint through the main phase at a matched (possibly reduced, e.g. 800-step) budget with the full arm compared at the same step count; or demote w/o-L1 from Claim B conjunct to supporting diagnostic so Claim B rests on the margin gates alone."
+   },
+   {
+    "severity": "fatal",
+    "claim": "Audit phase: 720 fresh + ~230 reclaimed rows plus all \u00a74 arms in 3.7h",
+    "evidence": "At v9's measured 18-19 s/row, 3.7h buys 701-740 row-decodes per seed. Required: 720 fresh abstention rows + 7 channel arms (full/no-prefix/shuffled/pause/w-o-L1/steering/gist) x ~99 masked rows = 693 more = 1,413 rows/seed = 7.26h, i.e. ~2x budget \u2014 before counting (a) the w/o-L1 arm's 300 training steps = 0.87h at the plan's own 10.4 s/step, absent from the phase table, and (b) the mandatory semantic-entropy baseline, which needs an N=8 pool per audit row (5,760 decodes/seed) if pools aren't harvested for fresh audit rows. The 'never cut' list is arithmetically unaffordable at measured throughput; something on it gets cut mid-session, unpreregistered.",
+    "fix": "Add audit s/row to the smoke measurements as a blocking gate; publish a per-arm row-count table that sums to 3.7h at measured throughput (e.g. channel arms on a 64-row masked core, abstention fresh rows sized to remaining time with deficit preregistered to the e-process session); move w/o-L1's 300 steps into the phase table; state explicitly whether semantic entropy reuses harvest pools or requires audit-row pools."
+   },
+   {
+    "severity": "major",
+    "claim": "Warm kill gate: 'calibrate on first 200 warm steps; slope positive over 200-600 AND level within the band derived from smoke extrapolation'",
+    "evidence": "The gate is self-referential and cannot kill. The band is extrapolated from a 100-step smoke plus the run's own first 200 steps: a slow, useless trajectory (EM 0.03 -> 0.07) produces a low extrapolated band, sits inside it, and has positive OLS slope \u2014 gate passes precisely when learning is bad but self-consistent. Deleting the fixed 0.98 threshold removed the only absolute anchor, so rung 1 ('channel terminal, abort-branch deliverable') is nearly unreachable regardless of reconstruction quality; combined with the vacuous step-1,200 gate, the plan has NO functioning tripwire between step 0 and the final audit. The gate's operating characteristics (P(kill|dead), P(kill|healthy-slow)) are unknown at prereg time \u2014 it is undecidable in the prereg sense.",
+    "fix": "Preregister an absolute digit-level EM floor at step 600 fixed BEFORE the warm phase starts (e.g. >=0.50, informed by CODI/ICAE reconstruction curves), plus a relative growth requirement (EM@600 >= 2x EM@200); keep the trajectory band as telemetry only."
+   },
+   {
+    "severity": "major",
+    "claim": "Margin gates on ~99 masked rows/seed: latent_channel_live >= 0.10, beats_pause >= 0.05 (claim) / >= 0.10 (strong)",
+    "evidence": "SE of a two-arm accuracy delta at n=99, p~0.35 is 0.068. Point-estimate threshold gates pass 50%/seed when the true effect equals the margin, so both-seed (rung 4) pass probability is 25% at a threshold-true effect; 80% both-seed pass requires true delta >= 0.185 for the 0.10 gates and >= 0.135 for beats_pause \u2014 roughly double the stated margins. The 0.05 claim tier and 0.10 strong tier are separated by 0.74 SE and are statistically indistinguishable at this n. Given the preregistered exposure gap (8.8k presentations vs the literature's 2e5+), the undisclosed real bar is a ~0.19 effect from ~4% of published training exposure.",
+    "fix": "Either (a) pair the arms on identical rows and gate on a one-sided 90% lower confidence bound > 0 with the point margin reported descriptively, or (b) size the masked audit core to >=215 rows/seed (SE 0.046) and disclose the true-effect-needed-for-80%-pass number (0.158) in the plan; delete the two-tier distinction or set tiers >=2 SE apart."
+   },
+   {
+    "severity": "major",
+    "claim": "Primary A sequential design: DeLong/Stouffer reject at z >= 1.645 on ~2,060 in-run rows, then e-process top-up to >= 4,600",
+    "evidence": "Three defects: (1) row arithmetic \u2014 720 fresh + 230 reclaimed = 950/seed x 2 seeds = 1,900 pooled, not 2,060 (and the cut order's 576-fresh option gives 1,612); (2) power at the claimed numbers is 63% (1,900: 60%; 1,612: 54%), so the in-run 'go/no-go' is a near-coin-flip look; (3) if the fixed-n z >= 1.645 test can declare victory in-run AND the e-process continues on failure, that is two confirmatory looks without alpha spending \u2014 simulated naive type I = 8.25% vs nominal 5% (correlation sqrt(2060/4600) between looks). The claim's error guarantee is silently broken.",
+    "fix": "Fix the 2,060 -> 1,900 arithmetic; make the e-process the SINGLE confirmatory analysis from row 1 (in-run look is futility-only, no rejection), or preregister a group-sequential boundary (O'Brien-Fleming: z >= ~2.42 at 41% information, z >= 1.68 at final)."
+   },
+   {
+    "severity": "minor",
+    "claim": "probe_generation_gap: probe acc - generation acc <= 0.10",
+    "evidence": "The gate PASSES when the probe is weak: an undertrained or floor-level probe (probe ~= gen ~= chance) gives gap ~= 0 and a clean pass while diagnosing nothing \u2014 it rewards a worse instrument. Probe n, training split, and target (premise vs answer) are unspecified, so the gate is undecidable as preregistered; it is only non-vacuous if explicitly conjunctive with latent_channel_live, which the plan implies but never states.",
+    "fix": "State the conjunction explicitly (gap gate evaluated only if channel_live passes), specify probe target/split/n, and add a probe-liveness precondition (probe acc >= chance + 0.10) before the gap is interpreted."
+   },
+   {
+    "severity": "minor",
+    "claim": "Teacher-ceiling per band measured in the 0.3h smoke; failing bands excluded from channel gates",
+    "evidence": "A 100-step smoke leaves ~20-30 eval rows per difficulty band; band-level accuracy has SE ~0.09, so band inclusion/exclusion flips on noise. Exclusion shrinks the masked-row denominator below the assumed ~99 post hoc, silently worsening every margin-gate calculation in the kill above (at n=60, SE(delta) rises to 0.087 and the 0.10 margin becomes a 1.1-SE gate).",
+    "fix": "Freeze band exclusion on >=100 teacher rows per band generated offline before the session (teacher ceiling needs no training, only the frozen base + gold traces), and preregister the minimum masked-core size below which channel gates are declared underpowered rather than evaluated."
+   }
+  ],
+  "lens": "GATE WINNABILITY \u2014 arithmetic audit of every gate, margin, and budget line: detectable effect sizes at the stated row counts, vacuous-by-construction gates (guess floors, self-referential bands), unwinnable-by-construction conjuncts (the v8 pattern), and whether the audit phase can physically execute the never-cut arm list at measured throughput.",
+  "verdict": "plan-survives-with-fixes"
+ },
+ {
+  "key": "budget-arithmetic",
+  "kills": [
+   {
+    "severity": "fatal",
+    "claim": "Load-bearing audit arm (c): 'matched-capacity r32 dense MLP-LoRA control', listed under 'Never cut', with the session table allocating it zero hours.",
+    "evidence": "The r32 dense control replaces the routed-expert architecture, so it is a separately TRAINED model \u2014 you cannot audit an untrained control. Matched steps = 2,200 (600 warm + 1,600 main) at even the plan's own 10.4 s/step = 6.4h; at corrected 13.5\u201317 s/step = 8\u201310h. The ledger totals 11.7h/12h with 0.3h slack and both GPUs occupied one-seed-each all session; the abort branch frees ~5h ONLY when the channel fails, i.e. exactly when the experts claim no longer needs the control. As written, rung-4 success makes the never-cut control unpayable.",
+    "fix": "Move the r32 dense control training into the rung-4 mandatory plain-LoRA control session (same follow-up session, matched steps), and demote the in-session experts readout to arms (a)+(b) only (cross-routing + router-delta), which need no extra training."
+   },
+   {
+    "severity": "fatal",
+    "claim": "'Throughput assumption: joint step \u2248 1.8\u20132.0\u00d7 v9's 5.2 s/step \u2192 10.4 s/step worst case'; main train 1,600 steps in 4.9h.",
+    "evidence": "v9's measured 5.2 s/step bought ~2\u20132.5 fwd+bwd passes (workspace TF + answer channel + probes; v9's own ledger added \u00d71.15 aux overhead). v10's main step is \u22654 pass-equivalents: teacher CE, student CE with 6 SEQUENTIAL in-graph latent forwards plus backward through the recurrent chain (96 serial 1-token graph-building forwards per optimizer step at accum 16), CoLaR teacher-forced CE (different latent inputs than the student pass \u2014 unshareable), and recon CE, plus sidecar KV-head computation on 3 of 4 passes and free-running decode on 25% of steps. Pass-count ratio alone is 2.0\u20132.75\u00d7; with serial latency the realistic step is 13.5\u201317 s. 1,600 \u00d7 13.5\u201317 s = 6.0\u20137.6h vs 4.9h budgeted \u2014 a 1.1\u20132.7h overrun that the cut order (200-step floor \u2248 0.8h) cannot cover. The plan books the 4-pass FLOOR as its worst case.",
+    "fix": "Prereg main phase as wall-clock-bounded (stop at 4.9h, minimum-step validity gate 1,200) and alternate CoLaR and recon passes on odd/even steps (halves their cost, keeps per-position dense supervision every 2 steps); treat smoke-measured >13 s/step as an automatic switch to this schedule."
+   },
+   {
+    "severity": "fatal",
+    "claim": "'Audit: 720 fresh + ~230 reclaimed \u2248 2,060 pooled rows | 3.7h | all arms \u00a74'.",
+    "evidence": "Mandatory never-cut semantic entropy requires an N=8 pool on every abstention row: 720 fresh \u00d7 9.8 s/row (v9's MEASURED batched 8-pool rate: 256 anchors \u00d7 8-pool = 0.7h) \u2248 2.0h before any control arm, even charitably reusing the pool's greedy member as the full-pipeline arm. Then ~8 further arms (no-prefix, shuffled, pause, steering, gist, cross-routing, router-delta, w/o-L1 with a mid-audit adapter swap) at v9's measured 6\u201313 s/row-arm: \u22482h on a v9-sized 112-row masked subset, 5\u20137h on a proportional ~370-row stratum \u2014 and the plan preregisters NO arm subsets, so the defensible reading is the larger number. Realistic total 4.5\u20139h per seed (seeds parallel, so wall-clock) vs 3.7h.",
+    "fix": "Preregister arm subsets now: channel arms (floor/shuffled/pause/steering/gist/w-o-L1) on a fixed 160-row masked stratum, expert arms on 128 rows/family; cut fresh abstention rows to 576 up front with the deficit preassigned to the e-process top-up session the plan already owns."
+   },
+   {
+    "severity": "major",
+    "claim": "w/o-L1 ablation checkpoint 'trained \u2264300 extra steps with \u03b3=0 from the main checkpoint' \u2014 on the never-cut list, absent from the session table.",
+    "evidence": "\u03b3=0 removes only the smoothL1 term; the teacher/student/CoLaR/recon passes remain, so 300 steps cost 300 \u00d7 10.4 s = 0.87h at the plan's own rate and 1.1\u20131.4h at the corrected rate. The table's seven lines sum to 11.7h with 0.3h slack; there is no line that can absorb it, and it cannot run inside the audit line (kill 3 already overruns).",
+    "fix": "Add an explicit 1.0h 'w/o-L1 branch train' line funded by lowering main from 1,600 to 1,400 steps (still above the 2,000-total-step floor: 600 + 1,400 = 2,000)."
+   },
+   {
+    "severity": "major",
+    "claim": "Teacher/student shared-LoRA batch interleave at r64 with grad-accum 16 fits the T4 budget (checklist item 3 treats this as a pre-flight memory test, the ledger assumes it passes at full speed).",
+    "evidence": "Summed-loss backward keeps four graphs alive simultaneously: teacher pass with all-layer hiddens retained for the L1 (stop-grad but stored), the student pass's 6-step recurrent latent chain, CoLaR, and recon. Weights 1.2\u20131.5GB + AdamW fp32 moments on ~55\u201365M trainable (LoRA r64 all layers + sidecar + KV heads + experts) \u2248 0.8\u20130.9GB + activations ~2\u20133GB per graph at micro-batch 8/seq 512 = 10\u201314GB peak against ~15.3GB usable T4 \u2014 inside the noise band of the session-B graph-accumulation OOM. Every mitigation (per-term sequential backward, gradient checkpointing, micro-batch 8\u21924) costs 20\u201340% step time, which stacks onto the kill-2 overrun: the ledger silently assumes best-case memory AND best-case throughput at once; the program's history (sessions B, D, G) says untested interactions like this crash.",
+    "fix": "Preregister per-term sequential backward (free each graph before the next pass) as the default implementation, price its ~25% step-time cost into the corrected main-phase budget, and make the smoke memory reading (peak \u226413GB at chosen micro-batch) a blocking gate alongside the grad-liveness suite."
+   },
+   {
+    "severity": "minor",
+    "claim": "'720 fresh + ~230 reclaimed \u2248 2,060 pooled rows' feeding the ~90%-power sequential design.",
+    "evidence": "(720 + 230) \u00d7 2 seeds = 1,900, not 2,060 \u2014 an 8% shortfall in the go/no-go stage's row count, so the in-run power/MDE arithmetic behind the DeLong/Stouffer design is inconsistent at the source; if fix 3 cuts fresh rows to 576, pooled first-stage drops to 1,612 and the discrepancy compounds.",
+    "fix": "State the reclaimed count that actually yields 2,060 (310/seed) or recompute the go/no-go boundary at the true 1,900 (or post-fix 1,612) rows, shifting the shortfall explicitly into the preregistered e-process extension target."
+   }
+  ],
+  "lens": "BUDGET LEDGER \u2014 recompute every session line against measured v9 throughputs (5.2 s/step train; 13 s/row anchor audit; 9.8 s/row batched 8-pool), honest per-step pass counts, T4 16GB memory, and the 12h cap",
+  "verdict": "plan-killed"
+ },
+ {
+  "key": "collapse-recurrence",
+  "kills": [
+   {
+    "severity": "fatal",
+    "claim": "Main-phase loss: CE_student(A | Q, 6 latents) + \u03b3\u00b7smoothL1(student vs teacher hiddens at pre-answer token, stop-grad teacher) forces information through the latents ('eliminates emergence as a load-bearing assumption').",
+    "evidence": "In \u22643-step synthetic families the gold trace is a deterministic function of the premise, so the teacher's pre-answer hidden is f(Q) at any weight snapshot \u2014 I(teacher_hidden; latents | Q) = 0. Therefore the L1 exerts ZERO pressure to route information through latents once a Q-conditioned map is learned, and CE_student on unmasked Q at pass@32 band 0.2\u20130.8 is directly minimizable by the shared r64 LoRA with dead latents. \u00a72 never states that CE_student/L1 training rows use the masked-prompt variant \u2014 masking appears only in the data spec and the AUDIT margins. If training is unmasked, the masked audit measures pure distribution shift and v9's exact terminal outcome recurs (masked 0.000 on 99/99 rows both seeds, probe 0.297/0.334 \u2014 reports/hlwm-v9.0-session-h-results-2026-09-03.md). The citations do not cover this: CODI and CoLaR both train and test with the question VISIBLE; neither claims masked-premise transfer, which is Claim B's actual test.",
+    "fix": "Preregister training-side info asymmetry: latents produced from the full premise, student channel (CE_student + the L1 anchor row) reads the masked premise on \u226550% of main-phase rows (v9's alternating-masked-batch pattern); log train-time masked EM every 100 steps and wire it into the step-1200 go/no-go."
+   },
+   {
+    "severity": "major",
+    "claim": "0.5\u00b7CE_CoLaR with latents teacher-forced as compressed gold-trace embeddings, free-running decode on \u226425% of steps, provides dense supervision to the channel.",
+    "evidence": "Teacher-forced CE_CoLaR back-propagates only into the CONSUMER (KV sidecar + decoder) \u2014 the gold-compressed embeddings are inputs, so the latent-producer MLP receives no gradient from it. The producer's only signals are end-to-end CE_student (drainable via the copy-Q shortcut above) and one single-position L1 \u2014 i.e., the producer is SPARSELY supervised in a plan titled 'Dense Supervision'. Meanwhile the consumer specializes 100% of steps to the gold-compressed manifold; free-running latents at init are MLP(random)\u00b7(embedding-std norm) \u2014 matched in scale, off-manifold in direction. That is the exposure-bias split that produced v9's probe-alive/generation-dead signature (0.30 vs 0.000). The data spec emits SIM-CoT per-step decode targets, but L contains NO term consuming them \u2014 the exact ablation SIM-CoT shows is load-bearing is shipped as data and dropped from the loss. CODI, the plan's core citation, self-generates latents on 100% of training steps; the plan departs from its own evidence base by 4\u00d7.",
+    "fix": "Add a per-latent producer loss \u2014 MSE(self-generated latent_i, stop-grad compressed-gold embedding_i) and/or SIM-CoT per-latent decode CE on SELF-generated latents (targets already emitted) \u2014 anneal teacher-forcing of CE_CoLaR/CE_student latents to \u226425% by step 1,000, and log cosine(self-latents, gold-compressed) plus the teacher-forced-vs-free-running CE_student gap every 100 steps with a preregistered divergence flag."
+   },
+   {
+    "severity": "major",
+    "claim": "Gate init tanh(g)=0.08 with three blocking step-0 liveness tests prevents the inert-auxiliary recurrence.",
+    "evidence": "All three tests are STEP-0 only; the risk is learned closure DURING training, which step-0 tests cannot see (v8's gate sat frozen at [0.0498, 0.0507] all run and was found post-hoc). Mechanism: during steps 0\u2013200 the sidecar content is noise, so \u2202CE/\u2202g has a persistent close-the-gate sign; Adam moves a scalar with consistent-sign gradient \u2248 lr per step = 8e-4, driving g: 0.080\u21920 in ~100 steps \u2014 the channel is dead before latents become informative. Independently, AdamW wd 0.1 decays g at lr\u00b7wd = 8e-5/step \u2248 16% over 2,200 steps with no opposing gradient (plan does not exempt gate scalars from weight decay). With per-layer-head gates (~28\u00d7heads scalars), the median can survive while the layers that matter close. And the channel can also close with every g OPEN via \u2016V_prefix\u2016\u21920 under wd on the sidecar \u2014 invisible to gate-value telemetry. The plan's telemetry section covers grad norms/cosines only; there is no gate-trajectory or prefix-mass telemetry and no in-run liveness gate.",
+    "fix": "Exclude gate scalars from weight decay; log per-layer tanh(g) distribution AND prefix/word attention-mass ratio every 100 steps; preregister in-run liveness floors at steps 600 and 1,200 (e.g., median prefix attention mass \u2265 0.02 on layers 8\u201328) folded into the go/no-go."
+   },
+   {
+    "severity": "major",
+    "claim": "K = 6 autoregressive continuous thoughts (last hidden \u2192 MLP+LayerNorm \u2192 next input embedding, normalized to embedding std) provide 6 distinct latent slots.",
+    "evidence": "An autoregressive producer h\u2192MLP(LayerNorm)\u2192e with fixed output std has a fixed-point attractor: similar e yields similar next h yields similar e \u2014 six latents converge to one effective latent. This is the lanes failure (cosine 0.94\u20130.98, NINE recorded attempts, failures #8+#9 demoting lanes in v8) recurring inside the channel under a new name. Nothing in L penalizes it (the plan cites SIM-CoT \u2014 'per-latent step supervision stops homogenization' \u2014 as core evidence but implements no per-latent term), and the telemetry never measures inter-latent cosine, so the collapse is silent until audit: 6 latents at ~30 trace tokens compressed becomes 1 latent, and Claim B's margin gates fail with no localizing readout.",
+    "fix": "Add the per-latent decode CE from the previous fix (it doubles as the anti-homogenization term, exactly SIM-CoT's mechanism) plus pairwise inter-latent cosine telemetry every 100 steps with a preregistered diagnostic (mean pairwise cosine < 0.90 by step 1,200, else flagged in the verdict)."
+   },
+   {
+    "severity": "major",
+    "claim": "Step-1,200 go/no-go: masked acc > 0 detects a dead channel in time to trigger the abort branch.",
+    "evidence": "A dead-channel model that cannot see the masked premise rationally learns 'always abstain' \u2014 and ABSTENTION is one of the four families, so abstention-family rows score CORRECT with exactly zero information through the channel: masked acc \u2248 abstention family share (~0.25) plus ~1/6 chance on ordering rows. The gate passes trivially on a fully collapsed channel, the 3.7h audit runs to a foregone rung-2 failure, and the plan silently forfeits the abort branch's ~5h \u2014 which funds the two most valuable pending deliverables of the whole program (fully-powered abstention audit + the plain-LoRA control that is 0-for-10 sessions unrun).",
+    "fix": "Define the go/no-go on numeric-family masked exact-match only (guess-chance \u2248 0), threshold \u2265 0.05, abstention and ordering rows excluded; report per-family masked acc as telemetry."
+   },
+   {
+    "severity": "minor",
+    "claim": "Cross-routing ablation (family-A rows through E2 must cost \u22650.05, else negative-evidence re-scope) makes 'shared expert absorbed everything' a distinguishable, reportable outcome.",
+    "evidence": "LoRA inits B=0, so both r16 experts output exactly 0 at step 0; the always-on shared r64 backbone has ~4\u00d7 the parameters, 2\u00d7 the data exposure, and no routing gaps, so it wins the gradient race and expert gradients shrink as shared loss falls \u2014 experts can stay \u22480 all run. Swapping two \u22480 adapters costs \u22480.000, so the ablation is null, and the matched r32 dense control matching the full system is consistent with BOTH 'experts redundant' (capacity story) and 'experts never trained' (starvation story \u2014 the plan itself discloses 4.4k presentations/expert). v5.6.2 already showed expert capacity was carrying content (probe 0.781\u21920.563 / 0.750\u21920.469 on reduction); the preregistered negative-evidence re-scope would write 'modularity unnecessary' when the true finding is 'experts never engaged' \u2014 a wrong conclusion entering the paper.",
+    "fix": "Log per-expert relative output norm (\u2016B_iA_ix\u2016 / \u2016shared-path output\u2016) during training and preregister a liveness precondition: the cross-routing null is interpretable as negative evidence for modularity ONLY if expert output norm exceeds a floor (e.g., \u22650.10 relative); below it, report 'experts never engaged' as an infrastructure finding, not a scientific one."
+   }
+  ],
+  "lens": "collapse-mechanism-recurrence: hunting places where v10's mechanisms silently reproduce the 10-study pattern (gate closure, degenerate shortcut optima, teacher-forcing/exposure splits, shared-path absorption, zero-gradient paths)",
+  "verdict": "plan-survives-with-fixes"
+ },
+ {
+  "key": "implementation-premortem",
+  "kills": [
+   {
+    "severity": "fatal",
+    "claim": "Session plan \u00a76: 'Harvest (N=8, unpadded) 1.0h' and 'Audit: 720 fresh ... 3.7h' with 7+ generation arms per row (\u00a74: full, no-prefix, shuffled-prefix, pause, w/o-L1, steering, gist; \u00a73 adds cross-routing and r32-dense control).",
+    "evidence": "modeling_hlwm.py:1119 \u2014 the generator is 'cache-free': every decoded token re-forwards the FULL sequence through 28 layers (generate() calls causal_logits(generated, mask) on the whole tensor each step). v9 measured 18-19 s/row at ~4-5 arms. v10 arithmetic: 720 rows \u00d7 18.5 s = 13,320 s = 3.70h \u2014 exactly the budget with ZERO allowance for the ~4 ADDED generation arms (pause, steering, no-prefix, w/o-L1) at ~4 s/arm/row = +3.2h \u2192 audit \u2248 6.9h vs 3.7h budgeted, against 0.3h total slack; the never-cut list (\u00a76) forbids cutting the arms that overflow. The only escape is a KV cache, which DOES NOT EXIST in this codebase and is absent from build checklist \u00a78: _allowed_pattern (line 306) only builds square L\u00d7L masks, forward() computes q/k/v from full hidden with full-length position_ids \u2014 a cache means new signatures, rectangular masks, RoPE offset positions, GQA repeat on cached keys, and prefix-slot persistence. New-untested-code sessions have a 3-for-6 kill rate (B, D, G).",
+    "fix": "Add checklist item 0: implement incremental KV cache (rectangular mask path + position offset) with a golden parity test \u2014 cached step-by-step logits must match full-re-forward logits within bf16 tolerance for prompts with prefix slots and latents, batch 1 and batch 8. Smoke must measure per-arm audit seconds and recompute the arm budget before warm phase; preregister an arm-cut order consistent with the never-cut list or shrink fresh rows first."
+   },
+   {
+    "severity": "fatal",
+    "claim": "\u00a72: 'Gate: post-softmax mixing ratio per layer-head: softmax prefix scores separately from word scores, prefix branch \u00d7 tanh(g)' with three step-0 liveness tests as the safety net.",
+    "evidence": "modeling_hlwm.py:364 \u2014 attention is F.scaled_dot_product_attention with a boolean attn_mask; SDPA never materializes attention weights, so post-softmax splitting is unimplementable on the existing path. The two viable routes each have a silent-defect mode the planned tests (i)-(iii) do NOT catch: (a) two-SDPA decomposition \u2014 if the word-branch mask is built from the concatenated length L+16 and still admits the 16 prefix keys, the prefix contributes UNGATED through the word softmax while g's gradient stays live (all three liveness tests PASS) yet tanh(g)=0.08 no longer bounds prefix influence; (b) eager rewrite \u2014 invalidates the \u00a76 throughput anchor (1.8-2.0\u00d7 v9's 5.2 s/step was measured on fused SDPA) and materializes [B,16,L,L+16] score tensors. Worse, tests (i)-(iii) run at step 0 in TRAINING mode only; v8's channel was live in training and dead at decode \u2014 nothing in the plan asserts the gated path is the one executed inside generate().",
+    "fix": "Add two identity tests to the blocking preflight: (1) gate-closed equivalence \u2014 with the prefix branch coefficient forced to 0, full-model logits must be allclose to the no-prefix model on the same batch (catches double-counting exactly); (2) decode-path parity \u2014 run test (iii) (perturb g, logits change) through generate() itself, not just a training forward."
+   },
+   {
+    "severity": "fatal",
+    "claim": "\u00a72: 6 autoregressive continuous latents fed as input embeddings, trained via CE_student; \u00a74 relies on warm-gate and step-1,200 masked-acc go/no-go to detect a dead channel.",
+    "evidence": "The forward APIs are id-based: masks default to (input_ids != pad_token_id) (modeling_hlwm.py:1102/1126) and attention output is multiplied by the mask at EVERY layer (line 379: attended * attention_mask). Latents have no input ids, so their mask entries must be hand-built; if they land 0, latent outputs are zeroed 28 times \u2014 channel structurally dead while CE_student happily trains on prompt-only. Second mode: position_ids default to arange(length) (line 517) over the concatenated tensor, so with right-padded prompts (the codebase's convention, data.py:353 pad=eos) latent RoPE positions are offset by the pad count per row. Both modes are silent; the first reproduces v9's masked-acc-0.000 signature from a bookkeeping bug and would fail the warm kill gate \u2192 the plan's ladder then records RUNG 1 'channel terminal for this design class at 0.6B' \u2014 a FALSE terminal verdict for the entire program caused by a mask bit.",
+    "fix": "Add a CPU-runnable perturbation-propagation test on HLWMConfig.tiny (line 173): for each latent k\u22080..5, perturb its embedding and assert answer-position logits change AND \u2202CE_student/\u2202latent_k \u2260 0, under right-padded batch>1. Make it part of the blocking step-0 suite, not the audit."
+   },
+   {
+    "severity": "major",
+    "claim": "\u00a72: loss sums 5 terms with stop-grad teacher hiddens; smoke gate 'every loss term \u2016grad\u2016>1e-6'; grad-cosine telemetry every 100 steps.",
+    "evidence": "Three interacting traps. (1) @torch.no_grad() sits directly on this codebase's generate (modeling_hlwm.py:1106) \u2014 session B died on exactly an orphaned no_grad; if the teacher forward is wrapped in no_grad (it doubles as the stop-grad L1 target source, so the temptation is structural), backward does NOT crash \u2014 the other 4 terms carry grad \u2014 and CE_teacher silently contributes zero gradient all run, degrading dense supervision back to v9's sparse regime. (2) The smoke gate as written is unimplementable from a joint backward: per-term \u2016grad\u2016 requires 5 isolated backwards, and non-reentrant gradient checkpointing (lines 519-531, use_reentrant=False) raises 'backward through the graph a second time' without retain_graph; with retain_graph, activation memory \u00d75 on a 16GB T4 \u2192 OOM. (3) Boundary off-by-one: smoke = 100 steps, telemetry fires every 100 steps \u2014 if telemetry triggers at step 100 (exclusive of smoke's 0-99), the telemetry code path is NEVER exercised before GPU commit and first executes 1.4h into the warm phase \u2014 the precise session-G failure class.",
+    "fix": "Compute per-term grads via 5 separate re-forwards with checkpointing DISABLED for the telemetry step (bounded memory, ~5 s cost); explicitly assert \u2202CE_teacher/\u2202LoRA \u2260 0 in isolation; force one telemetry firing at step 1 and run smoke for 101 steps so every periodic path executes at least once pre-commitment."
+   },
+   {
+    "severity": "major",
+    "claim": "\u00a72: smoothL1 'per-layer EMA-std normalization'; \u00a78 item 7: 'resume-glob checkpoints'.",
+    "evidence": "Resume is a proven-needed path (session G crashed \u2192 session H resumed from step-3200 checkpoints). If the 28 per-layer EMA-std scalars live as loop-local floats rather than registered buffers, state_dict omits them and resume reinitializes (0 \u2192 div-by-~0 \u2192 inf/NaN at the first resumed step; or 1.0 \u2192 Qwen3 late-layer hidden std is ~5-40\u00d7 embedding scale, so the L1 term silently rescales by 10-100\u00d7, destroying the smoke-calibrated \u03b3\u2208{5,10,20} balance at the worst possible moment \u2014 mid-salvage). Same exposure for gate g, router probe, step counter (the StableMoE switch at step 1,800 keys off it), and sampler state (family-balanced accumulation windows).",
+    "fix": "Register EMA stds, g, and step count as buffers; add a resume-continuity unit test \u2014 10 straight steps vs 5+save+load+5 must produce matching per-term losses within bf16 tolerance \u2014 and assert set(loaded_keys)==set(saved_keys) with strict=True."
+   },
+   {
+    "severity": "major",
+    "claim": "\u00a76: 'Calibration: nested 5-fold cross-conformal (CPU) ... new code path \u2014 dedicated unit tests required' feeding Primary Claim A.",
+    "evidence": "Session G died on a (3,4) combiner shape guard vs 5 features; v10 changes the feature stack AGAIN (verifier-head, P(True), semantic entropy, token entropy, length-normalized logprob), so any surviving hard-coded shape tuple recurs. Two silent corruptions specific to nested CV: (a) folding at candidate level instead of anchor level \u2014 the N=8 candidates per anchor are near-duplicates, so candidate-level folds leak calibration into test and optimistically bias the AUGRC comparison, corrupting the PRIMARY claim invisibly; (b) small-fold quantile arithmetic \u2014 v9's calib split was 96 rows; 5 outer folds \u2248 19 rows, inner folds \u2248 15/4; k=\u230a(n+1)(1\u2212c)\u230b on n=4 at c=0.35 gives k=3-of-4 (threshold from 4 points), and any configuration where k>n silently maps to +inf threshold \u2192 publish-nothing \u2192 the v8 coverage-strangle (0.078) reproduced by arithmetic rather than learning.",
+    "fix": "Unit tests with synthetic scores of known analytic coverage/risk; assert folds are anchor-grouped; assert the code RAISES when any fold has k>n or n below a preregistered minimum; grep-assert no literal feature-count tuples; size the calib pool so the innermost fold satisfies n \u2265 \u23081/(1\u2212c)\u2309\u00b75."
+   },
+   {
+    "severity": "major",
+    "claim": "\u00a74: 'w/o-L1 ablation checkpoint (trained \u2264300 extra steps with \u03b3=0 from the main checkpoint)' audited against the full arm in the same session.",
+    "evidence": "Single-session ordering (train \u2192 harvest \u2192 branch \u2192 audit) with one model instance in memory: if the branch trains the live object in place and the audit's full arm reads live weights, BOTH arms are the ablated model \u2014 wo_L1_ablation_material reads \u22480, the prereg concludes 'L1 not load-bearing', and the program's central dense-supervision hypothesis is falsely killed with no crash and no anomaly. Secondary trap: the cosine schedule is defined over 1,600 steps; stepping it to 1,900 puts cos(\u03c0\u00b7s/T) past \u03c0 so lr climbs back from 0 (8e-4\u00b70.5\u00b7(1+cos(1.1875\u03c0)) \u2248 6.8e-5, rising) \u2014 an unannounced re-warm during the ablation branch that contaminates the ablation delta. Also strict=False checkpoint loads silently drop any renamed sidecar/gate/router key (weights reinit without error).",
+    "fix": "sha256 the full-arm weights at branch point; audit preflight asserts the hash when loading the full arm; deep-copy or reload-from-disk for the branch; pin the branch lr to a constant (e.g., final annealed lr) and unit-test the scheduler for s>T; strict=True on every load."
+   },
+   {
+    "severity": "major",
+    "claim": "\u00a72 warm phase: decoder conditioned on 'latents + [RECON] cue'; \u00a72 CoLaR term: 'latents teacher-forced as compressed gold-trace embeddings, per-position CE'; \u00a72 hygiene covers 'anchor/L1 target id' only.",
+    "evidence": "Two id-class defects the hygiene clause misses. (1) [RECON] on a frozen Qwen3 base: add_special_tokens requires resize_token_embeddings \u2014 the new row is untrained and OUTSIDE LoRA (a random vector as the phase cue); convert_tokens_to_ids on an unadded token returns None \u2192 crash at tensor build in the best case. (2) CoLaR compression: traces are 1-3 steps, \u226430 tokens \u2014 not divisible by K=6; the natural fixed-window pooling over a right-padded trace tensor pools pad embeddings into the compressed targets, and this codebase sets pad = eos everywhere (data.py:353, train_kaggle.py:1641, 4 more files) \u2014 so the eos/<|endoftext|> embedding (v8's proven 'document boundary' poison, root cause of the scaffold collapse) re-enters through the supervision targets themselves. Presents as early-eos / turn-scaffold decodes with no training-time anomaly.",
+    "fix": "Encode the cue as a fixed multi-token string OR a learned embedding vector (never a resized vocab row); extend the v9-style whole-corpus tokenizer scan to assert every CoLaR compression window across all 25k rows contains zero pad/eos ids, and assert the cue round-trips decode(encode(cue))==cue as real non-eos ids."
+   }
+  ],
+  "lens": "implementation kill-lens: crash/corruption sites in new code (KV-prefix \u00d7 cache-free generator, SDPA gate, shared-LoRA interleave, latent forwards, EMA/resume state, conformal bookkeeping, checkpoint surgery, token ids) \u2014 grounded in the actual modeling_hlwm.py source",
+  "verdict": "plan-survives-with-fixes"
+ }
+]

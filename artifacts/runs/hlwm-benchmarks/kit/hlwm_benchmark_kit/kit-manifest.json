@@ -1,0 +1,51 @@
+{
+  "authorization": "run only after a full preregistered capability gate passes; results without a passing gate are exploratory and unreportable",
+  "eval_only": true,
+  "instruct_model": "Qwen/Qwen3-0.6B",
+  "instruct_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+  "kit_version": "1.0.0",
+  "name": "hlwm-benchmark-kit",
+  "overlay_sha256": {
+    "evaluate_benchmarks.py": "6ed68264789ebadade3d844654825ddfeb84a186982b4d7ac5795b1f2054e822",
+    "semantic_grading.py": "90ec078a5057d877f481dac7c5d47380ee1308ac946560e8920a5106a31829be",
+    "test_modeling_hlwm.py": "09200b0ab9b53c68ad57eb203ba82a3c777e5d80dc327418fa9632c3016ae13e"
+  },
+  "per_suite": 250,
+  "requires": [
+    "hlwm-verified-multidomain v5.6.1 candidate bundle (code)",
+    "one passing-seed hlwm resumable checkpoint"
+  ],
+  "sample_seed": 17,
+  "suites": {
+    "arc-challenge": {
+      "dataset_id": "allenai/ai2_arc",
+      "license": "cc-by-sa-4.0",
+      "revision": "210d026faf9955653af8916fad021475a3f00453",
+      "rows": 250,
+      "sha256": "47983da5a5de008833f386760c9de1c1c8409d4a95a7b8241f2b89282b3e85f5",
+      "skipped": 0,
+      "source_split_size": 1172,
+      "split": "test"
+    },
+    "gsm8k": {
+      "dataset_id": "openai/gsm8k",
+      "license": "mit",
+      "revision": "740312add88f781978c0658806c59bc2815b9866",
+      "rows": 250,
+      "sha256": "1ec618ad6f2d681b771b2e1710988b2fe4582eb45281775ca4f3f328d69c2736",
+      "skipped": 0,
+      "source_split_size": 1319,
+      "split": "test"
+    },
+    "mmlu": {
+      "dataset_id": "cais/mmlu",
+      "license": "mit",
+      "revision": "c30699e8356da336a370243923dbaf21066bb9fe",
+      "rows": 250,
+      "sha256": "897d689369975f8671296834dff74794ace592292dfba51d2e3f3e2dd9fb863b",
+      "skipped": 0,
+      "source_split_size": 14042,
+      "split": "test"
+    }
+  }
+}

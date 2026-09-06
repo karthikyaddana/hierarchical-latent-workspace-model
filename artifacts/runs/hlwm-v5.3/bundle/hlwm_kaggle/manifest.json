@@ -1,0 +1,59 @@
+{
+  "base_model": "Qwen/Qwen3-0.6B-Base",
+  "base_revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
+  "behavior_anchor_counts": {
+    "test": 128,
+    "train": 512,
+    "validation": 128
+  },
+  "code_sha256": {
+    "__init__.py": "15eee54eb55eb69558a57fe5b0141d6d555c010166ed5f82c9bff1b7e26c6028",
+    "data.py": "fa32c013d766f87e9c62f850a37a9d9ef86c80027ede4dee7c03b3d09cd20916",
+    "evaluate_checkpoint.py": "2174461da23261a233d8bc5d2304e3b76347bdbc9dcf32d9583fb3853831eb8c",
+    "inference_hlwm.py": "443ab597554c1a41c085cf76a656aec74b273cebe9dce91bd203453e15326a45",
+    "modeling_hlwm.py": "f4fb33c602d66db25bcc2d1bd2feae5efcf7054e5374490a5e1555761a0a0bc3",
+    "semantic_grading.py": "92bb44132f3535a094a289883f1ffc179168d681186e08a0f180cfa4cf7ee0ae",
+    "test_modeling_hlwm.py": "c5dc9cc7c389addef79412075cc4a914a23425ada119ab0334ec4e73c3b7a280",
+    "train_kaggle.py": "4e09efd9c19a81196f7454cc0bd0e0116151eb3e27b4b9d47694b8cf6cc00a94"
+  },
+  "counts": {
+    "test": 533,
+    "train": 3822,
+    "validation": 713
+  },
+  "name": "hlwm-reasoning9000-v5.3-candidate",
+  "package_version": "5.3.0",
+  "purpose": "semantically graded, validation-calibrated dual-seed HLWM architecture evaluation",
+  "reasoning9000_counts": {
+    "test": 405,
+    "train": 3310,
+    "validation": 585
+  },
+  "review_status": "unreviewed direct_fast_no_judge synthetic development release; the stronger 50-episode pilot accepted 0 and the scaling gate is false; not authorized as factual-quality or calibrated-policy evidence",
+  "seed": 17,
+  "training_defaults": {
+    "anchor_ratio": 0.5,
+    "calibration_records": 128,
+    "causal_ratio": 0.25,
+    "gradient_accumulation": 4,
+    "initial_loss_scale": 1024.0,
+    "joint_steps": 576,
+    "learning_rate": 8e-05,
+    "local_steps": 384,
+    "lora_alpha": 16.0,
+    "lora_dropout": 0.05,
+    "lora_rank": 8,
+    "lora_tail_layers": 4,
+    "max_runtime_hours": 8.5,
+    "overfit_steps": 64,
+    "unfreeze_tail_layers": 0,
+    "warmup_updates": 16
+  },
+  "v5_3_changes": [
+    "structured semantic graders instead of exact-phrase matching",
+    "safe evidence abstention trained as a committed public response",
+    "validation-only clean/corrupt policy threshold calibration",
+    "lane-diversity loss active in local and joint training",
+    "expanded held-out generation audit and explicit persisted downloads"
+  ]
+}

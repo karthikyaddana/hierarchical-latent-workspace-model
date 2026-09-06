@@ -1,0 +1,78 @@
+{
+  "accuracy_by_grader": {
+    "abstention": 0.9411764705882353,
+    "numeric": 0.09278350515463918,
+    "ordering": 0.36363636363636365,
+    "unit": 0.05084745762711865
+  },
+  "emitted": 512,
+  "epochs": 120,
+  "family_attempts": {
+    "abstention": 17,
+    "numeric": 97,
+    "ordering": 33,
+    "unit": 118
+  },
+  "family_valid_positives": {
+    "abstention": 16,
+    "numeric": 9,
+    "ordering": 12,
+    "unit": 6
+  },
+  "first_loss": 1.8848282098770142,
+  "invalid_emissions": 222,
+  "label_scheme": {
+    "corrupt": [
+      0.05,
+      0.95,
+      0.05
+    ],
+    "invalid": [
+      0.05,
+      0.05,
+      0.95
+    ],
+    "positive": [
+      0.95,
+      0.05,
+      0.05
+    ],
+    "semantic": [
+      0.05,
+      0.05,
+      0.95
+    ]
+  },
+  "label_smoothing": 0.05,
+  "last_loss": 0.46594512462615967,
+  "learning_rate": 0.001,
+  "method": "on_policy_train_anchor_head_fit_v2_decorrelated",
+  "min_valid_per_family": 16,
+  "negative_kind_counts": {
+    "corrupt": 64,
+    "invalid": 222,
+    "semantic": 64
+  },
+  "negative_records": 350,
+  "positive_records": 43,
+  "ranking_pairs": 135,
+  "semantic_negatives": 64,
+  "separation_after": {
+    "mean_negative_commit_probability": 0.08224993199110031,
+    "mean_positive_commit_probability": 0.9363535642623901,
+    "pairwise_commit_ranking_accuracy": 0.9999999403953552,
+    "pairwise_risk_ranking_accuracy": 0.4662458300590515,
+    "pairwise_verifier_ranking_accuracy": 0.8851826786994934
+  },
+  "separation_before": {
+    "mean_negative_commit_probability": 0.7283879518508911,
+    "mean_positive_commit_probability": 0.9211634993553162,
+    "pairwise_commit_ranking_accuracy": 0.844186007976532,
+    "pairwise_risk_ranking_accuracy": 0.8453155755996704,
+    "pairwise_verifier_ranking_accuracy": 0.8351494669914246
+  },
+  "source_split": "train",
+  "trained": true,
+  "valid_emissions": 43,
+  "validity_floor_met": false
+}

@@ -1,0 +1,29 @@
+{
+  "commitment_decisions": {
+    "publish": 4277,
+    "refine": 23
+  },
+  "episodes": 4300,
+  "generation_method": "direct_fast_no_judge",
+  "independently_adjudicated_episodes": 0,
+  "lanes": 8994,
+  "policy_label_use": "masked unless independently_adjudicated; paired deterministic corruption is used only as an architecture contrast",
+  "production_boundary": "This release can test architecture and optimization but cannot establish factual quality, abstention calibration or production readiness.",
+  "top_routes": {
+    "root -> architecture -> specialist": 5,
+    "root -> architecture_analysis -> lstm_gates": 1,
+    "root -> autodiff_analysis -> gradient_flow": 1,
+    "root -> domain": 3,
+    "root -> domain -> empirical": 1,
+    "root -> domain -> implementation": 2,
+    "root -> domain -> latency-budget-specialist": 1,
+    "root -> domain -> sensor-path-specialist": 1,
+    "root -> domain -> specialist": 8953,
+    "root -> domain -> validation-specialist": 1
+  },
+  "verification_verdicts": {
+    "insufficient": 457,
+    "refuted": 15,
+    "supported": 22052
+  }
+}

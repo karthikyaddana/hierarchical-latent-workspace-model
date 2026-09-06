@@ -1,0 +1,39 @@
+{
+  "eval_only": true,
+  "fetched_at": "2026-08-31T02:44:45+00:00",
+  "per_suite": 250,
+  "policy": "evaluation-only artifact; forbidden for training per config/benchmarks.reasoning.yaml; never place under data/",
+  "sample_seed": 17,
+  "suites": {
+    "arc-challenge": {
+      "dataset_id": "allenai/ai2_arc",
+      "license": "cc-by-sa-4.0",
+      "revision": "210d026faf9955653af8916fad021475a3f00453",
+      "rows": 250,
+      "sha256": "47983da5a5de008833f386760c9de1c1c8409d4a95a7b8241f2b89282b3e85f5",
+      "skipped": 0,
+      "source_split_size": 1172,
+      "split": "test"
+    },
+    "gsm8k": {
+      "dataset_id": "openai/gsm8k",
+      "license": "mit",
+      "revision": "740312add88f781978c0658806c59bc2815b9866",
+      "rows": 250,
+      "sha256": "1ec618ad6f2d681b771b2e1710988b2fe4582eb45281775ca4f3f328d69c2736",
+      "skipped": 0,
+      "source_split_size": 1319,
+      "split": "test"
+    },
+    "mmlu": {
+      "dataset_id": "cais/mmlu",
+      "license": "mit",
+      "revision": "c30699e8356da336a370243923dbaf21066bb9fe",
+      "rows": 250,
+      "sha256": "897d689369975f8671296834dff74794ace592292dfba51d2e3f3e2dd9fb863b",
+      "skipped": 0,
+      "source_split_size": 14042,
+      "split": "test"
+    }
+  }
+}

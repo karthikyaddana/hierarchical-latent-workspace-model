@@ -1,19 +1,26 @@
-# LaTeX build artifacts
-*.aux
-*.log
-*.out
-*.toc
-*.lof
-*.lot
-*.fls
-*.fdb_latexmk
-*.synctex.gz
-*.bbl
-*.blg
-build/
-
-# arXiv packaging output
-arxiv/
-
-# OS
 .DS_Store
+.env
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+build/
+dist/
+*.egg-info/
+
+# LaTeX build products
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.toc
+
+# Large artifacts distributed via Zenodo / Hugging Face — see DATA.md
+data/
+sources/private/
+logs/
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+*.zip

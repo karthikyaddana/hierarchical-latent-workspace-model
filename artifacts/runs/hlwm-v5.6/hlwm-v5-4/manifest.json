@@ -1,0 +1,78 @@
+{
+  "base_model": "Qwen/Qwen3-0.6B-Base",
+  "base_revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
+  "behavior_anchor_counts": {
+    "test": 256,
+    "train": 1024,
+    "validation": 256
+  },
+  "code_sha256": {
+    "__init__.py": "15eee54eb55eb69558a57fe5b0141d6d555c010166ed5f82c9bff1b7e26c6028",
+    "data.py": "603f84c0de4c052c87dcb6061593e707c21384a1c17a765d52760c0464574d11",
+    "evaluate_checkpoint.py": "d81e15c596983c31561c3de8149cb48dba7bb6d7de372402e4ec55811e428552",
+    "inference_hlwm.py": "e86173849184dbc46f3e61dcd0c3404d6a7dc31f3e00213bad0efad5a538d269",
+    "modeling_hlwm.py": "66cb187b10397fc02a2a84760d0157ee06b6f45f6bbfdb6ea506a8d88af8764e",
+    "semantic_grading.py": "87c0061f9f5f37c8e75efdfe89ca20db40b9d2237f90852e5cfee8b58670b0fc",
+    "test_modeling_hlwm.py": "c782158d4f7a0120df4d168fc21d24b73bd6ba4df4fde5fd74a4ce6049873059",
+    "train_kaggle.py": "8b82a867b35f66327ddf05948215e96d853b88d89cc859d6db22da78c335bc75"
+  },
+  "counts": {
+    "test": 841,
+    "train": 7498,
+    "validation": 945
+  },
+  "dataset_counts": {
+    "test": 585,
+    "train": 6474,
+    "validation": 689
+  },
+  "name": "hlwm-verified-multidomain-v5-6-candidate",
+  "package_version": "5.6.0",
+  "purpose": "routing-objective redesign (hard-assignment balance + expert diversity, marginal-KL removed) with execution-verified multi-domain data, sized for a Kaggle dual-T4 two-seed session",
+  "review_status": "Reasoning9000 rows remain unreviewed and policy-masked; builder episodes are the first independently adjudicated rows; benchmark episodes carry build-time execution-verified labels. Not authorized as production or factual-quality evidence until the preregistered gate passes.",
+  "seed": 17,
+  "session_plan_hours": 9.0,
+  "target_hardware": "Kaggle T4 x2, one independent seed per GPU",
+  "training_defaults": {
+    "anchor_ratio": 0.5,
+    "brief_tokens": 96,
+    "calibration_new_tokens": 96,
+    "calibration_records": 64,
+    "canvas_tokens": 128,
+    "causal_ratio": 0.4,
+    "causal_tokens": 1024,
+    "context_tokens": 256,
+    "expert_diversity_weight": 0.05,
+    "gradient_accumulation": 4,
+    "initial_loss_scale": 1024.0,
+    "joint_steps": 3072,
+    "learning_rate": 8e-05,
+    "local_steps": 1024,
+    "lora_alpha": 32.0,
+    "lora_dropout": 0.05,
+    "lora_rank": 16,
+    "lora_tail_layers": 8,
+    "max_runtime_hours": 8.5,
+    "overfit_steps": 128,
+    "policy_epochs": 120,
+    "policy_label_smoothing": 0.05,
+    "policy_learning_rate": 0.001,
+    "policy_new_tokens": 96,
+    "policy_records": 96,
+    "precision": "auto",
+    "router_aux_weight": 0.05,
+    "router_entropy_weight": 0.0,
+    "unfreeze_tail_layers": 0,
+    "warmup_updates": 32
+  },
+  "v5_6_changes": [
+    "marginal-entropy router regularizer removed (Study 4: it homogenized experts)",
+    "Switch-style hard-assignment balance loss strengthened (weight 0.01 -> 0.05)",
+    "pairwise expert-output diversity penalty on shared probe rows (weight 0.05)",
+    "policy-head de-saturation: 400 -> 120 epochs plus 0.05 label smoothing",
+    "execution-verified multi-domain data: MBPP/APPS/TACO/CodeContests episodes whose references passed their own executed checks, Spider exact-match, audited packets, adjudicated builder episodes, per-source dev slices",
+    "budgets context 256 / canvas 128 / brief 96 / causal 1024 for the code data",
+    "anchor ratio 0.75 -> 0.50 so external verified rows receive real exposure",
+    "audit: domain-stratified sampling, execution/sql graders, per-domain metrics (report-only), generation budget 288 tokens"
+  ]
+}

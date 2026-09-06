@@ -1,0 +1,28 @@
+{
+  "books_directory": "/Users/karthik/Library/Mobile Documents/com~apple~CloudDocs/Books",
+  "files_found": 250,
+  "unique_files_enabled": 244,
+  "exact_duplicate_files_quarantined": 6,
+  "total_bytes": 2016614564,
+  "domain_counts": {
+    "cloud_and_devops": 9,
+    "communication_and_writing": 8,
+    "deep_learning_fundamentals": 4,
+    "distributed_data_systems": 15,
+    "edge_ai": 1,
+    "entrepreneurship_and_operations": 18,
+    "framework_engineering": 4,
+    "general_reasoning_and_learning": 66,
+    "llm_engineering": 15,
+    "machine_learning_systems": 6,
+    "marketing_and_brand": 7,
+    "mathematics_and_optimization": 3,
+    "product_strategy": 11,
+    "programming_and_web": 30,
+    "psychology_and_behavior": 14,
+    "research_and_decision_making": 9,
+    "sales_and_copywriting": 10,
+    "software_architecture": 14
+  },
+  "manifest": "/Users/karthik/Documents/ChatGPT/Light of the Embel/config/sources.all-books.yaml"
+}

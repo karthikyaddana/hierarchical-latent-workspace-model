@@ -1,0 +1,46 @@
+{
+  "base_model": "Qwen/Qwen3-0.6B-Base",
+  "base_revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
+  "behavior_anchor_counts": {
+    "test": 16,
+    "train": 64,
+    "validation": 16
+  },
+  "code_sha256": {
+    "__init__.py": "15eee54eb55eb69558a57fe5b0141d6d555c010166ed5f82c9bff1b7e26c6028",
+    "data.py": "b519169b7ac9bfb99a36c38d1c19131abbc4aa400d62acd07e3a810dbc486776",
+    "evaluate_checkpoint.py": "349c6bb9995e280c98a28d5a6df623ac2dffd1ae9287dbc7822e7e00e428cd60",
+    "inference_hlwm.py": "0cd0cf4ba3a9e17f18077efbcc9ebd573b418906816af58f9df63d5e9fabd9b9",
+    "modeling_hlwm.py": "d9a6527733007a686c7ad4f733f3d62b02b423fd558f13feabc89be301409da9",
+    "test_modeling_hlwm.py": "badbce008926ee3c114febc8802ae04ab4c0129ac52c449ac223ae7711ef30cf",
+    "train_kaggle.py": "fa32e944ed83608519d5c3d32047302176f7c99652665881742668c0daabf486"
+  },
+  "counts": {
+    "test": 421,
+    "train": 3374,
+    "validation": 601
+  },
+  "name": "hlwm-reasoning9000-v5.1-candidate",
+  "package_version": "5.1.0",
+  "purpose": "dual-seed correctness-gated architecture and public-output evaluation",
+  "reasoning9000_counts": {
+    "test": 405,
+    "train": 3310,
+    "validation": 585
+  },
+  "review_status": "unreviewed direct_fast_no_judge synthetic development release; the stronger 50-episode pilot accepted 0 and the scaling gate is false; not authorized as factual-quality or calibrated-policy evidence",
+  "seed": 17,
+  "training_defaults": {
+    "anchor_ratio": 0.35,
+    "causal_ratio": 0.25,
+    "gradient_accumulation": 4,
+    "initial_loss_scale": 1024.0,
+    "joint_steps": 512,
+    "learning_rate": 8e-05,
+    "local_steps": 320,
+    "max_runtime_hours": 7.5,
+    "overfit_steps": 64,
+    "unfreeze_tail_layers": 1,
+    "warmup_updates": 16
+  }
+}

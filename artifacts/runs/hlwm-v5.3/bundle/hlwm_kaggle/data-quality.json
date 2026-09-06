@@ -1,0 +1,44 @@
+{
+  "behavior_anchor_boundary": "Deterministic semantic arithmetic, conversion, ordering and missing-evidence checks; all prompts are split-isolated and task-balanced, but they are not a substitute for independent human adjudication.",
+  "behavior_anchor_counts": {
+    "test": 128,
+    "train": 512,
+    "validation": 128
+  },
+  "behavior_anchor_task_types": [
+    "numeric",
+    "unit",
+    "ordering",
+    "abstention"
+  ],
+  "commitment_decisions": {
+    "publish": 4277,
+    "refine": 23
+  },
+  "episodes": 4300,
+  "generation_method": "direct_fast_no_judge",
+  "independently_adjudicated_episodes": 0,
+  "lanes": 8994,
+  "policy_calibration_split": "validation_only",
+  "policy_label_use": "masked for direct_fast_no_judge rows; enabled only for independently adjudicated or narrow programmatically verified behavior anchors",
+  "production_boundary": "This release can test architecture and optimization but cannot establish factual quality, abstention calibration or production readiness.",
+  "programmatically_verified_behavior_anchors": 768,
+  "safe_abstention_is_public_target": true,
+  "top_routes": {
+    "root -> architecture -> specialist": 5,
+    "root -> architecture_analysis -> lstm_gates": 1,
+    "root -> autodiff_analysis -> gradient_flow": 1,
+    "root -> domain": 3,
+    "root -> domain -> empirical": 1,
+    "root -> domain -> implementation": 2,
+    "root -> domain -> latency-budget-specialist": 1,
+    "root -> domain -> sensor-path-specialist": 1,
+    "root -> domain -> specialist": 8953,
+    "root -> domain -> validation-specialist": 1
+  },
+  "verification_verdicts": {
+    "insufficient": 457,
+    "refuted": 15,
+    "supported": 22052
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "anchor_counts": {
+    "test": 12,
+    "train": 32,
+    "validation": 8
+  },
+  "build_mode": "smoke",
+  "bundle_sha256": "01c082f02dabbb7d540bcd2a948a0a24c97e6b5a0338b9cba49c099d1a7332a1",
+  "code_sha256": {
+    "README.md": "34f5da01a231153b087863ad9d33626f1df511ada0a133505d1fd88b2ec9a438",
+    "__init__.py": "15eee54eb55eb69558a57fe5b0141d6d555c010166ed5f82c9bff1b7e26c6028",
+    "data.py": "604f92900315a91d01fc6ee9954cb0d838aca6c25c8da82ca3ea01fd644a69e8",
+    "evaluate_checkpoint.py": "53ce35140f3f7ba557745c4e1fcba0e01a3016589cb36d5019652817a9f2e95a",
+    "evaluate_v10.py": "d6710bf8a979d391285f006bdb934def83c5e8ccf013334a60bf6562dc563e9c",
+    "inference_hlwm.py": "5fc80eefd30d783120b0cd16e08fdd7ca55c7da3d989d2e9e804d478a7ef43b7",
+    "modeling_hlwm.py": "12afb2ce802d2d64ccab8d10f8f04278314510579f149fe51cb0d4419a0f85e4",
+    "selective_stats.py": "637ade8d72a43ed3ec019d5f30361d808ae4fdcec2d76154c78b9772659bfd0c",
+    "semantic_grading.py": "87c0061f9f5f37c8e75efdfe89ca20db40b9d2237f90852e5cfee8b58670b0fc",
+    "test_data_v10.py": "632b0fa9b9bf08ebd81837e0dd3481acfb7de96d540413140ede9ad807e3fd45",
+    "test_evaluate_v10.py": "a9f7e73bc3e554e03cfcb477b343b57b6f513b6e00c3bac27dd0779636690242",
+    "test_modeling_hlwm.py": "e95fdd5bb72bc354bc86b01d774db58fd4d2610b92410464abc15080a23e4a4c",
+    "test_selective_stats.py": "a4dba5eb62d9e92b03d084c6e67dd520838dfff5b9e9ae2308eebdd00720286e",
+    "train_kaggle.py": "bfc5f9b812076d5c30d534a07c51bd7a5553b35cfdb7045060b802791a05f718"
+  },
+  "counts": {
+    "test": 76,
+    "train": 96,
+    "validation": 72
+  },
+  "package_version": "10.0"
+}

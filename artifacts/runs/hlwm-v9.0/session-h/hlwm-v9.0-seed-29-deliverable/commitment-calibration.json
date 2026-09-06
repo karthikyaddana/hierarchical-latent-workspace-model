@@ -1,0 +1,87 @@
+{
+  "accuracy_by_grader": {
+    "abstention": 0.966796875,
+    "numeric": 0.25,
+    "ordering": 0.791015625,
+    "unit": 0.078125
+  },
+  "balanced_accuracy": 0.9010416567325592,
+  "calibrated_at_step": 3200,
+  "candidate_temperatures": [
+    0.0,
+    0.8,
+    0.8,
+    0.8,
+    0.8,
+    0.8,
+    0.8,
+    0.8
+  ],
+  "clean_accept_rate": 0.9325842696629213,
+  "commitment_threshold_non_degenerate": true,
+  "conformal": {
+    "calibration_anchors": 96,
+    "calibration_empirical_coverage": 0.40625,
+    "fitted": true,
+    "guaranteed_expected_coverage": 0.4020618556701031,
+    "order_statistic_k": 58,
+    "target_coverage": 0.4,
+    "threshold": 0.9089548941673857,
+    "tie_fraction": 0.010416666666666666,
+    "tie_jitter_applied": false
+  },
+  "corrupt_reject_rate": 0.9150485436893204,
+  "form_selection": {
+    "b1_partial_augrc": {
+      "4": 0.0,
+      "5": 0.0
+    },
+    "selected_feature_count": 4,
+    "selection_split": "B1"
+  },
+  "generated_candidate_records": 2048,
+  "generated_candidate_semantic_accuracy": 0.521484375,
+  "invalid_generated_candidates": 980,
+  "method": "validation_generated_nbest_conformal_publish_v5",
+  "negative_policy_records": 1236,
+  "negative_reject_rate": 0.8888888955116272,
+  "passed_research_gate": true,
+  "policy_heads_trained_on_policy": true,
+  "positive_accept_rate": 0.9131944179534912,
+  "positive_policy_records": 1068,
+  "publish_rule": {
+    "bias": -1.013354778289795,
+    "feature_count": 4,
+    "fitted": true,
+    "threshold": 0.9089548941673857,
+    "weights": [
+      1.5518189668655396,
+      -0.6605337858200073,
+      -2.384577751159668,
+      2.1531929969787598
+    ]
+  },
+  "publish_threshold_non_degenerate": true,
+  "selection": {
+    "anchors": 256,
+    "greedy_valid_rate": 0.5546875,
+    "oracle_any_valid_rate": 0.609375,
+    "selected_valid_rate": 0.57421875,
+    "selection_gain": 0.01953125
+  },
+  "source_split": "validation",
+  "split_sizes": {
+    "fit_anchors": 96,
+    "form_anchors": 64,
+    "holdout_anchors": 96
+  },
+  "test_split_used": false,
+  "thresholds": {
+    "commitment": 0.07585817575454712,
+    "risk": 0.6627914607524872,
+    "verifier_error": 0.4054487347602844
+  },
+  "unpadded_prompt_surface": true,
+  "valid_generated_candidates": 1068,
+  "verified_anchor_records": 256
+}

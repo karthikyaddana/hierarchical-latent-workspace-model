@@ -1,0 +1,72 @@
+# Curated upstream repositories only. Search-engine and Kaggle mirrors are not automatically trusted.
+# The fetch script verifies the current GitHub SPDX license and pins the exact commit before enabling ingestion.
+repositories:
+  - repo: google-deepmind/mathematics_dataset
+    domain: mathematics_and_optimization
+    expected_licenses: [Apache-2.0]
+    use: Procedural mathematics generators with exact answers
+  - repo: exercism/problem-specifications
+    domain: programming_and_web
+    expected_licenses: [MIT]
+    use: Language-neutral programming tasks and canonical tests
+  - repo: 18F/content-guide
+    domain: communication_and_writing
+    expected_licenses: [CC0-1.0]
+    use: Clear, accessible, user-centered writing guidance
+  - repo: microsoft/ML-For-Beginners
+    domain: machine_learning_systems
+    expected_licenses: [MIT]
+    use: Structured ML lessons, examples, and exercises
+  - repo: microsoft/Web-Dev-For-Beginners
+    domain: programming_and_web
+    expected_licenses: [MIT]
+    use: Web implementation, testing, and project exercises
+  - repo: microsoft/generative-ai-for-beginners
+    domain: llm_engineering
+    expected_licenses: [MIT]
+    use: LLM application design and implementation lessons
+  - repo: eugeneyan/applied-ml
+    domain: machine_learning_systems
+    expected_licenses: [MIT]
+    use: Applied ML system case studies and synthesis
+  - repo: open-guides/og-aws
+    domain: cloud_and_devops
+    expected_licenses: [CC-BY-4.0]
+    use: Practitioner-reviewed cloud engineering guidance
+  - repo: rust-lang/book
+    domain: programming_and_web
+    expected_licenses: [Apache-2.0, MIT]
+    use: Language design, correctness, and systems programming exercises
+
+direct_datasets:
+  - name: UCI Bank Marketing
+    url: https://archive.ics.uci.edu/dataset/222/bank+marketing
+    domain: marketing_and_brand
+    stated_license: CC-BY-4.0
+    status: fetch_after_schema_audit
+  - name: UCI Online Retail II
+    url: https://archive.ics.uci.edu/dataset/502/online+retail+ii
+    domain: product_strategy
+    stated_license: CC-BY-4.0
+    status: fetch_after_schema_audit
+
+huggingface_candidates:
+  - id: OpenAssistant/oasst1
+    domain: communication_and_writing
+    stated_license: Apache-2.0
+    status: split_and_pii_audit_required
+  - id: openai/gsm8k
+    domain: mathematics_and_optimization
+    stated_license: MIT
+    status: train_split_candidate_test_split_benchmark_only
+  - id: google-research-datasets/mbpp
+    domain: programming_and_web
+    stated_license: CC-BY-4.0
+    status: train_split_candidate_test_split_benchmark_only
+
+rejected_defaults:
+  - Random Kaggle or Hugging Face mirrors whose uploader cannot grant upstream rights
+  - Synthetic chain-of-thought traces with unknown prompt provenance
+  - Noncommercial, no-derivatives, research-only, unknown, or compound incompatible licenses
+  - PII-bearing conversations without a completed privacy scrub
+  - Benchmark validation or test splits

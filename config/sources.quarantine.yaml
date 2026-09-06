@@ -1,0 +1,70 @@
+# Original provenance quarantine retained for the audit trail.
+# The user subsequently asserted explicit training rights on 2026-08-17.
+# The separately enabled entries in sources.foundation.yaml are the active authorization record.
+sources:
+  - path: /Users/karthik/Library/Mobile Documents/com~apple~CloudDocs/Books/LLM Engineer’s Handbook (Paul Iusztin ,Maxime Labonne) (Z-Library).epub
+    title: LLM Engineer’s Handbook
+    authors: [Paul Iusztin, Maxime Labonne]
+    curriculum_topics: [llm_engineering, data_pipelines, model_evaluation, deployment]
+    allowed_for_training: false
+    quarantine_reason: Z-Library provenance; no verified training permission
+  - path: /Users/karthik/Library/Mobile Documents/com~apple~CloudDocs/Books/Prompt Engineering for LLMs (John Berryman , Albert Ziegler) (Z-Library).epub
+    title: Prompt Engineering for LLMs
+    authors: [John Berryman, Albert Ziegler]
+    curriculum_topics: [prompt_engineering, tool_use, evaluation]
+    allowed_for_training: false
+    quarantine_reason: Z-Library provenance; no verified training permission
+  - path: /Users/karthik/Library/Mobile Documents/com~apple~CloudDocs/Books/AI at the Edge (Daniel Situnayake, Jenny Plunkett) (Z-Library).pdf
+    title: AI at the Edge
+    authors: [Daniel Situnayake, Jenny Plunkett]
+    curriculum_topics: [edge_ai, quantization, constrained_inference]
+    allowed_for_training: false
+    quarantine_reason: Z-Library provenance; no verified training permission
+  - path: /Users/karthik/Library/Mobile Documents/com~apple~CloudDocs/Books/Deep Learning from Scratch (Seth Weidman) (Z-Library).pdf
+    title: Deep Learning from Scratch
+    authors: [Seth Weidman]
+    curriculum_topics: [deep_learning_fundamentals, backpropagation, optimization]
+    allowed_for_training: false
+    quarantine_reason: Z-Library provenance; no verified training permission
+  - path: /Users/karthik/Library/Mobile Documents/com~apple~CloudDocs/Books/Essential Math for AI Next-Level Mathematics for Efficient and Successful AI Systems (Hala Nelson) (Z-Library).pdf
+    title: Essential Math for AI
+    authors: [Hala Nelson]
+    curriculum_topics: [linear_algebra, probability, optimization, numerical_methods]
+    allowed_for_training: false
+    quarantine_reason: Z-Library provenance; no verified training permission
+  - path: /Users/karthik/Library/Mobile Documents/com~apple~CloudDocs/Books/Neural Network Programming with TensorFlow (Manpreet Singh Ghotra, Rajdeep Dua) (Z-Library).epub
+    title: Neural Network Programming with TensorFlow
+    authors: [Manpreet Singh Ghotra, Rajdeep Dua]
+    curriculum_topics: [tensorflow, neural_network_implementation, training_debugging]
+    allowed_for_training: false
+    quarantine_reason: Z-Library provenance; no verified training permission
+  - path: /Users/karthik/Library/Mobile Documents/com~apple~CloudDocs/Books/Programming PyTorch for Deep Learning (Ian Pointer) (Z-Library).pdf
+    title: Programming PyTorch for Deep Learning
+    authors: [Ian Pointer]
+    curriculum_topics: [pytorch, neural_network_implementation, training_debugging]
+    allowed_for_training: false
+    quarantine_reason: Z-Library provenance; no verified training permission
+  - path: /Users/karthik/Library/Mobile Documents/com~apple~CloudDocs/Books/Architecture Patterns with Python (Harry Percival, Bob Gregory) (Z-Library).epub
+    title: Architecture Patterns with Python
+    authors: [Harry Percival, Bob Gregory]
+    curriculum_topics: [python_architecture, domain_modeling, testing, maintainability]
+    allowed_for_training: false
+    quarantine_reason: Z-Library provenance; no verified training permission
+  - path: /Users/karthik/Library/Mobile Documents/com~apple~CloudDocs/Books/Designing distributed systems patterns and paradigms for scalable, reliable services (Burns, Brendan) (Z-Library).epub
+    title: Designing Distributed Systems
+    authors: [Brendan Burns]
+    curriculum_topics: [distributed_systems, reliability, scaling]
+    allowed_for_training: false
+    quarantine_reason: Z-Library provenance; no verified training permission
+  - path: /Users/karthik/Library/Mobile Documents/com~apple~CloudDocs/Books/Designing Machine Learning Systems (Chip Huyen) (Z-Library).epub
+    title: Designing Machine Learning Systems
+    authors: [Chip Huyen]
+    curriculum_topics: [ml_systems, data_quality, monitoring, deployment]
+    allowed_for_training: false
+    quarantine_reason: Z-Library provenance; no verified training permission
+  - path: /Users/karthik/Library/Mobile Documents/com~apple~CloudDocs/Books/Designing Data-Intensive Applications The Big Ideas Behind Reliable, Scalable, and Maintainable Systems (Martin Kleppmann) (Z-Library).epub
+    title: Designing Data-Intensive Applications
+    authors: [Martin Kleppmann]
+    curriculum_topics: [data_systems, consistency, replication, stream_processing]
+    allowed_for_training: false
+    quarantine_reason: Z-Library provenance; no verified training permission

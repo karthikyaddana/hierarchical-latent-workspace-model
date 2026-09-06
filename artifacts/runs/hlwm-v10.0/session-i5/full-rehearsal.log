@@ -1,0 +1,8 @@
+tokenizer ok | bos None | eos 151643
+test: 1737 rows -> 1152 kept, 585 legacy excluded | {'numeric': 288, 'unit': 288, 'ordering': 288, 'abstention': 288}
+validation: 1457 rows -> 768 kept, 689 legacy excluded | {'numeric': 192, 'unit': 192, 'ordering': 192, 'abstention': 192}
+prepare_rows survived all 1152 audit rows
+real 160-row masked core composition: {'numeric': 51, 'unit': 52, 'ordering': 57}
+real masked core is within-family-shuffle feasible
+mini-audit ok on 1152 rows | n_rows 1152 | legacy_excluded 0 | records 1152 | pool 8 | gate dict + binding rung serialize (rung rung_1+abstention_open)
+REHEARSAL PASSED in 1602s — audit path crash-safe on real data

@@ -1,0 +1,16 @@
+{"inter_latent_cosine": 0.153873, "phase": "warm", "producer_mse": 0.001833, "recon": 5.053919, "step": 0}
+{"inter_latent_cosine": 0.637758, "phase": "warm", "producer_mse": 0.001662, "recon": 1.98658, "step": 50}
+{"inter_latent_cosine": 0.756916, "phase": "warm", "producer_mse": 0.001818, "recon": 0.763365, "step": 100}
+{"inter_latent_cosine": 0.545845, "phase": "warm", "producer_mse": 0.001762, "recon": 1.010673, "step": 150}
+{"step": 200, "warm_recon_digit_em": 0.599406528189911}
+{"inter_latent_cosine": 0.98457, "phase": "warm", "producer_mse": 0.001765, "recon": 0.909408, "step": 200}
+{"inter_latent_cosine": 0.979453, "phase": "warm", "producer_mse": 0.001666, "recon": 0.994832, "step": 250}
+{"inter_latent_cosine": 0.976347, "phase": "warm", "producer_mse": 0.001747, "recon": 0.663535, "step": 300}
+{"inter_latent_cosine": 0.962119, "phase": "warm", "producer_mse": 0.001626, "recon": 0.824488, "step": 350}
+{"step": 400, "warm_recon_digit_em": 0.6201780415430267}
+{"inter_latent_cosine": 0.965621, "phase": "warm", "producer_mse": 0.001737, "recon": 0.658814, "step": 400}
+{"inter_latent_cosine": 0.969494, "phase": "warm", "producer_mse": 0.001611, "recon": 1.076532, "step": 450}
+{"inter_latent_cosine": 0.976891, "phase": "warm", "producer_mse": 0.001733, "recon": 0.694628, "step": 500}
+{"inter_latent_cosine": 0.982953, "phase": "warm", "producer_mse": 0.001611, "recon": 1.159887, "step": 550}
+{"step": 600, "warm_recon_digit_em": 0.6023738872403561}
+{"step": 600, "warm_gate": {"em_200": 0.599406528189911, "em_600": 0.6023738872403561, "floor": 0.5, "passed": false}}

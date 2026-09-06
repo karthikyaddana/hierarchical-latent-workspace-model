@@ -1,0 +1,87 @@
+{
+  "commitment_calibration": {
+    "accuracy_by_grader": {
+      "abstention": 0.953125,
+      "numeric": 0.265625,
+      "ordering": 0.0625,
+      "unit": 0.25
+    },
+    "balanced_accuracy": 0.8766317367553711,
+    "generated_candidate_semantic_accuracy": 0.3828125,
+    "method": "validation_generated_nbest_scalar_publish_v3",
+    "negative_reject_rate": 0.9369369149208069,
+    "passed_research_gate": true,
+    "positive_accept_rate": 0.8163265585899353,
+    "publish_rule": {
+      "bias": -0.43268832564353943,
+      "fitted": true,
+      "threshold": 0.6894052624702454,
+      "weights": [
+        2.517411947250366,
+        -1.8003607988357544,
+        -0.9988908171653748
+      ]
+    },
+    "publish_threshold_non_degenerate": true,
+    "selection": {
+      "anchors": 64,
+      "greedy_valid_rate": 0.390625,
+      "oracle_any_valid_rate": 0.5,
+      "selected_valid_rate": 0.453125,
+      "selection_gain": 0.0625
+    },
+    "thresholds": {
+      "commitment": 0.20562677830457687,
+      "risk": 0.05149617791175842,
+      "verifier_error": 0.8700487017631531
+    }
+  },
+  "elapsed_seconds": 19338.11988043785,
+  "note": "reconstructed from user-pasted notebook log of crashed version 346429459 (audit crashed; train/policy/calibration complete)",
+  "on_policy_policy_head": {
+    "emitted": 648,
+    "family_attempts": {
+      "abstention": 17,
+      "numeric": 187,
+      "ordering": 142,
+      "unit": 89
+    },
+    "family_valid_positives": {
+      "abstention": 16,
+      "numeric": 16,
+      "ordering": 16,
+      "unit": 16
+    },
+    "method": "on_policy_train_anchor_head_fit_v2_decorrelated",
+    "negative_kind_counts": {
+      "corrupt": 162,
+      "invalid": 371,
+      "semantic": 162
+    },
+    "ranking_pairs": 181,
+    "separation_after": {
+      "mean_negative_commit_probability": 0.05293850228190422,
+      "mean_positive_commit_probability": 0.7770419120788574,
+      "pairwise_commit_ranking_accuracy": 0.9953237175941467,
+      "pairwise_risk_ranking_accuracy": 0.665310263633728,
+      "pairwise_verifier_ranking_accuracy": 0.8702787756919861
+    },
+    "valid_emissions": 64,
+    "validity_floor_met": true
+  },
+  "overfit_gate": {
+    "after": 6.151170969009399,
+    "before": 12.807743549346924,
+    "passed": true
+  },
+  "parameters": {
+    "frozen": 596049920,
+    "total": 672676999,
+    "trainable": 76627079
+  },
+  "peak_gpu_allocated_gb": 4.850918292999268,
+  "precision": "bf16",
+  "seed": 29,
+  "status": "stable_prototype_training_complete",
+  "steps": 4224
+}

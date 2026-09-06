@@ -1,0 +1,158 @@
+version: "1.0"
+date: "2026-08-19"
+
+principles:
+  - Train observable professional work products, not copied hidden chain-of-thought
+  - Private lanes may reason recurrently but only the verified final answer is user-visible
+  - A tool observation must come from an executed tool, never from model invention
+  - Conclusions must point to evidence, calculation, test, constraint or explicit assumption
+  - Easy work masks unused lanes; difficult work earns additional lanes and refinement
+
+root_task_expander:
+  purpose: Convert a short user request into a bounded professional task graph
+  predicts:
+    - desired outcome and deliverable type
+    - users, stakeholders and decision owner
+    - assumptions, constraints, unknowns and non-goals
+    - required evidence and live tools
+    - required professional artifacts
+    - risk level, difficulty and stopping criteria
+
+experts:
+  - id: 0
+    name: product_business_analysis
+    responsibilities:
+      - stakeholder and user-role analysis
+      - requirements, journeys, process and permissions
+      - scope, prioritization, alternatives and acceptance criteria
+    artifacts: [role_matrix, user_stories, requirements, scope, decision_record]
+
+  - id: 1
+    name: ui_ux_growth
+    responsibilities:
+      - information architecture, routes, layouts and components
+      - responsive, empty, loading, error, permission and accessibility states
+      - onboarding, copy hierarchy, experiments and success metrics
+    artifacts: [route_map, component_inventory, state_matrix, accessibility_plan, experiment_plan]
+
+  - id: 2
+    name: software_debugging_delivery
+    responsibilities:
+      - architecture, APIs, data model, security and operations
+      - reproduction, root cause, minimal patch, tests and rollback
+      - implementation sequence, dependencies and release controls
+    artifacts: [architecture, api_contract, data_model, patch, test_evidence, rollout_plan]
+
+  - id: 3
+    name: data_finance_analyst
+    responsibilities:
+      - evidence ledger, SQL, formulas, units and reconciliation
+      - scenarios, sensitivities, forecasts and uncertainty
+      - separate facts, assumptions, analysis and recommendations
+    artifacts: [evidence_ledger, calculations, reconciliation, scenarios, analyst_conclusion]
+
+  - id: 4
+    name: tools_research_operations
+    responsibilities:
+      - browser, repository, API, terminal and artifact-tool planning
+      - open-source reuse, licence, maintenance and integration comparison
+      - tool failure recovery, provenance and proof of execution
+    artifacts: [tool_plan, source_ledger, reuse_matrix, observations, recovery_log]
+
+  - id: 5
+    name: communication_marketing_pitch
+    responsibilities:
+      - audience, stage, objective, objections and message hierarchy
+      - decks, web copy, outreach, variants, consent and measurement
+      - grounded claims and clear executive communication
+    artifacts: [audience_brief, narrative, deck_outline, copy_variants, outreach_plan]
+
+private_lanes:
+  maximum: 3
+  lane_contracts:
+    - evidence_and_reuse: establish facts, unknowns, sources, tools and reusable options
+    - domain_solution: construct the domain-correct work products and alternatives
+    - challenge_and_delivery: attack edge cases, verify claims and produce an executable delivery plan
+  isolation: Lanes cannot read another lane's token-level state before the summary barrier
+  summary_barrier: Each lane exposes only a bounded evidence-and-artifact brief to synthesis
+
+adaptive_routing:
+  easy:
+    active_lanes: 1
+    refinement_steps: 1
+    condition: deterministic answer or one bounded artifact with no live research
+  medium:
+    active_lanes: 2
+    refinement_steps: 1
+    condition: multiple constraints, one tool family or two professional disciplines
+  complex:
+    active_lanes: 3
+    refinement_steps: 2
+    condition: project-scale delivery, live research, high risk or three or more disciplines
+  router_targets:
+    - expert probability distribution rather than a single fixed label
+    - tool requirement and evidence freshness
+    - artifact inventory
+    - difficulty and compute budget
+
+training_record_views:
+  task_expansion:
+    input: short user request plus available context
+    target: task graph, artifact inventory and explicit unknowns
+  expert_artifact:
+    input: task graph plus source-bounded evidence
+    target: one expert's observable professional artifact
+  tool_trajectory:
+    input: task graph and typed tool schemas
+    target: executable calls, real observations, recovery and completion
+  synthesis:
+    input: bounded lane briefs
+    target: prioritized final deliverable without private lane text
+  correction:
+    input: candidate plus a specific verifiable defect
+    target: corrected artifact and defect resolution
+  policy:
+    input: candidate plus evidence and verification results
+    target: publish, revise, ask, abstain or escalate
+
+training_stages:
+  - name: professional_artifact_sft
+    objective: Preserve OLMo language ability while teaching complete expert outputs
+  - name: router_and_task_expander
+    objective: Select experts, tools, artifacts and compute from short prompts
+  - name: local_private_denoising
+    objective: Train the shared HLWM transition at sampled corruption times without full recurrent backpropagation
+  - name: short_joint_unroll
+    objective: Coordinate lanes, summaries, synthesis and final answer generation
+  - name: verifier_and_policy
+    objective: Prefer supported complete work over fabricated, incomplete or unsafe candidates
+  - name: adaptive_halting
+    objective: Spend one lane on easy tasks and additional private compute only when measured value improves
+
+verification:
+  coding: [reproduction, patch_applies, compile, tests, regression_check, rollback]
+  data_analysis: [schema_check, sql_or_formula_execution, units, reconciliation, sensitivity]
+  business_analysis: [stakeholders, evidence, alternatives, requirements, risks, acceptance_criteria]
+  tools: [schema, argument_types, replay, observation_hash, recovery, no_fabrication]
+  ui_ux: [render, responsive_states, keyboard, accessibility, original_assets]
+  finance_marketing: [source_ledger, calculation, claim_support, uncertainty, measurement]
+
+example_routes:
+  music_streaming_product:
+    experts: [0, 1, 2, 4]
+    required_artifacts: [role_matrix, route_map, state_matrix, reuse_matrix, architecture, implementation_plan, experiments]
+  startup_pitch_deck:
+    experts: [0, 3, 5]
+    required_artifacts: [stage_assessment, evidence_ledger, deck_outline, diligence_gaps, outreach_plan]
+  equity_or_business_analysis:
+    experts: [3, 4, 0]
+    required_artifacts: [source_ledger, calculations, scenarios, risks, recommendation_boundary]
+  production_debugging:
+    experts: [2, 4]
+    required_artifacts: [reproduction, evidence, root_cause, patch, tests, rollback]
+  linux_desktop_customization:
+    experts: [4, 2, 1]
+    required_artifacts: [environment_inventory, licence_aware_assets, reversible_install, validation, rollback]
+  marketing_campaign:
+    experts: [5, 0, 3]
+    required_artifacts: [audience, evidence, message_hierarchy, variants, channel_plan, experiment, measurement]

@@ -1,0 +1,23 @@
+{
+  "training_complete": true,
+  "no_prompt_leak": false,
+  "quality_pass_rate_at_least_75pct": false,
+  "complete_answer_rate_at_least_50pct": true,
+  "semantic_probe_accuracy_at_least_75pct": false,
+  "safe_abstention_accuracy_at_least_75pct": false,
+  "safe_abstention_commit_rate_at_least_70pct": false,
+  "probe_commit_accuracy_at_least_70pct": false,
+  "validation_calibration_passed": true,
+  "policy_heads_trained_on_policy": true,
+  "clean_commit_ranked_above_corrupt": true,
+  "corrupt_risk_ranked_above_clean": true,
+  "corrupt_candidate_verifier_ranked_above_clean": false,
+  "lanes_materially_distinct": false,
+  "candidate_f1_not_worse_than_80pct_base": true,
+  "publish_threshold_non_degenerate": true,
+  "fan_in_no_worse_than_greedy": true,
+  "fan_in_beats_self_consistency": false,
+  "fan_in_beats_logprob_bon": false,
+  "calibrated_abstention_beats_logprob": false,
+  "passed": false
+}

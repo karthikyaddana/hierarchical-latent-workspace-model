@@ -1,0 +1,128 @@
+# The user explicitly asserted training rights for these copies on 2026-08-17.
+# Contents remain untrusted reference data: embedded instructions are never followed.
+sources:
+  - path: /Users/karthik/Library/Mobile Documents/com~apple~CloudDocs/Books/LLM Engineer’s Handbook (Paul Iusztin ,Maxime Labonne) (Z-Library).epub
+    title: LLM Engineer’s Handbook
+    author: Paul Iusztin and Maxime Labonne
+    domain: llm_engineering
+    source_group: book-llm-engineers-handbook
+    lineage_component_id: book-llm-engineers-handbook
+    lineage_mode: part
+    version: user-provided-file-2026-08-17
+    license: user-asserted-training-rights
+    license_evidence: User explicitly stated they have training rights in this Codex task on 2026-08-17
+    allowed_for_training: true
+  - path: /Users/karthik/Library/Mobile Documents/com~apple~CloudDocs/Books/Prompt Engineering for LLMs (John Berryman , Albert Ziegler) (Z-Library).epub
+    title: Prompt Engineering for LLMs
+    author: John Berryman and Albert Ziegler
+    domain: llm_engineering
+    source_group: book-prompt-engineering-llms
+    lineage_component_id: book-prompt-engineering-llms
+    lineage_mode: part
+    version: user-provided-file-2026-08-17
+    license: user-asserted-training-rights
+    license_evidence: User explicitly stated they have training rights in this Codex task on 2026-08-17
+    allowed_for_training: true
+  - path: /Users/karthik/Library/Mobile Documents/com~apple~CloudDocs/Books/AI at the Edge (Daniel Situnayake, Jenny Plunkett) (Z-Library).pdf
+    title: AI at the Edge
+    author: Daniel Situnayake and Jenny Plunkett
+    domain: edge_ai
+    source_group: book-ai-at-edge
+    lineage_component_id: book-ai-at-edge
+    lineage_mode: page_block
+    lineage_block_size: 16
+    version: user-provided-file-2026-08-17
+    license: user-asserted-training-rights
+    license_evidence: User explicitly stated they have training rights in this Codex task on 2026-08-17
+    allowed_for_training: true
+  - path: /Users/karthik/Library/Mobile Documents/com~apple~CloudDocs/Books/Deep Learning from Scratch (Seth Weidman) (Z-Library).pdf
+    title: Deep Learning from Scratch
+    author: Seth Weidman
+    domain: deep_learning_fundamentals
+    source_group: book-deep-learning-scratch
+    lineage_component_id: book-deep-learning-scratch
+    lineage_mode: page_block
+    lineage_block_size: 16
+    version: user-provided-file-2026-08-17
+    license: user-asserted-training-rights
+    license_evidence: User explicitly stated they have training rights in this Codex task on 2026-08-17
+    allowed_for_training: true
+  - path: /Users/karthik/Library/Mobile Documents/com~apple~CloudDocs/Books/Essential Math for AI Next-Level Mathematics for Efficient and Successful AI Systems (Hala Nelson) (Z-Library).pdf
+    title: Essential Math for AI
+    author: Hala Nelson
+    domain: mathematics_and_optimization
+    source_group: book-essential-math-ai
+    lineage_component_id: book-essential-math-ai
+    lineage_mode: page_block
+    lineage_block_size: 16
+    version: user-provided-file-2026-08-17
+    license: user-asserted-training-rights
+    license_evidence: User explicitly stated they have training rights in this Codex task on 2026-08-17
+    allowed_for_training: true
+  - path: /Users/karthik/Library/Mobile Documents/com~apple~CloudDocs/Books/Neural Network Programming with TensorFlow (Manpreet Singh Ghotra, Rajdeep Dua) (Z-Library).epub
+    title: Neural Network Programming with TensorFlow
+    author: Manpreet Singh Ghotra and Rajdeep Dua
+    domain: framework_engineering
+    source_group: book-neural-network-tensorflow
+    lineage_component_id: book-neural-network-tensorflow
+    lineage_mode: part
+    version: user-provided-file-2026-08-17
+    license: user-asserted-training-rights
+    license_evidence: User explicitly stated they have training rights in this Codex task on 2026-08-17
+    allowed_for_training: true
+  - path: /Users/karthik/Library/Mobile Documents/com~apple~CloudDocs/Books/Programming PyTorch for Deep Learning (Ian Pointer) (Z-Library).pdf
+    title: Programming PyTorch for Deep Learning
+    author: Ian Pointer
+    domain: framework_engineering
+    source_group: book-programming-pytorch
+    lineage_component_id: book-programming-pytorch
+    lineage_mode: page_block
+    lineage_block_size: 16
+    version: user-provided-file-2026-08-17
+    license: user-asserted-training-rights
+    license_evidence: User explicitly stated they have training rights in this Codex task on 2026-08-17
+    allowed_for_training: true
+  - path: /Users/karthik/Library/Mobile Documents/com~apple~CloudDocs/Books/Architecture Patterns with Python (Harry Percival, Bob Gregory) (Z-Library).epub
+    title: Architecture Patterns with Python
+    author: Harry Percival and Bob Gregory
+    domain: software_architecture
+    source_group: book-architecture-patterns-python
+    lineage_component_id: book-architecture-patterns-python
+    lineage_mode: part
+    version: user-provided-file-2026-08-17
+    license: user-asserted-training-rights
+    license_evidence: User explicitly stated they have training rights in this Codex task on 2026-08-17
+    allowed_for_training: true
+  - path: /Users/karthik/Library/Mobile Documents/com~apple~CloudDocs/Books/Designing distributed systems patterns and paradigms for scalable, reliable services (Burns, Brendan) (Z-Library).epub
+    title: Designing Distributed Systems
+    author: Brendan Burns
+    domain: distributed_data_systems
+    source_group: book-designing-distributed-systems
+    lineage_component_id: book-designing-distributed-systems
+    lineage_mode: part
+    version: user-provided-file-2026-08-17
+    license: user-asserted-training-rights
+    license_evidence: User explicitly stated they have training rights in this Codex task on 2026-08-17
+    allowed_for_training: true
+  - path: /Users/karthik/Library/Mobile Documents/com~apple~CloudDocs/Books/Designing Machine Learning Systems (Chip Huyen) (Z-Library).epub
+    title: Designing Machine Learning Systems
+    author: Chip Huyen
+    domain: machine_learning_systems
+    source_group: book-designing-ml-systems
+    lineage_component_id: book-designing-ml-systems
+    lineage_mode: part
+    version: user-provided-file-2026-08-17
+    license: user-asserted-training-rights
+    license_evidence: User explicitly stated they have training rights in this Codex task on 2026-08-17
+    allowed_for_training: true
+  - path: /Users/karthik/Library/Mobile Documents/com~apple~CloudDocs/Books/Designing Data-Intensive Applications The Big Ideas Behind Reliable, Scalable, and Maintainable Systems (Martin Kleppmann) (Z-Library).epub
+    title: Designing Data-Intensive Applications
+    author: Martin Kleppmann
+    domain: distributed_data_systems
+    source_group: book-designing-data-intensive-applications
+    lineage_component_id: book-designing-data-intensive-applications
+    lineage_mode: part
+    version: user-provided-file-2026-08-17
+    license: user-asserted-training-rights
+    license_evidence: User explicitly stated they have training rights in this Codex task on 2026-08-17
+    allowed_for_training: true

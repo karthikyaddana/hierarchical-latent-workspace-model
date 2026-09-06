@@ -1,0 +1,172 @@
+{
+  "package_version": "9.0",
+  "seeds": {
+    "17": {
+      "passed": false,
+      "failed_gates": [
+        "abstention_beats_logprob_partial_augrc",
+        "aux_premise_decodable",
+        "canary_clean",
+        "canvas_beats_gist",
+        "full_ablation_consistent",
+        "latent_channel_live",
+        "validity_floor_met",
+        "verifier_margin_positive_on_generated"
+      ],
+      "infra": {
+        "training_complete": true,
+        "zero_skipped_updates": true,
+        "truncation_integrity": true,
+        "validity_floor_met": false,
+        "calibration_fitted": true,
+        "canary_clean": false
+      },
+      "claim_L": {
+        "masked_leak_zero": true,
+        "masked_causal_floor": true,
+        "latent_channel_live": false,
+        "full_ablation_consistent": false,
+        "unmasked_parity": true,
+        "aux_premise_decodable": false
+      },
+      "attribution": {
+        "gist_control_run": true,
+        "canvas_beats_gist": false
+      },
+      "claim_V": {
+        "verifier_margin_positive_on_generated": false,
+        "clean_commit_ranked_above_corrupt": true,
+        "publish_score_continuous": true
+      },
+      "claim_A2": {
+        "coverage_in_band": true,
+        "risk_ucb_015": true,
+        "abstention_beats_logprob_partial_augrc": false,
+        "safe_abstention_probes": true
+      },
+      "masked_channel": {
+        "floor_accuracy": 0.0,
+        "gist_accuracy": 0.0,
+        "leak_rows": 0,
+        "masked_rows": 99,
+        "premise_probe_accuracy": 0.2970898532957742,
+        "unmasked_causal_accuracy": 0.4708994708994709,
+        "unmasked_parity_gap": -0.037037037037037035,
+        "unmasked_workspace_accuracy": 0.5079365079365079,
+        "workspace_accuracy": 0.0
+      },
+      "abstention": {
+        "bootstrap_heads_win_fraction": 0.994,
+        "bootstrap_partial_win_fraction": 0.746,
+        "coverage": 0.2951388888888889,
+        "graded_rows": 288,
+        "heads_augrc": 0.1273148148148148,
+        "heads_partial_augrc": 0.01284722222222223,
+        "heads_selective_accuracy": 0.9764705882352941,
+        "logprob_augrc": 0.1412157600308642,
+        "logprob_partial_augrc": 0.015571581196581202,
+        "logprob_selective_accuracy_at_matched_coverage": 0.9647058823529412,
+        "partial_augrc_band": [
+          0.05,
+          0.5
+        ],
+        "published_rows": 85,
+        "selective_risk_ucb95": 0.07221851093581821
+      },
+      "gate_notes": {
+        "canary_boundaries_seen": false,
+        "distinct_publish_scores": 329,
+        "lane_summary_cosine_report_only": 1.0,
+        "no_scaffold_leak_rate": 0.0,
+        "prefix_gate_tanh_telemetry_only": 0.052352435886859894,
+        "published_rows": 85,
+        "quality_pass_rate": 0.5104166666666666,
+        "risk_ucb_void_low_n": false
+      }
+    },
+    "29": {
+      "passed": false,
+      "failed_gates": [
+        "abstention_beats_logprob_partial_augrc",
+        "aux_premise_decodable",
+        "canary_clean",
+        "canvas_beats_gist",
+        "full_ablation_consistent",
+        "latent_channel_live",
+        "validity_floor_met",
+        "verifier_margin_positive_on_generated"
+      ],
+      "infra": {
+        "training_complete": true,
+        "zero_skipped_updates": true,
+        "truncation_integrity": true,
+        "validity_floor_met": false,
+        "calibration_fitted": true,
+        "canary_clean": false
+      },
+      "claim_L": {
+        "masked_leak_zero": true,
+        "masked_causal_floor": true,
+        "latent_channel_live": false,
+        "full_ablation_consistent": false,
+        "unmasked_parity": true,
+        "aux_premise_decodable": false
+      },
+      "attribution": {
+        "gist_control_run": true,
+        "canvas_beats_gist": false
+      },
+      "claim_V": {
+        "verifier_margin_positive_on_generated": false,
+        "clean_commit_ranked_above_corrupt": true,
+        "publish_score_continuous": true
+      },
+      "claim_A2": {
+        "coverage_in_band": true,
+        "risk_ucb_015": true,
+        "abstention_beats_logprob_partial_augrc": false,
+        "safe_abstention_probes": true
+      },
+      "masked_channel": {
+        "floor_accuracy": 0.0,
+        "gist_accuracy": 0.0,
+        "leak_rows": 0,
+        "masked_rows": 99,
+        "premise_probe_accuracy": 0.3337159355857758,
+        "unmasked_causal_accuracy": 0.49206349206349204,
+        "unmasked_parity_gap": 0.0,
+        "unmasked_workspace_accuracy": 0.49206349206349204,
+        "workspace_accuracy": 0.0
+      },
+      "abstention": {
+        "bootstrap_heads_win_fraction": 0.039,
+        "bootstrap_partial_win_fraction": 0.792,
+        "coverage": 0.2673611111111111,
+        "graded_rows": 288,
+        "heads_augrc": 0.1387080439814815,
+        "heads_partial_augrc": 0.007345085470085469,
+        "heads_selective_accuracy": 1.0,
+        "logprob_augrc": 0.12645881558641975,
+        "logprob_partial_augrc": 0.01135149572649572,
+        "logprob_selective_accuracy_at_matched_coverage": 0.961038961038961,
+        "partial_augrc_band": [
+          0.05,
+          0.5
+        ],
+        "published_rows": 77,
+        "selective_risk_ucb95": 0.03815851571268482
+      },
+      "gate_notes": {
+        "canary_boundaries_seen": false,
+        "distinct_publish_scores": 372,
+        "lane_summary_cosine_report_only": 1.0,
+        "no_scaffold_leak_rate": 0.0,
+        "prefix_gate_tanh_telemetry_only": 0.04987454041838646,
+        "published_rows": 77,
+        "quality_pass_rate": 0.4930555555555556,
+        "risk_ucb_void_low_n": false
+      }
+    }
+  },
+  "binding_rung": "rung 1: latent_channel_live failed on both seeds - the latent channel cannot carry structurally necessary information at 0.6B; TERMINAL for the workspace generative mechanism"
+}

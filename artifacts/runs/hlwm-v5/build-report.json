@@ -1,0 +1,49 @@
+{
+  "bundle": "/Users/karthik/Documents/ChatGPT/Light of the Embel/artifacts/kaggle/hlwm-v5/hlwm-v5-candidate-bundle.zip",
+  "bundle_bytes": 21622969,
+  "bundle_sha256": "286d0fa316b1cd296dd38e3cb3ee0315a16ebe3e436bd9227abaf41c81930738",
+  "code_sha256": {
+    "__init__.py": "15eee54eb55eb69558a57fe5b0141d6d555c010166ed5f82c9bff1b7e26c6028",
+    "data.py": "875e91b99dfb04adadee89586b741c4fe66f805b229d6e0622cefea50e4471a3",
+    "evaluate_checkpoint.py": "838412840e3e936dd147b5bf02d5f2d37298094e13d253b8da74bcb7d27ea693",
+    "modeling_hlwm.py": "06c3ae417637c6f29c7475d328ce34d4f4cd0c4dcea6d712965c05efe52cd179",
+    "test_modeling_hlwm.py": "cdb1c4c13b00ddac2535312f7c26e598038e6c6cec0891ba641dd2733bd189ae",
+    "train_kaggle.py": "c9512cf6813185cbbdc74b4fead902e9d24d53a18ace581c881d3939b4cfe890"
+  },
+  "counts": {
+    "test": 405,
+    "train": 3310,
+    "validation": 585
+  },
+  "data_quality": {
+    "commitment_decisions": {
+      "publish": 4277,
+      "refine": 23
+    },
+    "episodes": 4300,
+    "generation_method": "direct_fast_no_judge",
+    "independently_adjudicated_episodes": 0,
+    "lanes": 8994,
+    "policy_label_use": "masked unless independently_adjudicated; paired deterministic corruption is used only as an architecture contrast",
+    "production_boundary": "This release can test architecture and optimization but cannot establish factual quality, abstention calibration or production readiness.",
+    "top_routes": {
+      "root -> architecture -> specialist": 5,
+      "root -> architecture_analysis -> lstm_gates": 1,
+      "root -> autodiff_analysis -> gradient_flow": 1,
+      "root -> domain": 3,
+      "root -> domain -> empirical": 1,
+      "root -> domain -> implementation": 2,
+      "root -> domain -> latency-budget-specialist": 1,
+      "root -> domain -> sensor-path-specialist": 1,
+      "root -> domain -> specialist": 8953,
+      "root -> domain -> validation-specialist": 1
+    },
+    "verification_verdicts": {
+      "insufficient": 457,
+      "refuted": 15,
+      "supported": 22052
+    }
+  },
+  "notebook": "/Users/karthik/Documents/ChatGPT/Light of the Embel/artifacts/kaggle/hlwm-v5/embel-hlwm-v5-kaggle-t4.ipynb",
+  "notebook_sha256": "6c4918f82fa8c2e7d2f10c7953a2f90df861b87918cc9f1502463b116741d29f"
+}

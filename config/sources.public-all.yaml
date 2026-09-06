@@ -1,0 +1,173 @@
+# Combined provenance manifest. Individual source permissions remain authoritative.
+sources:
+- path: /Users/karthik/Documents/ChatGPT/Light of the Embel/sources/public/repos/google-deepmind__mathematics_dataset
+  title: google-deepmind/mathematics_dataset
+  author: google-deepmind
+  domain: mathematics_and_optimization
+  source_group: github-google-deepmind-mathematics_dataset
+  lineage_component_id: github-google-deepmind-mathematics_dataset
+  lineage_mode: source
+  version: git:427f45075f84b8b9774950196ad63867ca20ffb3
+  license: Apache-2.0
+  license_evidence: https://github.com/google-deepmind/mathematics_dataset/blob/427f45075f84b8b9774950196ad63867ca20ffb3/LICENSE
+  allowed_for_training: true
+  url: https://github.com/google-deepmind/mathematics_dataset
+  use: Procedural mathematics generators with exact answers
+  manifest_origin: /Users/karthik/Documents/ChatGPT/Light of the Embel/config/sources.public-repos.yaml
+- path: /Users/karthik/Documents/ChatGPT/Light of the Embel/sources/public/repos/exercism__problem-specifications
+  title: exercism/problem-specifications
+  author: exercism
+  domain: programming_and_web
+  source_group: github-exercism-problem-specifications
+  lineage_component_id: github-exercism-problem-specifications
+  lineage_mode: source
+  version: git:03f83310ed0547b902d211a05d23b3d74661df02
+  license: MIT
+  license_evidence: https://github.com/exercism/problem-specifications/blob/03f83310ed0547b902d211a05d23b3d74661df02/LICENSE
+  allowed_for_training: true
+  url: https://github.com/exercism/problem-specifications
+  use: Language-neutral programming tasks and canonical tests
+  manifest_origin: /Users/karthik/Documents/ChatGPT/Light of the Embel/config/sources.public-repos.yaml
+- path: /Users/karthik/Documents/ChatGPT/Light of the Embel/sources/public/repos/18F__content-guide
+  title: 18F/content-guide
+  author: 18F
+  domain: communication_and_writing
+  source_group: github-18f-content-guide
+  lineage_component_id: github-18f-content-guide
+  lineage_mode: source
+  version: git:1b1723d3d5b8f91d92c16487c88b56265dc0ec3a
+  license: CC0-1.0
+  license_evidence: https://github.com/18F/content-guide/blob/1b1723d3d5b8f91d92c16487c88b56265dc0ec3a/LICENSE.md
+  allowed_for_training: true
+  url: https://github.com/18F/content-guide
+  use: Clear, accessible, user-centered writing guidance
+  manifest_origin: /Users/karthik/Documents/ChatGPT/Light of the Embel/config/sources.public-repos.yaml
+- path: /Users/karthik/Documents/ChatGPT/Light of the Embel/sources/public/repos/microsoft__ML-For-Beginners
+  title: microsoft/ML-For-Beginners
+  author: microsoft
+  domain: machine_learning_systems
+  source_group: github-microsoft-ml-for-beginners
+  lineage_component_id: github-microsoft-ml-for-beginners
+  lineage_mode: source
+  version: git:d0d0ea2b2d22cddca31f9c6d108df7daa87a1b46
+  license: MIT
+  license_evidence: https://github.com/microsoft/ML-For-Beginners/blob/d0d0ea2b2d22cddca31f9c6d108df7daa87a1b46/LICENSE
+  allowed_for_training: true
+  url: https://github.com/microsoft/ML-For-Beginners
+  use: Structured ML lessons, examples, and exercises
+  manifest_origin: /Users/karthik/Documents/ChatGPT/Light of the Embel/config/sources.public-repos.yaml
+- path: /Users/karthik/Documents/ChatGPT/Light of the Embel/sources/public/repos/microsoft__Web-Dev-For-Beginners
+  title: microsoft/Web-Dev-For-Beginners
+  author: microsoft
+  domain: programming_and_web
+  source_group: github-microsoft-web-dev-for-beginners
+  lineage_component_id: github-microsoft-web-dev-for-beginners
+  lineage_mode: source
+  version: git:5f220217d35499881cfff61a5b4c2dab033ab228
+  license: MIT
+  license_evidence: https://github.com/microsoft/Web-Dev-For-Beginners/blob/5f220217d35499881cfff61a5b4c2dab033ab228/LICENSE
+  allowed_for_training: true
+  url: https://github.com/microsoft/Web-Dev-For-Beginners
+  use: Web implementation, testing, and project exercises
+  manifest_origin: /Users/karthik/Documents/ChatGPT/Light of the Embel/config/sources.public-repos.yaml
+- path: /Users/karthik/Documents/ChatGPT/Light of the Embel/sources/public/repos/microsoft__generative-ai-for-beginners
+  title: microsoft/generative-ai-for-beginners
+  author: microsoft
+  domain: llm_engineering
+  source_group: github-microsoft-generative-ai-for-beginners
+  lineage_component_id: github-microsoft-generative-ai-for-beginners
+  lineage_mode: source
+  version: git:645f932514e9f22f688c8feb3e49a7a7f2eb6f1b
+  license: MIT
+  license_evidence: https://github.com/microsoft/generative-ai-for-beginners/blob/645f932514e9f22f688c8feb3e49a7a7f2eb6f1b/LICENSE
+  allowed_for_training: true
+  url: https://github.com/microsoft/generative-ai-for-beginners
+  use: LLM application design and implementation lessons
+  manifest_origin: /Users/karthik/Documents/ChatGPT/Light of the Embel/config/sources.public-repos.yaml
+- path: /Users/karthik/Documents/ChatGPT/Light of the Embel/sources/public/repos/eugeneyan__applied-ml
+  title: eugeneyan/applied-ml
+  author: eugeneyan
+  domain: machine_learning_systems
+  source_group: github-eugeneyan-applied-ml
+  lineage_component_id: github-eugeneyan-applied-ml
+  lineage_mode: source
+  version: git:d58606b6ec039e9cc242f43fd64d16af71cd1297
+  license: MIT
+  license_evidence: https://github.com/eugeneyan/applied-ml/blob/d58606b6ec039e9cc242f43fd64d16af71cd1297/LICENSE
+  allowed_for_training: true
+  url: https://github.com/eugeneyan/applied-ml
+  use: Applied ML system case studies and synthesis
+  manifest_origin: /Users/karthik/Documents/ChatGPT/Light of the Embel/config/sources.public-repos.yaml
+- path: /Users/karthik/Documents/ChatGPT/Light of the Embel/sources/public/repos/open-guides__og-aws
+  title: open-guides/og-aws
+  author: open-guides
+  domain: cloud_and_devops
+  source_group: github-open-guides-og-aws
+  lineage_component_id: github-open-guides-og-aws
+  lineage_mode: source
+  version: git:cde02946c221492d46c03777de41894b88b7d1ff
+  license: CC-BY-4.0
+  license_evidence: https://github.com/open-guides/og-aws/blob/cde02946c221492d46c03777de41894b88b7d1ff/LICENSE
+  allowed_for_training: true
+  url: https://github.com/open-guides/og-aws
+  use: Practitioner-reviewed cloud engineering guidance
+  manifest_origin: /Users/karthik/Documents/ChatGPT/Light of the Embel/config/sources.public-repos.yaml
+- path: /Users/karthik/Documents/ChatGPT/Light of the Embel/sources/public/repos/rust-lang__book
+  title: rust-lang/book
+  author: rust-lang
+  domain: programming_and_web
+  source_group: github-rust-lang-book
+  lineage_component_id: github-rust-lang-book
+  lineage_mode: source
+  version: git:917544888a55e4da7109bdba8c88c893c0da70f4
+  license: Apache-2.0 OR MIT
+  license_evidence: https://github.com/rust-lang/book/blob/917544888a55e4da7109bdba8c88c893c0da70f4/COPYRIGHT
+  allowed_for_training: true
+  url: https://github.com/rust-lang/book
+  use: Language design, correctness, and systems programming exercises
+  manifest_origin: /Users/karthik/Documents/ChatGPT/Light of the Embel/config/sources.public-repos.yaml
+- path: /Users/karthik/Documents/ChatGPT/Light of the Embel/sources/public/uci/bank-marketing/bank-additional/bank-additional/bank-additional-full.csv
+  title: UCI Bank Marketing
+  author: S. Moro, P. Cortez, and P. Rita
+  domain: marketing_and_brand
+  source_group: uci-bank-marketing-222
+  lineage_component_id: uci-bank-marketing-222
+  lineage_mode: source
+  version: uci-static-222-2026-08-17
+  license: CC-BY-4.0
+  license_evidence: https://archive.ics.uci.edu/dataset/222/bank+marketing
+  allowed_for_training: true
+  data_role: visible_context
+  url: https://archive.ics.uci.edu/dataset/222/bank+marketing
+  use: Campaign segmentation, leakage detection, metric design, and evidence-based decision episodes
+  manifest_origin: /Users/karthik/Documents/ChatGPT/Light of the Embel/config/sources.public-datasets.yaml
+- path: /Users/karthik/Documents/ChatGPT/Light of the Embel/sources/public/huggingface/openai__gsm8k/train
+  title: GSM8K training split
+  author: OpenAI
+  domain: mathematics_and_optimization
+  source_group: hf-openai-gsm8k-train
+  lineage_component_id: hf-openai-gsm8k-train
+  lineage_mode: source
+  version: hf:740312add88f781978c0658806c59bc2815b9866
+  license: MIT
+  license_evidence: https://huggingface.co/datasets/openai/gsm8k/blob/740312add88f781978c0658806c59bc2815b9866/README.md
+  allowed_for_training: true
+  data_role: visible_context
+  url: https://huggingface.co/datasets/openai/gsm8k
+  split_policy: training split only; official test split is stored outside the training manifest
+  manifest_origin: /Users/karthik/Documents/ChatGPT/Light of the Embel/config/sources.public-datasets.yaml
+- path: /Users/karthik/Documents/ChatGPT/Light of the Embel/sources/public/huggingface/google-research-datasets__mbpp/train
+  title: MBPP sanitized training and prompt splits
+  author: Google Research
+  domain: programming_and_web
+  source_group: hf-google-mbpp-train
+  lineage_component_id: hf-google-mbpp-train
+  lineage_mode: source
+  version: hf:4bb6404fdc6cacfda99d4ac4205087b89d32030c
+  license: CC-BY-4.0
+  license_evidence: https://huggingface.co/datasets/google-research-datasets/mbpp/blob/4bb6404fdc6cacfda99d4ac4205087b89d32030c/README.md
+  allowed_for_training: true
+  data_role: visible_context
+  url: https://huggingface.co/datasets/google-research-datasets/mbpp
+  split_policy: sanitized train and prompt splits only; validation and test are stored outside the training manifest
+  manifest_origin: /Users/karthik/Documents/ChatGPT/Light of the Embel/config/sources.public-datasets.yaml

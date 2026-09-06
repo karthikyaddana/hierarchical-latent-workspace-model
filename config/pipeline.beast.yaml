@@ -1,0 +1,39 @@
+project:
+  name: hlwm-beast-teacher-factory
+  seed: 8675309
+  schema_version: "1.0"
+
+azure:
+  endpoint: "https://nethandevnath-resource.services.ai.azure.com/openai/v1"
+  deployment: "DeepSeek-V4-Flash"
+  scope: "https://ai.azure.com/.default"
+  timeout_seconds: 180
+  max_retries: 1
+  requests_per_minute: 60
+  temperature: 0.15
+  max_completion_tokens: 2600
+
+teacher_factory:
+  mode: single_teacher
+  input_files:
+    - data/reasoning9000/final/master/train.jsonl
+    - data/expert_seeds/expert-workflow-seeds.jsonl
+  priority_source_groups:
+    - owner-authored-expert-workflow-seeds
+  direct_pair_globs:
+    - sources/public/expert-curated/*.jsonl
+  output_dir: data/expert-beast
+  request_log: logs/beast-teacher-requests.jsonl
+  stop_file: data/expert-beast/STOP
+  workers: 4
+  variants_per_episode: 4
+  teacher_models_per_task: 1
+  validation_fraction: 0.10
+  minimum_main_train_records: 1500
+  max_requests_per_run: 32
+  max_tokens_per_run: 80000
+  providers:
+    azure_deepseek_v4:
+      type: azure
+      model: DeepSeek-V4-Flash
+      roles: [teacher]

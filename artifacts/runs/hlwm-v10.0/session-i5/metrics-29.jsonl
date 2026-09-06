@@ -1,0 +1,36 @@
+{"inter_latent_cosine": 0.413267, "phase": "warm", "producer_mse": 0.001795, "recon": 5.280289, "step": 0}
+{"inter_latent_cosine": 0.857541, "phase": "warm", "producer_mse": 0.001857, "recon": 3.666627, "step": 50}
+{"inter_latent_cosine": 0.864018, "phase": "warm", "producer_mse": 0.001812, "recon": 4.038865, "step": 100}
+{"inter_latent_cosine": 0.703102, "phase": "warm", "producer_mse": 0.001737, "recon": 1.288108, "step": 150}
+{"step": 200, "warm_recon_digit_em": 0.5637982195845698}
+{"inter_latent_cosine": 0.444587, "phase": "warm", "producer_mse": 0.001828, "recon": 0.677344, "step": 200}
+{"inter_latent_cosine": 0.388205, "phase": "warm", "producer_mse": 0.001749, "recon": 0.890463, "step": 250}
+{"inter_latent_cosine": 0.562315, "phase": "warm", "producer_mse": 0.001776, "recon": 0.692516, "step": 300}
+{"inter_latent_cosine": 0.568831, "phase": "warm", "producer_mse": 0.001711, "recon": 0.93475, "step": 350}
+{"step": 400, "warm_recon_digit_em": 0.5816023738872403}
+{"inter_latent_cosine": 0.414559, "phase": "warm", "producer_mse": 0.001776, "recon": 0.814384, "step": 400}
+{"inter_latent_cosine": 0.746046, "phase": "warm", "producer_mse": 0.001743, "recon": 1.053926, "step": 450}
+{"inter_latent_cosine": 0.749608, "phase": "warm", "producer_mse": 0.001763, "recon": 0.700166, "step": 500}
+{"inter_latent_cosine": 0.743, "phase": "warm", "producer_mse": 0.001787, "recon": 1.015845, "step": 550}
+{"step": 600, "warm_recon_digit_em": 0.5905044510385756}
+{"step": 600, "warm_gate": {"em_200": 0.5637982195845698, "em_600": 0.5905044510385756, "floor": 0.5, "passed": true}}
+{"step": 600, "v10_grad_probe": {"student": 432166.78125, "teacher": 343788.6875}}
+{"distill_l1": 0.110239, "inter_latent_cosine": 0.761844, "latent_step_ce": 15.070312, "phase": "main", "prefix_gate_median": 0.079907, "producer_mse": 0.001778, "recon": 0.618607, "router_probe_accuracy": 0.0, "router_probe_ce": 2.8125, "step": 600, "student_ce": 17.231157, "teacher_answer_ce": 20.813335, "teacher_trace_ce": 0.0}
+{"distill_l1": 0.04265, "inter_latent_cosine": 0.748614, "latent_step_ce": 16.53595, "phase": "main", "prefix_gate_median": 0.07983, "producer_mse": 0.001803, "recon": 1.104251, "router_probe_accuracy": 0.0, "router_probe_ce": 2.078125, "step": 650, "student_ce": 1.406317, "teacher_answer_ce": 1.378176, "teacher_trace_ce": 0.0}
+{"step": 700, "v10_grad_probe": {"colar": 9287.9365234375, "student": 44377.25, "teacher": 34076.41796875}}
+{"colar_answer_ce": 0.150498, "colar_segment_ce": 2.014073, "distill_l1": 0.023129, "inter_latent_cosine": 0.751889, "latent_step_ce": 8.816406, "phase": "main", "prefix_gate_median": 0.079808, "producer_mse": 0.001776, "router_probe_accuracy": 0.0, "router_probe_ce": 3.390625, "step": 700, "student_ce": 0.152818, "teacher_answer_ce": 0.159042, "teacher_trace_ce": 0.0}
+{"colar_answer_ce": 0.979299, "colar_segment_ce": 2.832826, "distill_l1": 0.029212, "inter_latent_cosine": 0.754612, "latent_step_ce": 4.41394, "phase": "main", "prefix_gate_median": 0.079798, "producer_mse": 0.00182, "router_probe_accuracy": 0.0, "router_probe_ce": 1.203125, "step": 750, "student_ce": 1.061894, "teacher_answer_ce": 0.581031, "teacher_trace_ce": 0.0}
+{"step": 800, "v10_grad_probe": {"student": 32973.5078125, "teacher": 10936.220703125}}
+{"distill_l1": 0.02064, "inter_latent_cosine": 0.779095, "latent_step_ce": 5.675781, "phase": "main", "prefix_gate_median": 0.080134, "producer_mse": 0.001783, "recon": 0.911028, "router_probe_accuracy": 1.0, "router_probe_ce": 0.929688, "step": 800, "student_ce": 0.033883, "teacher_answer_ce": 0.057516, "teacher_trace_ce": 0.0}
+{"distill_l1": 0.013282, "inter_latent_cosine": 0.787941, "latent_step_ce": 3.096191, "phase": "main", "prefix_gate_median": 0.080357, "producer_mse": 0.001849, "recon": 1.240459, "router_probe_accuracy": 0.0, "router_probe_ce": 1.382812, "step": 850, "student_ce": 0.248944, "teacher_answer_ce": 0.266896, "teacher_trace_ce": 0.0}
+{"step": 900, "v10_grad_probe": {"colar": 8643.341796875, "student": 16268.6142578125, "teacher": 12445.2275390625}}
+{"colar_answer_ce": 0.097156, "colar_segment_ce": 1.948679, "distill_l1": 0.011157, "inter_latent_cosine": 0.763294, "latent_step_ce": 2.955566, "phase": "main", "prefix_gate_median": 0.080212, "producer_mse": 0.001784, "router_probe_accuracy": 0.0, "router_probe_ce": 1.632812, "step": 900, "student_ce": 0.050764, "teacher_answer_ce": 0.062571, "teacher_trace_ce": 0.0}
+{"colar_answer_ce": 1.034348, "colar_segment_ce": 2.507561, "distill_l1": 0.009879, "inter_latent_cosine": 0.779523, "latent_step_ce": 2.710938, "phase": "main", "prefix_gate_median": 0.080279, "producer_mse": 0.001847, "router_probe_accuracy": 0.0, "router_probe_ce": 1.289062, "step": 950, "student_ce": 1.012578, "teacher_answer_ce": 0.189377, "teacher_trace_ce": 0.0}
+{"step": 1000, "v10_grad_probe": {"student": 10887.1650390625, "teacher": 12134.849609375}}
+{"distill_l1": 0.008254, "inter_latent_cosine": 0.753213, "latent_step_ce": 2.026367, "phase": "main", "prefix_gate_median": 0.080421, "producer_mse": 0.001778, "recon": 0.732443, "router_probe_accuracy": 1.0, "router_probe_ce": 1.257812, "step": 1000, "student_ce": 0.001642, "teacher_answer_ce": 0.00326, "teacher_trace_ce": 0.0}
+{"distill_l1": 0.007916, "inter_latent_cosine": 0.785806, "latent_step_ce": 2.136475, "phase": "main", "prefix_gate_median": 0.080427, "producer_mse": 0.001836, "recon": 0.880936, "router_probe_accuracy": 0.0, "router_probe_ce": 1.34375, "step": 1050, "student_ce": 0.220928, "teacher_answer_ce": 0.458486, "teacher_trace_ce": 0.0}
+{"step": 1100, "v10_grad_probe": {"colar": 180.15748596191406, "student": 9485.0771484375, "teacher": 10805.2353515625}}
+{"colar_answer_ce": 0.000774, "colar_segment_ce": 1.933212, "distill_l1": 0.007359, "inter_latent_cosine": 0.7616, "latent_step_ce": 1.797195, "phase": "main", "prefix_gate_median": 0.080476, "producer_mse": 0.001775, "router_probe_accuracy": 1.0, "router_probe_ce": 0.765625, "step": 1100, "student_ce": 0.001585, "teacher_answer_ce": 0.003332, "teacher_trace_ce": 0.0}
+{"colar_answer_ce": 1.01437, "colar_segment_ce": 2.773402, "distill_l1": 0.009864, "inter_latent_cosine": 0.798502, "latent_step_ce": 2.053101, "phase": "main", "prefix_gate_median": 0.080423, "producer_mse": 0.001838, "router_probe_accuracy": 1.0, "router_probe_ce": 0.675781, "step": 1150, "student_ce": 0.87942, "teacher_answer_ce": 0.044789, "teacher_trace_ce": 0.0}
+{"gonogo_masked_numeric_em": 0.0, "step": 1200}
+{"v10_verdict": {"aborted": "gonogo", "gonogo_masked_numeric_em": 0.0, "mode": "v10", "warm_gate": {"em_200": 0.5637982195845698, "em_600": 0.5905044510385756, "floor": 0.5, "passed": true}, "warm_steps": 600}}

@@ -1,0 +1,143 @@
+{
+  "schema_version": "1.0",
+  "mode": "historical",
+  "passed": false,
+  "deployment": "DeepSeek-V3.2-Speciale",
+  "prompt_hash": "172cba754adb6bb48f73cc43b644f8d4",
+  "dataset_hash": "c14b2a53c3f52c8b90b1e0de53dcdba2",
+  "case_count": 14,
+  "accuracy": 0.14285714285714285,
+  "invalid_predictions": 3,
+  "confusion": {
+    "correct_blocking": 2,
+    "correct_non_blocking": 0,
+    "false_blocking": 7,
+    "missed_blocking": 2
+  },
+  "requirements": {
+    "minimum_cases": 12,
+    "false_blocking": 0,
+    "missed_blocking": 0,
+    "invalid_predictions": 0
+  },
+  "cases": [
+    {
+      "case_id": "cal011-nb-extra-client-parse",
+      "gold_label": "non_blocking",
+      "prediction": "blocking",
+      "correct": false,
+      "reason": "Historical decision reconstructed from the archived run outcome.",
+      "errors": []
+    },
+    {
+      "case_id": "cal011-nb-searchsummary-style-scope",
+      "gold_label": "non_blocking",
+      "prediction": "blocking",
+      "correct": false,
+      "reason": "Historical decision reconstructed from the archived run outcome.",
+      "errors": []
+    },
+    {
+      "case_id": "cal011-nb-counterexample-mutation-location",
+      "gold_label": "non_blocking",
+      "prediction": "blocking",
+      "correct": false,
+      "reason": "Historical decision reconstructed from the archived run outcome.",
+      "errors": []
+    },
+    {
+      "case_id": "cal011-nb-pressure-map-format",
+      "gold_label": "non_blocking",
+      "prediction": "blocking",
+      "correct": false,
+      "reason": "Historical decision reconstructed from the archived run outcome.",
+      "errors": []
+    },
+    {
+      "case_id": "cal011-nb-visible-bibliographic-title",
+      "gold_label": "non_blocking",
+      "prediction": "blocking",
+      "correct": false,
+      "reason": "Historical decision reconstructed from the archived run outcome.",
+      "errors": []
+    },
+    {
+      "case_id": "cal011-nb-validation-early-stopping",
+      "gold_label": "non_blocking",
+      "prediction": "blocking",
+      "correct": false,
+      "reason": "Historical decision reconstructed from the archived run outcome.",
+      "errors": []
+    },
+    {
+      "case_id": "cal011-nb-torch-any-scalar-boolean",
+      "gold_label": "non_blocking",
+      "prediction": "blocking",
+      "correct": false,
+      "reason": "Historical decision reconstructed from the archived run outcome.",
+      "errors": []
+    },
+    {
+      "case_id": "pilot004-b-exact-word-count",
+      "gold_label": "blocking",
+      "prediction": null,
+      "correct": false,
+      "reason": "Historical decision reconstructed from the archived run outcome.",
+      "errors": [
+        "prediction reason omits required visible evidence"
+      ]
+    },
+    {
+      "case_id": "cal010-b-acronym-boundary-code",
+      "gold_label": "blocking",
+      "prediction": "blocking",
+      "correct": true,
+      "reason": "Historical decision reconstructed from the archived run outcome.",
+      "errors": []
+    },
+    {
+      "case_id": "pilot003-b-trivial-source-paraphrase",
+      "gold_label": "blocking",
+      "prediction": null,
+      "correct": false,
+      "reason": "Historical decision reconstructed from the archived run outcome.",
+      "errors": [
+        "prediction reason omits required visible evidence"
+      ]
+    },
+    {
+      "case_id": "cal011-b-undefined-comparator",
+      "gold_label": "blocking",
+      "prediction": "blocking",
+      "correct": true,
+      "reason": "Historical decision reconstructed from the archived run outcome.",
+      "errors": []
+    },
+    {
+      "case_id": "pilot003-b-fabricated-rbm-execution",
+      "gold_label": "blocking",
+      "prediction": "non_blocking",
+      "correct": false,
+      "reason": "Historical decision reconstructed from the archived run outcome.",
+      "errors": []
+    },
+    {
+      "case_id": "pilot003-b-self-certified-human-study",
+      "gold_label": "blocking",
+      "prediction": "non_blocking",
+      "correct": false,
+      "reason": "Historical decision reconstructed from the archived run outcome.",
+      "errors": []
+    },
+    {
+      "case_id": "pilot003-b-incomplete-proposed-test-artifact",
+      "gold_label": "blocking",
+      "prediction": null,
+      "correct": false,
+      "reason": "Historical decision reconstructed from the archived run outcome.",
+      "errors": [
+        "prediction reason omits required visible evidence"
+      ]
+    }
+  ]
+}

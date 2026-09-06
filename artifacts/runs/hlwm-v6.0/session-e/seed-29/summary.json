@@ -1,0 +1,250 @@
+{
+  "adapter": {
+    "bytes": 306530740,
+    "path": "/kaggle/working/hlwm-v6.0-seed-29/hlwm-adapter-step-004224.safetensors",
+    "sha256": "b0174da4d893ac19a40b73f149d88fcbf34fd9c53abfdb86cdbfbd7baea4de19",
+    "tensor_count": 191
+  },
+  "args": {
+    "anchor_ratio": 0.5,
+    "batch_size": 1,
+    "brief_tokens": 96,
+    "calibration_new_tokens": 96,
+    "calibration_records": 64,
+    "canary_anchors": 8,
+    "canary_new_tokens": 96,
+    "candidate_temperature_list": [
+      0.0,
+      0.7,
+      0.9,
+      1.1
+    ],
+    "candidate_temperatures": "0.0,0.7,0.9,1.1",
+    "canvas_tokens": 128,
+    "causal_control": false,
+    "causal_ratio": 0.4,
+    "causal_tokens": 1024,
+    "context_tokens": 256,
+    "data_dir": "/kaggle/working/hlwm-v6.0/hlwm_kaggle/data",
+    "diffusion_steps": 4,
+    "eval_every": 512,
+    "expert_diversity_weight": 0.0,
+    "expert_init_scale": 0.01,
+    "gradient_accumulation": 4,
+    "initial_loss_scale": 1024.0,
+    "joint_steps": 3072,
+    "learning_rate": 8e-05,
+    "local_steps": 1024,
+    "lora_alpha": 32.0,
+    "lora_dropout": 0.05,
+    "lora_rank": 16,
+    "lora_tail_layers": 8,
+    "loss_scale_growth_interval": 2000,
+    "max_runtime_hours": 8.5,
+    "max_skipped_updates": 2,
+    "max_train": null,
+    "max_validation": 256,
+    "memory_headroom_fraction": 0.92,
+    "model": "Qwen/Qwen3-0.6B-Base",
+    "num_experts": 1,
+    "num_lanes": 2,
+    "num_workers": 2,
+    "output_dir": "/kaggle/working/hlwm-v6.0-seed-29",
+    "overfit_examples": 64,
+    "overfit_min_improvement": 0.05,
+    "overfit_steps": 128,
+    "policy_epochs": 120,
+    "policy_label_smoothing": 0.05,
+    "policy_learning_rate": 0.001,
+    "policy_max_attempts": 1024,
+    "policy_min_valid_per_family": 16,
+    "policy_new_tokens": 96,
+    "policy_records": 128,
+    "precision": "auto",
+    "preflight_only": false,
+    "progressive": true,
+    "refinement_steps": 2,
+    "resolved_precision": "bf16",
+    "resume": null,
+    "revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
+    "router_aux_weight": 0.0,
+    "router_entropy_weight": 0.0,
+    "save_every": 1024,
+    "seed": 29,
+    "skip_architecture_smoke": false,
+    "skip_policy_phase": false,
+    "skip_real_qwen_preflight": true,
+    "steps": 4224,
+    "unfreeze_tail_layers": 0,
+    "warmup_updates": 32,
+    "weight_decay": 0.01,
+    "workspace_memory_windows": 16
+  },
+  "behavior_anchor_count": 1024,
+  "causal_control": false,
+  "checkpoint": "/kaggle/working/hlwm-v6.0-seed-29/checkpoint-step-004224.pt",
+  "commitment_calibration": {
+    "accuracy_by_grader": {
+      "abstention": 0.953125,
+      "numeric": 0.265625,
+      "ordering": 0.0625,
+      "unit": 0.25
+    },
+    "balanced_accuracy": 0.8766317367553711,
+    "calibrated_at_step": 4224,
+    "candidate_temperatures": [
+      0.0,
+      0.7,
+      0.9,
+      1.1
+    ],
+    "clean_accept_rate": 0.9081632653061225,
+    "commitment_threshold_non_degenerate": true,
+    "corrupt_reject_rate": 0.8873873873873874,
+    "generated_candidate_records": 256,
+    "generated_candidate_semantic_accuracy": 0.3828125,
+    "invalid_generated_candidates": 158,
+    "method": "validation_generated_nbest_scalar_publish_v3",
+    "negative_policy_records": 222,
+    "negative_reject_rate": 0.9369369149208069,
+    "passed_research_gate": true,
+    "policy_heads_trained_on_policy": true,
+    "positive_accept_rate": 0.8163265585899353,
+    "positive_policy_records": 98,
+    "publish_rule": {
+      "bias": -0.43268832564353943,
+      "fitted": true,
+      "threshold": 0.6894052624702454,
+      "weights": [
+        2.517411947250366,
+        -1.8003607988357544,
+        -0.9988908171653748
+      ]
+    },
+    "publish_threshold_non_degenerate": true,
+    "selection": {
+      "anchors": 64,
+      "greedy_valid_rate": 0.390625,
+      "oracle_any_valid_rate": 0.5,
+      "selected_valid_rate": 0.453125,
+      "selection_gain": 0.0625
+    },
+    "source_split": "validation",
+    "test_split_used": false,
+    "thresholds": {
+      "commitment": 0.20562677830457687,
+      "risk": 0.05149617791175842,
+      "verifier_error": 0.8700487017631531
+    },
+    "valid_generated_candidates": 98,
+    "verified_anchor_records": 64
+  },
+  "elapsed_seconds": 18323.93909263611,
+  "final_loss_scale": 1.0,
+  "mode_counts": {
+    "causal": 1671,
+    "joint_hlwm": 1828,
+    "local_denoise": 725
+  },
+  "on_policy_policy_head": {
+    "accuracy_by_grader": {
+      "abstention": 0.9411764705882353,
+      "numeric": 0.0855614973262032,
+      "ordering": 0.11267605633802817,
+      "unit": 0.1797752808988764
+    },
+    "emitted": 648,
+    "epochs": 120,
+    "family_attempts": {
+      "abstention": 17,
+      "numeric": 187,
+      "ordering": 142,
+      "unit": 89
+    },
+    "family_valid_positives": {
+      "abstention": 16,
+      "numeric": 16,
+      "ordering": 16,
+      "unit": 16
+    },
+    "first_loss": 2.208009958267212,
+    "invalid_emissions": 371,
+    "label_scheme": {
+      "corrupt": [
+        0.05,
+        0.95,
+        0.05
+      ],
+      "invalid": [
+        0.05,
+        0.05,
+        0.95
+      ],
+      "positive": [
+        0.95,
+        0.05,
+        0.05
+      ],
+      "semantic": [
+        0.05,
+        0.05,
+        0.95
+      ]
+    },
+    "label_smoothing": 0.05,
+    "last_loss": 0.5984741449356079,
+    "learning_rate": 0.001,
+    "method": "on_policy_train_anchor_head_fit_v2_decorrelated",
+    "min_valid_per_family": 16,
+    "negative_kind_counts": {
+      "corrupt": 162,
+      "invalid": 371,
+      "semantic": 162
+    },
+    "negative_records": 695,
+    "positive_records": 64,
+    "ranking_pairs": 181,
+    "semantic_negatives": 162,
+    "separation_after": {
+      "mean_negative_commit_probability": 0.05293850228190422,
+      "mean_positive_commit_probability": 0.7770419120788574,
+      "pairwise_commit_ranking_accuracy": 0.9953237175941467,
+      "pairwise_risk_ranking_accuracy": 0.665310263633728,
+      "pairwise_verifier_ranking_accuracy": 0.8702787756919861
+    },
+    "separation_before": {
+      "mean_negative_commit_probability": 0.6029361486434937,
+      "mean_positive_commit_probability": 0.9501831531524658,
+      "pairwise_commit_ranking_accuracy": 0.8208183646202087,
+      "pairwise_risk_ranking_accuracy": 0.8195368647575378,
+      "pairwise_verifier_ranking_accuracy": 0.8146582841873169
+    },
+    "source_split": "train",
+    "trained": true,
+    "valid_emissions": 64,
+    "validity_floor_met": true
+  },
+  "optimizer_updates": 1056,
+  "overfit_gate": {
+    "after": 6.151170969009399,
+    "before": 12.807743549346924,
+    "fixed_examples": 4,
+    "passed": true,
+    "relative_improvement": 0.5197303142970058,
+    "required_improvement": 0.05
+  },
+  "parameters": {
+    "frozen": 596049920,
+    "total": 672676999,
+    "trainable": 76627079
+  },
+  "peak_gpu_allocated_gb": 4.850918292999268,
+  "peak_gpu_reserved_gb": 5.3046875,
+  "planned_steps": 4224,
+  "precision": "bf16",
+  "real_qwen_preflight": null,
+  "skipped_optimizer_updates": 0,
+  "status": "stable_prototype_training_complete",
+  "steps": 4224,
+  "warning": "Reasoning9000 remains unreviewed. Programmatically verified behavior anchors exercise formatting and abstention but do not establish production capability."
+}

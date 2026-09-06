@@ -1,13 +1,16 @@
 cff-version: 1.2.0
 message: "If you use this work, please cite it as below."
-title: "Hierarchical Latent Workspace Model: two negative-results preprints"
+title: "Hierarchical Latent Workspace Model: two negative-results preprints and the full experimental record"
 abstract: >-
-  Two preprints from a twenty-day, ten-experiment preregistered attempt to build a
-  latent-workspace language model on a frozen Qwen3-0.6B decoder wrapped in trainable
-  sidecars. All three proposed mechanisms failed their preregistered gates. With the
-  operative premise deleted from the decoder's input token ids, generation through the
-  latent channel scored 0.000 on all 99 masked rows on both seeds while a linear probe
-  recovered roughly 0.30 of the withheld premise: the channel was readable but not usable.
+  Two preprints and the complete experimental record from a twenty-day, ten-experiment
+  preregistered attempt to build a latent-workspace language model on a frozen Qwen3-0.6B
+  decoder wrapped in trainable sidecars. All three proposed mechanisms failed their
+  preregistered gates. With the operative premise deleted from the decoder's input token
+  ids, generation through the latent channel scored 0.000 on all 99 masked rows on both
+  seeds while a linear probe recovered roughly 0.30 of the withheld premise: the channel
+  was readable but not usable. The repository carries the gate verdicts, per-step metrics,
+  training logs and preregistration plans for all seventeen experiment versions.
+type: software
 authors:
   - family-names: Yaddanapudi
     given-names: Karthik
@@ -15,7 +18,9 @@ authors:
     affiliation: Independent Researcher
 doi: "10.5281/zenodo.22343152"
 repository-code: "https://github.com/karthikyaddana/hierarchical-latent-workspace-model"
-license: CC-BY-4.0
+license:
+  - CC-BY-4.0
+  - Apache-2.0
 date-released: 2026-09-05
 keywords:
   - machine learning
@@ -24,3 +29,21 @@ keywords:
   - interpretability
   - negative results
   - preregistration
+  - reproducibility
+references:
+  - type: article
+    title: >-
+      Readable but Not Usable: A Preregistered Post-Mortem of a Latent-Workspace
+      Language Model, Including Its Own Novelty Audit
+    authors:
+      - family-names: Yaddanapudi
+        given-names: Karthik
+    year: 2026
+  - type: article
+    title: >-
+      The Hierarchical Latent Workspace Model: Root-Preserving Variable-Depth
+      Expertise for Parallel Diffusion Reasoning
+    authors:
+      - family-names: Yaddanapudi
+        given-names: Karthik
+    year: 2026

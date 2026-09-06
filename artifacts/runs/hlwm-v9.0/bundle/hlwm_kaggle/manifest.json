@@ -1,0 +1,57 @@
+{
+  "base_model": "Qwen/Qwen3-0.6B-Base",
+  "base_revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
+  "behavior_anchor_counts": {
+    "test": 576,
+    "train": 1024,
+    "validation": 384
+  },
+  "code_sha256": {
+    "README.md": "34f5da01a231153b087863ad9d33626f1df511ada0a133505d1fd88b2ec9a438",
+    "__init__.py": "15eee54eb55eb69558a57fe5b0141d6d555c010166ed5f82c9bff1b7e26c6028",
+    "data.py": "45cd32a17559f2c41481b414d7797712065fc6b62f357b9d32aae1d04451a17f",
+    "evaluate_checkpoint.py": "53ce35140f3f7ba557745c4e1fcba0e01a3016589cb36d5019652817a9f2e95a",
+    "inference_hlwm.py": "5fc80eefd30d783120b0cd16e08fdd7ca55c7da3d989d2e9e804d478a7ef43b7",
+    "modeling_hlwm.py": "ce74a8fb030ead62e7af3726ffbdd2071c7aefa1b0e1bac3f7c2baa882e2c01b",
+    "semantic_grading.py": "87c0061f9f5f37c8e75efdfe89ca20db40b9d2237f90852e5cfee8b58670b0fc",
+    "test_modeling_hlwm.py": "3d8bb435c98d51545df3f37f351e0852682c219b7f60c38dd831449081367145",
+    "train_kaggle.py": "cdace14b005707d0c76ff656e91a1588d42eb4bb3fe91da27521ba72c2f87174"
+  },
+  "counts": {
+    "test": 1161,
+    "train": 7498,
+    "validation": 1073
+  },
+  "name": "hlwm-necessity-v9-0-candidate",
+  "package_version": "9.0",
+  "purpose": "necessity by construction: information-asymmetric masked channel with dense latent supervision and a gist attribution control; repaired harvest surface; difficulty-banded audit; conformal abstention with a coverage-restricted headline; sized for a Kaggle dual-T4 two-seed session",
+  "review_status": "Reasoning9000 rows remain unreviewed and policy-masked. The masked-row setting is a constructed mechanism demonstration, not a capability claim. Not authorized as production or factual-quality evidence until the preregistered gate passes.",
+  "seed": 90,
+  "session_plan_hours": 9.5,
+  "supersedes": "hlwm-repaired-channel-v8-0-candidate",
+  "target_hardware": "Kaggle T4 x2, one independent seed per GPU",
+  "training_defaults": {
+    "audit_rows": "224 banded anchors + 64 SQL = 288",
+    "candidate_temperatures": "0.0,0.8,0.8,0.8,0.8,0.8,0.8,0.8",
+    "conformal_target_coverage": 0.4,
+    "gist_prefix_tokens": 25,
+    "harvest_max_hours": 1.0,
+    "num_experts": 1,
+    "num_lanes": 1,
+    "policy_max_attempts": 512,
+    "premise_aux_weight": 0.1,
+    "steps": "128 overfit + 768 local + 2304 joint = 3200",
+    "synthesis_kl_weight": 0.02,
+    "workspace_memory_windows": 16
+  },
+  "v9_0_changes": [
+    "M1 information-asymmetric channels: masked anchor rows condition the answer channel on a withheld-premise prompt while the workspace reads the full context; the latent prefix is the only path from the operands to the answer. Leak integrity at four layers (generator, normalization assert, collator subsequence assert, audit leak gate).",
+    "M2 dense latent supervision: a latent-only probe decodes the withheld premise tokens from the prefix positions (never the gold answer); weight 0.1, restricted candidate scoring, masked rows only.",
+    "M3 attribution control: a gist prefix (mean-pool projection, same 25-token budget, no canvas/diffusion) trained on alternating masked batches and audited as the canvas's killer baseline.",
+    "M4 harvest/verifier repair (RC-2): one shared unpadded encode primitive for harvest, calibration and audit; validity floor is now a real gate; harvest wall-clock guard.",
+    "M5 difficulty banding (RC-3): anchor generators parameterized by chain length, operand digits and distractors; the audit anchors are selected by an in-session banding pass against a frozen estimator before training starts.",
+    "M6 abstention realignment: conformal target coverage 0.40 in band [0.20, 0.55]; three-way calibration split (weights on A, score form on B1, threshold on B2); five-feature publish rule nests plurality agreement; headline is coverage-restricted partial AUGRC in [0.05, 0.50] at >=80% of paired bootstraps; risk UCB <= 0.15 with an n>=20 feasibility precondition.",
+    "RC-1 instrument fixes: full-prefix ablation shipped (the causal arm is the workspace arm with prefix removed; masked rows recompute it as the floor arm); the memory-only slice is retained as a descriptive second arm; the prefix gate is telemetry only and gates nothing.",
+    "Single lane (the preregistered unconditional lane exit executed after failures eight and nine); prefix = 8 synthesis + 16 windows + 1 summary = 25."
+  ]
+}

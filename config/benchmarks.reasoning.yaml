@@ -1,0 +1,191 @@
+# Evaluation-only quarantine. None of these canonical tasks may enter generation packets or training exports.
+benchmarks:
+  - {name: ARC-AGI-2, url: "https://github.com/arcprize/ARC-AGI-2", capability: abstract_reasoning}
+  - {name: MMLU-Pro, url: "https://huggingface.co/datasets/TIGER-Lab/MMLU-Pro", capability: broad_knowledge_reasoning}
+  - {name: GPQA, url: "https://huggingface.co/datasets/Idavidrein/gpqa", capability: expert_scientific_reasoning}
+  - {name: BBH, url: "https://github.com/suzgunmirac/BIG-Bench-Hard", capability: multi_step_reasoning}
+  - {name: GSM8K-test, url: "https://huggingface.co/datasets/openai/gsm8k", capability: mathematical_reasoning}
+  - {name: MATH-test, url: "https://huggingface.co/datasets/EleutherAI/hendrycks_math", capability: competition_mathematics}
+  - {name: HumanEval, url: "https://github.com/openai/human-eval", capability: code_generation}
+  - {name: MBPP-test, url: "https://huggingface.co/datasets/google-research-datasets/mbpp", capability: code_generation}
+  - {name: LiveCodeBench, url: "https://github.com/LiveCodeBench/LiveCodeBench", capability: contamination_resistant_coding}
+  - {name: CRUXEval, url: "https://github.com/facebookresearch/cruxeval", capability: code_execution_reasoning}
+  - {name: SWE-bench-Verified, url: "https://www.swebench.com", capability: repository_level_debugging}
+  - {name: IFEval, url: "https://huggingface.co/datasets/google/IFEval", capability: instruction_following}
+  - {name: TruthfulQA, url: "https://github.com/sylinrl/TruthfulQA", capability: truthfulness}
+  - {name: MuSR, url: "https://github.com/Zayne-sprague/MuSR", capability: long_context_reasoning}
+  - {name: DROP, url: "https://huggingface.co/datasets/ucinlp/drop", capability: discrete_text_reasoning}
+  - {name: DS-1000, url: "https://github.com/xlang-ai/DS-1000", capability: data_science_code}
+  - {name: SciCode, url: "https://github.com/scicode-bench/SciCode", capability: scientific_coding}
+  - {name: VibeEval, url: "https://huggingface.co/datasets/RekaAI/VibeEval", capability: open_ended_instruction_quality}
+  - {name: OmniDocBench, url: "https://huggingface.co/datasets/opendatalab/OmniDocBench", capability: document_parsing}
+  - {name: OmniEval-AutoGen, url: "https://huggingface.co/datasets/RUC-NLPIR/OmniEval-AutoGen-Dataset", capability: automated_agent_evaluation}
+  - {name: Agents-Medium-Benchmark-2, url: "https://huggingface.co/datasets/m-ric/agents_medium_benchmark_2", capability: agentic_reasoning}
+  - {name: GAIA, url: "https://huggingface.co/datasets/gaia-benchmark/GAIA", capability: real_world_agent_tasks}
+  - {name: Agents-Small-Benchmark, url: "https://huggingface.co/datasets/m-ric/agents_small_benchmark", capability: agentic_reasoning}
+  - {name: CodeCriticBench, url: "https://huggingface.co/datasets/m-a-p/CodeCriticBench", capability: code_critique}
+  - {name: Babillage, url: "https://huggingface.co/datasets/kyutai/Babillage", capability: language_model_evaluation}
+  # --- Hallucination and factuality ---
+  - {name: HaluEval, url: "https://github.com/RUCAIBox/HaluEval", capability: hallucination_detection}
+  - {name: HalluLens, url: "https://github.com/facebookresearch/HalluLens", capability: hallucination_detection}
+  - {name: SelfCheckGPT-WikiBio, url: "https://github.com/potsawee/selfcheckgpt", capability: hallucination_detection}
+  - {name: SimpleQA, url: "https://huggingface.co/datasets/basicv8vc/SimpleQA", capability: short_form_factuality}
+  - {name: PopQA, url: "https://huggingface.co/datasets/akariasai/PopQA", capability: long_tail_factuality}
+  - {name: FreshQA, url: "https://github.com/freshllms/freshqa", capability: time_sensitive_factuality}
+  - {name: LongFact, url: "https://github.com/google-deepmind/long-form-factuality", capability: long_form_factuality}
+  - {name: FActScore, url: "https://github.com/shmsw25/FActScore", capability: biography_factuality}
+  - {name: FELM, url: "https://github.com/hkust-nlp/felm", capability: factuality_judgment}
+  - {name: FACTS-Grounding, url: "https://www.kaggle.com/facts-leaderboard", capability: grounded_factuality}
+  - {name: RAGTruth, url: "https://github.com/ParticleMedia/RAGTruth", capability: rag_hallucination}
+  - {name: FaithBench, url: "https://github.com/vectara/FaithBench", capability: summarization_faithfulness}
+  - {name: TofuEval, url: "https://github.com/amazon-science/tofueval", capability: dialogue_summarization_faithfulness}
+  - {name: WildHallucinations, url: "https://github.com/wenting-zhao/WildHallucinations", capability: entity_factuality}
+  - {name: SummaC, url: "https://github.com/tingofurro/summac", capability: summary_consistency}
+  - {name: FRANK, url: "https://github.com/artidoro/frank", capability: summarization_factuality_typology}
+  # --- Knowledge and reasoning ---
+  - {name: HLE, url: "https://github.com/centerforaisafety/hle", capability: frontier_knowledge}
+  - {name: SuperGPQA, url: "https://github.com/SuperGPQA/SuperGPQA", capability: graduate_knowledge}
+  - {name: LiveBench, url: "https://github.com/LiveBench/LiveBench", capability: contamination_free_general}
+  - {name: SimpleBench, url: "https://github.com/simple-bench/SimpleBench", capability: trick_resistant_reasoning}
+  - {name: ZebraLogic, url: "https://huggingface.co/datasets/WildEval/ZebraLogic", capability: constraint_logic}
+  - {name: BBEH, url: "https://github.com/google-deepmind/bbeh", capability: extra_hard_reasoning}
+  - {name: MuSiQue, url: "https://github.com/StonyBrookNLP/musique", capability: multihop_qa}
+  - {name: FOLIO, url: "https://github.com/Yale-LILY/FOLIO", capability: first_order_logic}
+  - {name: PrOntoQA, url: "https://github.com/asaparov/prontoqa", capability: deductive_reasoning}
+  - {name: ProcessBench, url: "https://github.com/QwenLM/ProcessBench", capability: reasoning_error_detection}
+  # --- Mathematics ---
+  - {name: AIME-2025, url: "https://huggingface.co/datasets/opencompass/AIME2025", capability: competition_mathematics}
+  - {name: OlympiadBench, url: "https://github.com/OpenBMB/OlympiadBench", capability: olympiad_mathematics}
+  - {name: Omni-MATH, url: "https://github.com/KbsdJames/Omni-MATH", capability: olympiad_mathematics}
+  - {name: PutnamBench, url: "https://github.com/trishullab/PutnamBench", capability: formal_mathematics}
+  - {name: MathArena, url: "https://matharena.ai", capability: live_competition_mathematics}
+  # --- Coding, debugging and repositories ---
+  - {name: EvalPlus, url: "https://github.com/evalplus/evalplus", capability: strict_code_execution}
+  - {name: BigCodeBench, url: "https://github.com/bigcode-project/bigcodebench", capability: library_usage_codegen}
+  - {name: ClassEval, url: "https://github.com/FudanSELab/ClassEval", capability: class_level_codegen}
+  - {name: HumanEvalPack, url: "https://huggingface.co/datasets/bigcode/humanevalpack", capability: code_fix_and_explain}
+  - {name: SWE-bench-Multimodal, url: "https://www.swebench.com/multimodal", capability: repository_level_debugging}
+  - {name: Aider-Polyglot, url: "https://github.com/Aider-AI/polyglot-benchmark", capability: code_editing}
+  - {name: CanItEdit, url: "https://github.com/nuprl/CanItEdit", capability: instructional_code_editing}
+  - {name: RepoBench, url: "https://github.com/Leolty/repobench", capability: repository_completion}
+  - {name: KernelBench, url: "https://github.com/ScalingIntelligence/KernelBench", capability: gpu_kernel_codegen}
+  - {name: Terminal-Bench, url: "https://github.com/laude-institute/terminal-bench", capability: terminal_agent_tasks}
+  # --- Agents and tool use ---
+  - {name: WebArena, url: "https://github.com/web-arena-x/webarena", capability: web_agents}
+  - {name: OSWorld, url: "https://github.com/xlang-ai/OSWorld", capability: computer_use_agents}
+  - {name: AgentBench, url: "https://github.com/THUDM/AgentBench", capability: general_agents}
+  - {name: TAU-bench, url: "https://github.com/sierra-research/tau-bench", capability: tool_agent_user_interaction}
+  - {name: BFCL, url: "https://gorilla.cs.berkeley.edu/leaderboard.html", capability: function_calling}
+  - {name: API-Bank, url: "https://github.com/AlibabaResearch/DAMO-ConvAI/tree/main/api-bank", capability: tool_use}
+  - {name: ToolBench, url: "https://github.com/OpenBMB/ToolBench", capability: tool_use}
+  - {name: MLE-bench, url: "https://github.com/openai/mle-bench", capability: ml_engineering_agents}
+  - {name: AgentHarm, url: "https://huggingface.co/datasets/ai-safety-institute/AgentHarm", capability: agent_safety}
+  # --- Instruction following and chat quality ---
+  - {name: MT-Bench, url: "https://github.com/lm-sys/FastChat/tree/main/fastchat/llm_judge", capability: multi_turn_quality}
+  - {name: Arena-Hard-Auto, url: "https://github.com/lmarena/arena-hard-auto", capability: chat_quality_auto_judge}
+  - {name: AlpacaEval-2, url: "https://github.com/tatsu-lab/alpaca_eval", capability: instruction_win_rate}
+  - {name: WildBench, url: "https://github.com/allenai/WildBench", capability: real_user_instructions}
+  - {name: InFoBench, url: "https://github.com/qinyiwei/InfoBench", capability: instruction_decomposition}
+  - {name: FollowBench, url: "https://github.com/YJiangcm/FollowBench", capability: constraint_following}
+  - {name: Multi-IF, url: "https://github.com/facebookresearch/Multi-IF", capability: multi_turn_instruction_following}
+  # --- Long context ---
+  - {name: RULER, url: "https://github.com/NVIDIA/RULER", capability: long_context_stress}
+  - {name: LongBench-v2, url: "https://github.com/THUDM/LongBench", capability: long_context_qa}
+  - {name: HELMET, url: "https://github.com/princeton-nlp/HELMET", capability: long_context_suite}
+  - {name: NoLiMa, url: "https://github.com/adobe-research/NoLiMa", capability: literal_match_free_recall}
+  - {name: LOFT, url: "https://github.com/google-deepmind/loft", capability: long_context_retrieval}
+  # --- Safety, refusal calibration and robustness (defensive evaluation only) ---
+  - {name: XSTest, url: "https://github.com/paul-rottger/xstest", capability: over_refusal}
+  - {name: SORRY-Bench, url: "https://github.com/SORRY-Bench/SORRY-Bench", capability: refusal_calibration}
+  - {name: StrongREJECT, url: "https://github.com/alexandrasouly/strongreject", capability: jailbreak_robustness}
+  - {name: HarmBench, url: "https://github.com/centerforaisafety/HarmBench", capability: automated_red_teaming}
+  # --- Planning ---
+  - {name: PlanBench, url: "https://github.com/karthikv792/LLMs-Planning", capability: symbolic_planning}
+  - {name: TravelPlanner, url: "https://github.com/OSU-NLP-Group/TravelPlanner", capability: constrained_planning}
+  - {name: NATURAL-PLAN, url: "https://github.com/google-deepmind/natural-plan", capability: calendar_and_trip_planning}
+  # --- Writing and generation quality ---
+  - {name: EQ-Bench-Creative, url: "https://eqbench.com", capability: creative_writing_judge}
+  - {name: WritingBench, url: "https://github.com/X-PLUG/WritingBench", capability: long_form_writing}
+  - {name: HelloBench, url: "https://github.com/Quehry/HelloBench", capability: long_text_generation}
+  # --- Retrieval-augmented generation ---
+  - {name: RGB, url: "https://github.com/chen700564/RGB", capability: rag_robustness}
+  - {name: RAGBench, url: "https://huggingface.co/datasets/rungalileo/ragbench", capability: rag_grounding}
+  # --- Health (finance-domain benchmarks intentionally excluded) ---
+  - {name: HealthBench, url: "https://github.com/openai/simple-evals", capability: health_dialogue_quality}
+  # --- Coding: repository, debugging, review, translation, multilingual ---
+  - {name: SWE-bench, url: "https://huggingface.co/datasets/princeton-nlp/SWE-bench", capability: repository_level_debugging}
+  - {name: SWE-bench-Lite, url: "https://huggingface.co/datasets/princeton-nlp/SWE-bench_Lite", capability: repository_level_debugging}
+  - {name: SWE-bench-Pro, url: "https://github.com/scaleapi/SWE-bench_Pro-os", capability: repository_level_debugging}
+  - {name: SWE-bench-Live, url: "https://github.com/microsoft/SWE-bench-Live", capability: contamination_resistant_repo_debugging}
+  - {name: SWE-Rebench, url: "https://huggingface.co/datasets/nebius/SWE-rebench", capability: contamination_resistant_repo_debugging}
+  - {name: Multi-SWE-bench, url: "https://github.com/multi-swe-bench/multi-swe-bench", capability: multilingual_repo_debugging}
+  - {name: SWE-bench-Multilingual, url: "https://www.swebench.com", capability: multilingual_repo_debugging}
+  - {name: Terminal-Bench-2, url: "https://github.com/laude-institute/terminal-bench", capability: terminal_agent_tasks}
+  - {name: DebugBench, url: "https://github.com/thunlp/DebugBench", capability: bug_fixing}
+  - {name: QuixBugs, url: "https://github.com/jkoppel/QuixBugs", capability: bug_fixing}
+  - {name: Defects4J, url: "https://github.com/rjust/defects4j", capability: java_bug_fixing}
+  - {name: BugsInPy, url: "https://github.com/soarsmu/BugsInPy", capability: python_bug_fixing}
+  - {name: CRUXEval-X, url: "https://github.com/CRUXEVAL-X/cruxeval-x", capability: multilingual_execution_reasoning}
+  - {name: MultiPL-E, url: "https://github.com/nuprl/MultiPL-E", capability: multilingual_codegen}
+  - {name: MBXP, url: "https://github.com/amazon-science/mxeval", capability: multilingual_codegen}
+  - {name: StudentEval, url: "https://huggingface.co/datasets/wellesley-easel/StudentEval", capability: novice_prompt_codegen}
+  - {name: Commit0, url: "https://github.com/commit-0/commit0", capability: repository_generation}
+  - {name: DevEval, url: "https://github.com/seketeam/DevEval", capability: repository_level_codegen}
+  - {name: RepoCoder, url: "https://github.com/microsoft/CodeT/tree/main/RepoCoder", capability: repository_completion}
+  - {name: CrossCodeEval, url: "https://github.com/amazon-science/cceval", capability: cross_file_completion}
+  - {name: TransCoder, url: "https://github.com/facebookresearch/CodeGen", capability: code_translation}
+  - {name: CodeXGLUE, url: "https://github.com/microsoft/CodeXGLUE", capability: code_understanding_suite}
+  # --- SQL (FinQA and other finance benchmarks intentionally excluded) ---
+  - {name: Spider-dev, url: "https://yale-lily.github.io/spider", capability: text_to_sql}
+  - {name: Spider-2.0, url: "https://spider2-sql.github.io", capability: enterprise_text_to_sql}
+  - {name: BIRD, url: "https://bird-bench.github.io", capability: large_db_text_to_sql}
+  - {name: BIRD-CRITIC, url: "https://bird-critic.github.io", capability: sql_issue_repair}
+  - {name: Dr.Spider, url: "https://github.com/awslabs/diagnostic-robustness-text-to-sql", capability: text_to_sql_robustness}
+  - {name: KaggleDBQA, url: "https://github.com/Chia-Hsuan-Lee/KaggleDBQA", capability: text_to_sql}
+  # --- Secure coding (defensive evaluation only) ---
+  - {name: CyberSecEval-3, url: "https://github.com/meta-llama/PurpleLlama", capability: secure_coding}
+  - {name: SecurityEval, url: "https://github.com/s2e-lab/SecurityEval", capability: vulnerable_code_detection}
+  - {name: SecCodePLT, url: "https://github.com/CodeSecPLT/CodeSecPLT", capability: secure_coding}
+  - {name: PrimeVul, url: "https://github.com/DLVulDet/PrimeVul", capability: vulnerability_detection}
+  # --- Math formalization ---
+  - {name: MATH-500, url: "https://huggingface.co/datasets/HuggingFaceH4/MATH-500", capability: competition_mathematics}
+  - {name: AIME-2024, url: "https://huggingface.co/datasets/Maxwell-Jia/AIME_2024", capability: competition_mathematics}
+  - {name: MiniF2F, url: "https://github.com/openai/miniF2F", capability: formal_theorem_proving}
+  - {name: ProofNet, url: "https://github.com/zhangir-azerbayev/ProofNet", capability: formal_theorem_proving}
+  # --- Agents and browsing (additions) ---
+  - {name: BrowseComp, url: "https://github.com/openai/simple-evals", capability: web_browsing_research}
+  - {name: ToolSandbox, url: "https://github.com/apple/ToolSandbox", capability: stateful_tool_use}
+  - {name: MCP-Bench, url: "https://github.com/Accenture/mcp-bench", capability: mcp_tool_agents}
+  - {name: WorkArena, url: "https://github.com/ServiceNow/WorkArena", capability: enterprise_web_agents}
+  - {name: AssistantBench, url: "https://assistantbench.github.io", capability: web_task_agents}
+  - {name: BrowserGym, url: "https://github.com/ServiceNow/BrowserGym", capability: web_agent_environment}
+  - {name: OpenHands-Evals, url: "https://github.com/OpenHands/OpenHands", capability: agentic_software_engineering}
+policy:
+  # Blanket rule the fail-closed tests assert on: benchmark items never train.
+  allowed_for_training: false
+  finance_domain_benchmarks: intentionally_excluded
+  lm_eval_harness_registry: reports/data-research-2026-08-19/benchmark-registry-163.csv
+  # We may learn from an upstream benchmark's official training split when its
+  # licence permits it.  We never train on the questions used to report scores.
+  official_training_splits_allowed_after_audit: true
+  evaluation_items_allowed_for_training: false
+  reserve_all_validation_test_hidden_and_challenge_splits: true
+  reserve_future_or_temporally_newer_releases: true
+  transformed_evaluation_questions_allowed: false
+  generated_skill_analogues_allowed: true
+  requirements_for_training_split_use:
+    - exact upstream source and revision
+    - permissive training rights
+    - English content verification
+    - split lineage preserved before conversion
+    - exact near-duplicate and semantic-family contamination checks
+    - executable or deterministic answer verification where possible
+    - no reference answer copied into an evaluation prompt family
+  contamination_hash_check_required: true
+  semantic_contamination_check_required: true
+  evaluate_base_model_before_fine_tuning: true
+collection_references:
+  - url: https://huggingface.co/collections/sugatoray/rlms-reasoning-language-models
+    role: Research and model reference only; models are not training data and are not assumed to exist in Azure.
+  - url: https://huggingface.co/collections/sugatoray/papers-benchmarks
+    role: Evaluation discovery only; all dataset items remain excluded from training exports.

@@ -1,0 +1,588 @@
+{
+  "seeds": [
+    17,
+    29
+  ],
+  "per_seed_passed": {
+    "17": false,
+    "29": false
+  },
+  "replicated": false,
+  "planned_steps": 4224,
+  "key_rates": {
+    "17": {
+      "probe_content_accuracy": 0.25,
+      "safe_abstention_accuracy": 0.625,
+      "probe_commit_accuracy": 0.65625,
+      "second_route_load": 0.0,
+      "route_entropy_normalized": -0.0
+    },
+    "29": {
+      "probe_content_accuracy": 0.5,
+      "safe_abstention_accuracy": 0.0,
+      "probe_commit_accuracy": 0.40625,
+      "second_route_load": 0.0,
+      "route_entropy_normalized": -0.0
+    }
+  },
+  "diagnostics": {
+    "17": {
+      "validity_floor_met": true,
+      "family_valid_positives": {
+        "abstention": 16,
+        "numeric": 16,
+        "ordering": 16,
+        "unit": 16
+      },
+      "commitment_threshold_non_degenerate": true
+    },
+    "29": {
+      "validity_floor_met": true,
+      "family_valid_positives": {
+        "abstention": 16,
+        "numeric": 16,
+        "ordering": 16,
+        "unit": 16
+      },
+      "commitment_threshold_non_degenerate": true
+    }
+  },
+  "fan_in": {
+    "17": {
+      "gain_over_greedy": 0.2222222222222222,
+      "graded_rows": 36,
+      "greedy_accuracy": 0.19444444444444445,
+      "oracle_any_valid": 0.4166666666666667,
+      "selected_accuracy": 0.4166666666666667
+    },
+    "29": {
+      "gain_over_greedy": 0.027777777777777776,
+      "graded_rows": 36,
+      "greedy_accuracy": 0.4444444444444444,
+      "oracle_any_valid": 0.5555555555555556,
+      "selected_accuracy": 0.4722222222222222
+    }
+  },
+  "baseline_comparison": {
+    "17": {
+      "bon_logprob_accuracy": 0.7575757575757576,
+      "causal_greedy_accuracy": 0.7575757575757576,
+      "causal_oracle_accuracy": 0.8181818181818182,
+      "fan_in_greedy_accuracy": 0.21212121212121213,
+      "fan_in_selected_accuracy": 0.45454545454545453,
+      "light_graded_rows": 33,
+      "sc_vote_accuracy": 0.7575757575757576
+    },
+    "29": {
+      "bon_logprob_accuracy": 0.8181818181818182,
+      "causal_greedy_accuracy": 0.8181818181818182,
+      "causal_oracle_accuracy": 0.8181818181818182,
+      "fan_in_greedy_accuracy": 0.48484848484848486,
+      "fan_in_selected_accuracy": 0.5151515151515151,
+      "light_graded_rows": 33,
+      "sc_vote_accuracy": 0.8181818181818182
+    }
+  },
+  "selective_comparison": {
+    "17": {
+      "coverage": 0.3055555555555556,
+      "graded_rows": 36,
+      "heads_selective_accuracy": 0.8181818181818182,
+      "logprob_selective_accuracy_at_matched_coverage": 0.6363636363636364
+    },
+    "29": {
+      "coverage": 0.08333333333333333,
+      "graded_rows": 36,
+      "heads_selective_accuracy": 0.3333333333333333,
+      "logprob_selective_accuracy_at_matched_coverage": 1.0
+    }
+  },
+  "readout_ablation": {
+    "17": {
+      "graded_accuracy_delta": 0.16666666666666666,
+      "graded_rows": 36,
+      "mean_greedy_f1_delta": 0.1039024366481909,
+      "records": 64
+    },
+    "29": {
+      "graded_accuracy_delta": 0.3055555555555556,
+      "graded_rows": 36,
+      "mean_greedy_f1_delta": 0.23225015747024605,
+      "records": 64
+    }
+  },
+  "domain_metrics": {
+    "17": {
+      "behavior-anchor": {
+        "commit_accuracy": 0.65625,
+        "commit_coverage": 0.34375,
+        "graded_accuracy": 0.46875,
+        "graded_samples": 32,
+        "mean_candidate_token_f1": 0.37863945356028816,
+        "quality_pass_rate": 0.25,
+        "samples": 32
+      },
+      "cloud_and_devops": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.24330887169409646,
+        "quality_pass_rate": 1.0,
+        "samples": 2
+      },
+      "coding_debugging": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.1565217391304348,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "communication_and_writing": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.13689814079135548,
+        "quality_pass_rate": 1.0,
+        "samples": 2
+      },
+      "competitive-programming": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": 0.0,
+        "graded_samples": 2,
+        "mean_candidate_token_f1": 0.2899116723848456,
+        "quality_pass_rate": 0.0,
+        "samples": 2
+      },
+      "copywriting": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.25,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "deep_learning_fundamentals": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.22976312941710866,
+        "quality_pass_rate": 1.0,
+        "samples": 2
+      },
+      "distributed_data_systems": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.24615872691539387,
+        "quality_pass_rate": 1.0,
+        "samples": 2
+      },
+      "edge_ai": {
+        "commit_accuracy": 0.5,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.18523004501254167,
+        "quality_pass_rate": 1.0,
+        "samples": 2
+      },
+      "entrepreneurship_and_operations": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.14848226482209814,
+        "quality_pass_rate": 1.0,
+        "samples": 2
+      },
+      "framework_engineering": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.16171224732461356,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "general_reasoning_and_learning": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.1686746987951807,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "llm_engineering": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.24397590361445784,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "machine_learning_systems": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.18320610687022898,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "marketing_and_brand": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.09195402298850575,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "mathematics_and_optimization": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.11076923076923076,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "pitch_deck": {
+        "commit_accuracy": 1.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.011299435028248588,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "product_strategy": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.1892744479495268,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "programming_and_web": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.2814445828144458,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "psychology_and_behavior": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.22331691297208536,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "python-function": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": 0.0,
+        "graded_samples": 1,
+        "mean_candidate_token_f1": 0.13888888888888887,
+        "quality_pass_rate": 0.0,
+        "samples": 1
+      },
+      "research_and_decision_making": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.2832980972515856,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "sales_and_copywriting": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.28985507246376807,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "software-reasoning": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.054878048780487805,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "software_architecture": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.4036144578313253,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "text-to-sql": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": 0.0,
+        "graded_samples": 1,
+        "mean_candidate_token_f1": 0.19672131147540983,
+        "quality_pass_rate": 0.0,
+        "samples": 1
+      }
+    },
+    "29": {
+      "behavior-anchor": {
+        "commit_accuracy": 0.40625,
+        "commit_coverage": 0.09375,
+        "graded_accuracy": 0.53125,
+        "graded_samples": 32,
+        "mean_candidate_token_f1": 0.7076505577747835,
+        "quality_pass_rate": 0.5,
+        "samples": 32
+      },
+      "cloud_and_devops": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.2867156353865883,
+        "quality_pass_rate": 1.0,
+        "samples": 2
+      },
+      "coding_debugging": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.03859649122807018,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "communication_and_writing": {
+        "commit_accuracy": 0.5,
+        "commit_coverage": 0.5,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.19403453689167977,
+        "quality_pass_rate": 1.0,
+        "samples": 2
+      },
+      "competitive-programming": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": 0.0,
+        "graded_samples": 2,
+        "mean_candidate_token_f1": 0.2273373622467117,
+        "quality_pass_rate": 0.0,
+        "samples": 2
+      },
+      "copywriting": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.2644415917843389,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "deep_learning_fundamentals": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.24984434301925815,
+        "quality_pass_rate": 1.0,
+        "samples": 2
+      },
+      "distributed_data_systems": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.27061678419082436,
+        "quality_pass_rate": 1.0,
+        "samples": 2
+      },
+      "edge_ai": {
+        "commit_accuracy": 0.5,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.25,
+        "quality_pass_rate": 1.0,
+        "samples": 2
+      },
+      "entrepreneurship_and_operations": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.1811718489083612,
+        "quality_pass_rate": 1.0,
+        "samples": 2
+      },
+      "framework_engineering": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.1649746192893401,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "general_reasoning_and_learning": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.1368653421633554,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "llm_engineering": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.2464898595943838,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "machine_learning_systems": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.2302158273381295,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "marketing_and_brand": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.22693266832917705,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "mathematics_and_optimization": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.2722222222222222,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "pitch_deck": {
+        "commit_accuracy": 1.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.019417475728155338,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "product_strategy": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.28306264501160094,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "programming_and_web": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.17994858611825193,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "psychology_and_behavior": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.22348484848484848,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "python-function": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": 0.0,
+        "graded_samples": 1,
+        "mean_candidate_token_f1": 0.14285714285714285,
+        "quality_pass_rate": 0.0,
+        "samples": 1
+      },
+      "research_and_decision_making": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.24466019417475726,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "sales_and_copywriting": {
+        "commit_accuracy": 1.0,
+        "commit_coverage": 1.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.203125,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "software-reasoning": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.018518518518518517,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "software_architecture": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": null,
+        "graded_samples": 0,
+        "mean_candidate_token_f1": 0.21839080459770116,
+        "quality_pass_rate": 1.0,
+        "samples": 1
+      },
+      "text-to-sql": {
+        "commit_accuracy": 0.0,
+        "commit_coverage": 0.0,
+        "graded_accuracy": 0.0,
+        "graded_samples": 1,
+        "mean_candidate_token_f1": 0.006688963210702342,
+        "quality_pass_rate": 0.0,
+        "samples": 1
+      }
+    }
+  }
+}

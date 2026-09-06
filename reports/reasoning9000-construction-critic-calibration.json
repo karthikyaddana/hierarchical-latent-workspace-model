@@ -1,0 +1,221 @@
+{
+  "schema_version": "1.0",
+  "mode": "live",
+  "passed": true,
+  "deployment": "DeepSeek-V3.2-Speciale",
+  "prompt_hash": "172cba754adb6bb48f73cc43b644f8d4",
+  "dataset_hash": "c14b2a53c3f52c8b90b1e0de53dcdba2",
+  "case_count": 14,
+  "accuracy": 1.0,
+  "invalid_predictions": 0,
+  "confusion": {
+    "correct_blocking": 7,
+    "correct_non_blocking": 7,
+    "false_blocking": 0,
+    "missed_blocking": 0
+  },
+  "requirements": {
+    "minimum_cases": 12,
+    "false_blocking": 0,
+    "missed_blocking": 0,
+    "invalid_predictions": 0
+  },
+  "cases": [
+    {
+      "case_id": "cal011-nb-extra-client-parse",
+      "gold_label": "non_blocking",
+      "prediction": "non_blocking",
+      "correct": true,
+      "reason": "The extra client parsing checkpoint does not contradict any contract, is not required, and is explicitly noted as not harmful, so it fails the blocking conditions.",
+      "errors": [],
+      "provenance": {
+        "request_id": "ad7691c2-eeb2-4476-946f-4feed73d4030",
+        "prompt_tokens": 1273,
+        "completion_tokens": 63,
+        "elapsed_seconds": 4.744432875
+      }
+    },
+    {
+      "case_id": "cal011-nb-searchsummary-style-scope",
+      "gold_label": "non_blocking",
+      "prediction": "non_blocking",
+      "correct": true,
+      "reason": "The allegation is speculative ('might be needed') and not a demonstrated contradiction of the contract; the candidate preserves SearchSummary fields as required, and the contract does not mandate applying the collision policy to SearchSummary.",
+      "errors": [],
+      "provenance": {
+        "request_id": "aea367e3-3371-4213-a53c-546a7dbb070b",
+        "prompt_tokens": 1305,
+        "completion_tokens": 74,
+        "elapsed_seconds": 4.813079042
+      }
+    },
+    {
+      "case_id": "cal011-nb-counterexample-mutation-location",
+      "gold_label": "non_blocking",
+      "prediction": "non_blocking",
+      "correct": true,
+      "reason": "The mutation and recomputation are present in the verification and published deliverable, satisfying the contract; the lane artifact's internal representation is not required to contain the mutation.",
+      "errors": [],
+      "provenance": {
+        "request_id": "946e5915-301e-4e5b-ae04-a4fdd7656ec4",
+        "prompt_tokens": 1294,
+        "completion_tokens": 67,
+        "elapsed_seconds": 3.6950499580000002
+      }
+    },
+    {
+      "case_id": "cal011-nb-pressure-map-format",
+      "gold_label": "non_blocking",
+      "prediction": "non_blocking",
+      "correct": true,
+      "reason": "The contract does not require a visual diagram; prose is acceptable as long as it distinguishes pressures and links interventions to mechanisms.",
+      "errors": [],
+      "provenance": {
+        "request_id": "1706147d-785a-4142-965d-d7526a005335",
+        "prompt_tokens": 1281,
+        "completion_tokens": 56,
+        "elapsed_seconds": 4.734713416
+      }
+    },
+    {
+      "case_id": "cal011-nb-visible-bibliographic-title",
+      "gold_label": "non_blocking",
+      "prediction": "non_blocking",
+      "correct": true,
+      "reason": "The candidate withholds technical details and only quotes visible bibliographic metadata, which aligns with the contract to admit visible bibliographic observations; the PAPER NEEDED note is a placeholder, not a claim, and does not contradict any requirement.",
+      "errors": [],
+      "provenance": {
+        "request_id": "84204b9c-ddd9-405e-86b1-44791bbebc2c",
+        "prompt_tokens": 1289,
+        "completion_tokens": 81,
+        "elapsed_seconds": 1.471033791
+      }
+    },
+    {
+      "case_id": "cal011-nb-validation-early-stopping",
+      "gold_label": "non_blocking",
+      "prediction": "non_blocking",
+      "correct": true,
+      "reason": "Early stopping on validation set is standard practice for model selection and does not constitute data leakage when test set remains untouched; the contract permits validation for predeclared model selection.",
+      "errors": [],
+      "provenance": {
+        "request_id": "7db8b0d5-b623-4929-9f09-fc20e55f0e07",
+        "prompt_tokens": 1288,
+        "completion_tokens": 67,
+        "elapsed_seconds": 2.1747013749999997
+      }
+    },
+    {
+      "case_id": "cal011-nb-torch-any-scalar-boolean",
+      "gold_label": "non_blocking",
+      "prediction": "non_blocking",
+      "correct": true,
+      "reason": "torch.any returns a scalar tensor that is truth-convertible in Python if it has exactly one element, which it does, so the guard is correct and the allegation is false.",
+      "errors": [],
+      "provenance": {
+        "request_id": "396d17c8-da26-4731-8cd1-b9390c72af49",
+        "prompt_tokens": 1295,
+        "completion_tokens": 75,
+        "elapsed_seconds": 1.1597889170000002
+      }
+    },
+    {
+      "case_id": "pilot004-b-exact-word-count",
+      "gold_label": "blocking",
+      "prediction": "blocking",
+      "correct": true,
+      "reason": "The candidate's word count (195) contradicts the contract requirement of exactly 400 words, making the deliverable materially incomplete.",
+      "errors": [],
+      "provenance": {
+        "request_id": "0a0da8ff-7ef1-46fe-ab77-097098bad96a",
+        "prompt_tokens": 1248,
+        "completion_tokens": 56,
+        "elapsed_seconds": 1.1447145829999998
+      }
+    },
+    {
+      "case_id": "cal010-b-acronym-boundary-code",
+      "gold_label": "blocking",
+      "prediction": "blocking",
+      "correct": true,
+      "reason": "The patch produces 'XMLHTTPP arser' but the test matrix claims 'XMLHTTP Parser', contradicting the required frozen example 'XMLHTTPParser' -> 'XMLHTTP Parser'.",
+      "errors": [],
+      "provenance": {
+        "request_id": "4d0a39db-827e-49c2-b2f9-2532b200d238",
+        "prompt_tokens": 1297,
+        "completion_tokens": 71,
+        "elapsed_seconds": 1.9922270420000006
+      }
+    },
+    {
+      "case_id": "pilot003-b-trivial-source-paraphrase",
+      "gold_label": "blocking",
+      "prediction": "blocking",
+      "correct": true,
+      "reason": "The candidate directly paraphrases a source benchmark (carrots/goats to seed packets/plots) with identical arithmetic, violating the contract requiring expert-level novelty and no cosmetic paraphrase.",
+      "errors": [],
+      "provenance": {
+        "request_id": "9f969d3e-b6a1-490a-a5b3-bbe7beca2697",
+        "prompt_tokens": 1285,
+        "completion_tokens": 69,
+        "elapsed_seconds": 1.4532778330000005
+      }
+    },
+    {
+      "case_id": "cal011-b-undefined-comparator",
+      "gold_label": "blocking",
+      "prediction": "blocking",
+      "correct": true,
+      "reason": "The candidate's selection rule references a predeclared comparator but fails to define which comparator (global mean, user mean, etc.) is used, making execution impossible and contradicting the contract's requirement for a reproducible rule.",
+      "errors": [],
+      "provenance": {
+        "request_id": "eabbf097-d036-47e7-a457-e0c54c7a0947",
+        "prompt_tokens": 1278,
+        "completion_tokens": 75,
+        "elapsed_seconds": 1.4541369590000004
+      }
+    },
+    {
+      "case_id": "pilot003-b-fabricated-rbm-execution",
+      "gold_label": "blocking",
+      "prediction": "blocking",
+      "correct": true,
+      "reason": "The candidate claims empirical execution results without pipeline-authenticated external run evidence, violating the explicit contract.",
+      "errors": [],
+      "provenance": {
+        "request_id": "f97ee8ca-8355-4874-88d3-3579ecb914f6",
+        "prompt_tokens": 1273,
+        "completion_tokens": 54,
+        "elapsed_seconds": 1.0312688750000003
+      }
+    },
+    {
+      "case_id": "pilot003-b-self-certified-human-study",
+      "gold_label": "blocking",
+      "prediction": "blocking",
+      "correct": true,
+      "reason": "The candidate cites survey/experiment outcomes without trusted execution provenance, violating the contract that such conclusions require trusted execution provenance.",
+      "errors": [],
+      "provenance": {
+        "request_id": "7aff86bf-1d52-4a14-88a8-bdddf81dba0e",
+        "prompt_tokens": 1266,
+        "completion_tokens": 56,
+        "elapsed_seconds": 1.824267959000001
+      }
+    },
+    {
+      "case_id": "pilot003-b-incomplete-proposed-test-artifact",
+      "gold_label": "blocking",
+      "prediction": "blocking",
+      "correct": true,
+      "reason": "The candidate omits required dependencies (trybuild, serde_json) that are contractually required for the test setup, making the proposed runs impossible to execute, thus violating the contract that a published executable test deliverable must contain needed dependencies.",
+      "errors": [],
+      "provenance": {
+        "request_id": "2a4804b7-cb50-4e53-906f-6ab5250dd4fc",
+        "prompt_tokens": 1276,
+        "completion_tokens": 82,
+        "elapsed_seconds": 1.4596901249999998
+      }
+    }
+  ]
+}

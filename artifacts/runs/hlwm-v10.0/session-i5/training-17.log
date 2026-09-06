@@ -1,0 +1,31 @@
+{
+  "environment": {
+    "torch": "2.10.0+cu128",
+    "precision": "bf16",
+    "device": "Tesla T4",
+    "cuda_device_count": 1,
+    "cuda_devices": [
+      "Tesla T4"
+    ],
+    "cuda": "12.8",
+    "compute_capability": [
+      7,
+      5
+    ],
+    "base_model": "Qwen/Qwen3-0.6B-Base",
+    "base_revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd"
+  }
+}
+Loading pinned Qwen base and transplanting language weights...
+{
+  "parameters": {
+    "trainable": 124672588,
+    "total": 720722508,
+    "frozen": 596049920
+  }
+}
+{"warm_recon_digit_em": {"200": 0.599406528189911}}
+{"warm_recon_digit_em": {"400": 0.6201780415430267}}
+{"warm_recon_digit_em": {"600": 0.6023738872403561}}
+{"gonogo_masked_numeric_em": 0.0}
+{"v10_training": {"aborted": "gonogo", "gonogo_masked_numeric_em": 0.0, "mode": "v10", "warm_gate": {"em_200": 0.599406528189911, "em_600": 0.6023738872403561, "floor": 0.5, "passed": true}, "warm_steps": 600}}

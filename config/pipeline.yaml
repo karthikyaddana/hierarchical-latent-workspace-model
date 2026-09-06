@@ -1,0 +1,83 @@
+project:
+  name: hlwm-production-dataset
+  seed: 3407
+  schema_version: "1.0"
+
+azure:
+  endpoint: "https://nethandevnath-resource.services.ai.azure.com/openai/v1"
+  deployment: "DeepSeek-V4-Flash"
+  judge_deployment: "DeepSeek-V4-Flash"
+  scope: "https://ai.azure.com/.default"
+  timeout_seconds: 180
+  max_retries: 5
+  max_workers: 8
+  requests_per_minute: 60
+  temperature: 0.35
+  max_completion_tokens: 12000
+
+generation:
+  target_episodes: 2000
+  chunks_per_episode: 2
+  max_source_chars: 18000
+  lanes_min: 2
+  lanes_max: 4
+  require_grounded_sources: true
+  quality_threshold: 0.82
+  repair_rejected: false
+  domains:
+    reasoning:
+      weight: 0.15
+      objectives:
+        - constraint satisfaction
+        - causal analysis
+        - decision making under uncertainty
+        - evidence reconciliation
+    project_planning:
+      weight: 0.15
+      objectives:
+        - scope and requirements
+        - risk and dependency planning
+        - sequencing and resource allocation
+        - measurable acceptance criteria
+    coding_debugging:
+      weight: 0.30
+      objectives:
+        - Python implementation
+        - debugging from logs and tests
+        - software architecture
+        - cloud and infrastructure code
+    english_writing:
+      weight: 0.12
+      objectives:
+        - clarity and structure
+        - editing and rewriting
+        - audience adaptation
+        - factual long-form drafting
+    copywriting:
+      weight: 0.13
+      objectives:
+        - value propositions
+        - landing pages and lifecycle copy
+        - ethical persuasion
+        - message testing
+    marketing_advertising:
+      weight: 0.15
+      objectives:
+        - campaign strategy
+        - ad concepts and variants
+        - positioning and segmentation
+        - measurement and experimentation
+
+splits:
+  train: 0.80
+  validation: 0.10
+  test: 0.10
+  group_by: lineage_component_id
+
+output:
+  chunks_file: data/chunks/chunks.jsonl
+  generated_dir: data/generated
+  reviewed_dir: data/reviewed
+  final_dir: data/final
+  request_log: logs/azure_requests.jsonl
+  run_log: logs/runs.jsonl

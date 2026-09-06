@@ -1,0 +1,48 @@
+language_policy:
+  required: true
+  allowed_languages: [en]
+  minimum_confidence: 0.78
+sources:
+  - path: /Users/karthik/Documents/ChatGPT/Light of the Embel/sources/public/derived/uci-bank-marketing-analysis.jsonl
+    title: UCI Bank Marketing derived analytical packets
+    author: S. Moro, P. Cortez, and P. Rita
+    domain: marketing_and_brand
+    source_group: uci-bank-marketing-222
+    lineage_component_id: uci-bank-marketing-222
+    lineage_mode: source
+    version: uci-static-222-analysis-v1-2026-08-17
+    license: CC-BY-4.0
+    license_evidence: https://archive.ics.uci.edu/dataset/222/bank+marketing
+    allowed_for_training: true
+    data_role: visible_context
+    url: https://archive.ics.uci.edu/dataset/222/bank+marketing
+    use: Descriptive campaign segmentation, leakage detection, metric design, uncertainty, and evidence-based decision episodes
+    transformation: Deterministic distribution and segment summaries with explicit non-causal boundaries
+  - path: /Users/karthik/Documents/ChatGPT/Light of the Embel/sources/public/huggingface/openai__gsm8k/train
+    title: GSM8K training split
+    author: OpenAI
+    domain: mathematics_and_optimization
+    source_group: hf-openai-gsm8k-train
+    lineage_component_id: hf-openai-gsm8k-train
+    lineage_mode: source
+    version: hf:740312add88f781978c0658806c59bc2815b9866
+    license: MIT
+    license_evidence: https://huggingface.co/datasets/openai/gsm8k/blob/740312add88f781978c0658806c59bc2815b9866/README.md
+    allowed_for_training: true
+    data_role: visible_context
+    url: https://huggingface.co/datasets/openai/gsm8k
+    split_policy: training split only; official test split is stored outside the training manifest
+  - path: /Users/karthik/Documents/ChatGPT/Light of the Embel/sources/public/huggingface/google-research-datasets__mbpp/train
+    title: MBPP sanitized training and prompt splits
+    author: Google Research
+    domain: programming_and_web
+    source_group: hf-google-mbpp-train
+    lineage_component_id: hf-google-mbpp-train
+    lineage_mode: source
+    version: hf:4bb6404fdc6cacfda99d4ac4205087b89d32030c
+    license: CC-BY-4.0
+    license_evidence: https://huggingface.co/datasets/google-research-datasets/mbpp/blob/4bb6404fdc6cacfda99d4ac4205087b89d32030c/README.md
+    allowed_for_training: true
+    data_role: visible_context
+    url: https://huggingface.co/datasets/google-research-datasets/mbpp
+    split_policy: sanitized train and prompt splits only; validation and test are stored outside the training manifest

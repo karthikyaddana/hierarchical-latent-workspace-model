@@ -1,0 +1,43 @@
+{
+  "built": "2026-08-31",
+  "bundle": "/Users/karthik/Documents/ChatGPT/Light of the Embel/artifacts/kaggle/hlwm-v5.6.2/hlwm-v5.6.2-candidate-bundle.zip",
+  "bundle_bytes": 24214733,
+  "bundle_sha256": "a68485c308b7dbf6df9cfdd340c509585aa536bedbfcc6d2a367c86c4bc1ec55",
+  "changes_vs_v5.6.1": [
+    "num-experts 6 -> 2 (preregistered reduction ladder rung after Study 6)",
+    "validity-gated head phase: >=16 valid positives per anchor family, 512-attempt cap, per-family telemetry, non-fatal shortfall reporting",
+    "generation canary every eval boundary: 8 stratified anchors, prompt-leak/format-marker/semantic/route-entropy telemetry to metrics.jsonl, report-only",
+    "commitment_threshold_non_degenerate diagnostic in calibration report ([0.02, 0.98])",
+    "collection progress printed every 16 attempts"
+  ],
+  "code_sha256": {
+    "__init__.py": "15eee54eb55eb69558a57fe5b0141d6d555c010166ed5f82c9bff1b7e26c6028",
+    "data.py": "603f84c0de4c052c87dcb6061593e707c21384a1c17a765d52760c0464574d11",
+    "evaluate_checkpoint.py": "fcb356048c08fed4038e242c0296b27de4e0bfdc8abd0aea271cc658f3200e8b",
+    "inference_hlwm.py": "e86173849184dbc46f3e61dcd0c3404d6a7dc31f3e00213bad0efad5a538d269",
+    "modeling_hlwm.py": "9b29816ee3d2d624ced3b7a34e52addf83cc833f20ac135ae3b1d53bb0d40bff",
+    "semantic_grading.py": "87c0061f9f5f37c8e75efdfe89ca20db40b9d2237f90852e5cfee8b58670b0fc",
+    "test_modeling_hlwm.py": "dd6b1bddf2c3ba157098fc391890db5178493a0865b546e6db98a849990b259b",
+    "train_kaggle.py": "482c9d8f815d7211fe655bd2fe98d5e1d1df021826466c0ef5f51611b19559c5"
+  },
+  "counts": {
+    "test": 841,
+    "train": 7498,
+    "validation": 945
+  },
+  "dataset_counts": {
+    "test": 585,
+    "train": 6474,
+    "validation": 689
+  },
+  "kept": [
+    "expert-init-scale 0.01",
+    "policy-records 128",
+    "all v5.6 data/budgets/steps/gates"
+  ],
+  "notebook_t4": "/Users/karthik/Documents/ChatGPT/Light of the Embel/artifacts/kaggle/hlwm-v5.6.2/embel-hlwm-v5.6.2-kaggle-2xt4.ipynb",
+  "notebook_t4_sha256": "9612d5d5935a0c9c5981074aec61a88ccd851b6718d2af8009d9a9ca2cf29514",
+  "package_version": "5.6.2",
+  "plan": "reports/hlwm-v5.6.2-plan-2026-08-31.md",
+  "tests": "39/39 (3 new: validity-gated collection x2, canary)"
+}

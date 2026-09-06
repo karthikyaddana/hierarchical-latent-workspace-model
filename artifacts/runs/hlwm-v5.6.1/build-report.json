@@ -1,0 +1,35 @@
+{
+  "bundle": "/Users/karthik/Documents/ChatGPT/Light of the Embel/artifacts/kaggle/hlwm-v5.6.1/hlwm-v5.6.1-candidate-bundle.zip",
+  "bundle_bytes": 1761306716,
+  "bundle_sha256": "3c41dbffb7e2a9e1ef2ce2b1a0ba8c86e8da1ad00ceb00bf6040562a5e8cf306",
+  "code_sha256": {
+    "__init__.py": "15eee54eb55eb69558a57fe5b0141d6d555c010166ed5f82c9bff1b7e26c6028",
+    "data.py": "603f84c0de4c052c87dcb6061593e707c21384a1c17a765d52760c0464574d11",
+    "evaluate_checkpoint.py": "fcb356048c08fed4038e242c0296b27de4e0bfdc8abd0aea271cc658f3200e8b",
+    "inference_hlwm.py": "e86173849184dbc46f3e61dcd0c3404d6a7dc31f3e00213bad0efad5a538d269",
+    "modeling_hlwm.py": "9b29816ee3d2d624ced3b7a34e52addf83cc833f20ac135ae3b1d53bb0d40bff",
+    "semantic_grading.py": "87c0061f9f5f37c8e75efdfe89ca20db40b9d2237f90852e5cfee8b58670b0fc",
+    "test_modeling_hlwm.py": "5cab5c198168d7e452a6f86ed39c754f94ed49dde208da054d72e2db51735842",
+    "train_kaggle.py": "9808deace724d294911d506aab9af045a923a26f65c334ee11639183b8bafa41"
+  },
+  "counts": {
+    "test": 841,
+    "train": 7498,
+    "validation": 945
+  },
+  "cross_split_prompt_collisions_dropped": 5,
+  "dataset_counts": {
+    "test": 585,
+    "train": 6474,
+    "validation": 689
+  },
+  "duplicate_train_prompts_dropped": 48,
+  "embedded_resumables": {
+    "hlwm-v5.6.1-seed-17-resumable.pt": "e541aac97fb16128631110bd75b0ea085b79a73e8b588fe8f19600763502b5a4",
+    "hlwm-v5.6.1-seed-29-resumable.pt": "9b23f37985079c6f2a8478d4f8581c676b22e9b66d1ed03351ef2f4a62b95508",
+    "provenance": "session-A step-4224 checkpoints (4224/4224 microsteps, 1056 updates, 0 skipped), downloaded from the crashed 2026-08-31 run, re-zipped after macOS auto-extraction, verified by torch.load (format v4, seeds 17/29, pinned Qwen revision match)"
+  },
+  "hotfix_2026_08_31": "OOM fix: @torch.no_grad() on collect_on_policy_policy_examples (feature tensors were retaining full backbone autograd graphs across up to 3 teacher-force forwards per record); gc+empty_cache before collection; resume at step==steps now skips the loop and reruns policy/calibration/export so the crashed session A checkpoints at step 4224 are salvageable.",
+  "notebook_t4": "/Users/karthik/Documents/ChatGPT/Light of the Embel/artifacts/kaggle/hlwm-v5.6.1/embel-hlwm-v5.6.1-kaggle-2xt4.ipynb",
+  "notebook_t4_sha256": "ef68e4ee92519dfd0a66fcc69d918e4c9173732f5c0ff013dc577279650ad3ee"
+}

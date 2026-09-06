@@ -1,0 +1,43 @@
+{
+  "built": "2026-09-01",
+  "bundle": "/Users/karthik/Documents/ChatGPT/Light of the Embel/artifacts/kaggle/hlwm-v5.7/hlwm-v5.7-candidate-bundle.zip",
+  "bundle_bytes": 24221725,
+  "bundle_sha256": "5a76c709f6266d5f264f53a3a8262cdb06840cb9a2aada703f3105cfd2b86d23",
+  "changes_vs_v5.6.2": [
+    "num-experts 2 -> 1: workspace-only, no routing decision (rung 1 after Study 7); trainable 74,508,423 vs Study 6 75,174,348 (-0.9%, LoRA rank unchanged)",
+    "de-correlated policy-head labels: commit=semantic validity, risk=mechanical corruption only, verifier=fluent-but-wrong only; per-kind ranking losses; method on_policy_train_anchor_head_fit_v2_decorrelated",
+    "domain-stratified generation canary (round-robin over dataset domains; light graders only; python/io test execution stays in the audit)",
+    "output_diversity guarded for <2 experts (empty pairwise mean would be NaN); router-aux and expert-diversity weights set to 0",
+    "notebook gate battery drops the 3 routing gates (15 remain); routing metrics stay report-only"
+  ],
+  "code_sha256": {
+    "__init__.py": "15eee54eb55eb69558a57fe5b0141d6d555c010166ed5f82c9bff1b7e26c6028",
+    "data.py": "603f84c0de4c052c87dcb6061593e707c21384a1c17a765d52760c0464574d11",
+    "evaluate_checkpoint.py": "fcb356048c08fed4038e242c0296b27de4e0bfdc8abd0aea271cc658f3200e8b",
+    "inference_hlwm.py": "e86173849184dbc46f3e61dcd0c3404d6a7dc31f3e00213bad0efad5a538d269",
+    "modeling_hlwm.py": "d8b17dd859160f4f37851d16c703ff222a05af2d39e46a46b47c09c34d1dcd46",
+    "semantic_grading.py": "87c0061f9f5f37c8e75efdfe89ca20db40b9d2237f90852e5cfee8b58670b0fc",
+    "test_modeling_hlwm.py": "7d143930c0b26c2d447b62d8301c20ecddd4728a6b91347321e0a680871bc5d6",
+    "train_kaggle.py": "291971d6fa1cf99cb96e1ffde209c1a5f04db5d27e3ebf16fea0a7f6d1866d37"
+  },
+  "counts": {
+    "test": 841,
+    "train": 7498,
+    "validation": 945
+  },
+  "dataset_counts": {
+    "test": 585,
+    "train": 6474,
+    "validation": 689
+  },
+  "kept": [
+    "validity floor 16/family cap 512",
+    "expert-init-scale 0.01",
+    "all v5.6 data/budgets/steps/behavioral gates"
+  ],
+  "notebook_t4": "/Users/karthik/Documents/ChatGPT/Light of the Embel/artifacts/kaggle/hlwm-v5.7/embel-hlwm-v5.7-kaggle-2xt4.ipynb",
+  "notebook_t4_sha256": "ea0a8c7b0fd1af15dac8bf2d857ce8951d71aebf39858fc7deeca639d81e89e3",
+  "package_version": "5.7",
+  "plan": "reports/hlwm-v5.7-plan-2026-09-01.md",
+  "tests": "42/42 (3 new: de-correlated labels, domain stratification, single-expert smoke)"
+}

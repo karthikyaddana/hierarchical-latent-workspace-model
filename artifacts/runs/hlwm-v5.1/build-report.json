@@ -1,0 +1,57 @@
+{
+  "bundle": "/Users/karthik/Documents/ChatGPT/Light of the Embel/artifacts/kaggle/hlwm-v5.1/hlwm-v5.1-candidate-bundle.zip",
+  "bundle_bytes": 21642674,
+  "bundle_sha256": "98749545586c304f526bfa4b0e752c863b5009d9cacdb6316348c17cb8186d7a",
+  "code_sha256": {
+    "__init__.py": "15eee54eb55eb69558a57fe5b0141d6d555c010166ed5f82c9bff1b7e26c6028",
+    "data.py": "b519169b7ac9bfb99a36c38d1c19131abbc4aa400d62acd07e3a810dbc486776",
+    "evaluate_checkpoint.py": "349c6bb9995e280c98a28d5a6df623ac2dffd1ae9287dbc7822e7e00e428cd60",
+    "inference_hlwm.py": "0cd0cf4ba3a9e17f18077efbcc9ebd573b418906816af58f9df63d5e9fabd9b9",
+    "modeling_hlwm.py": "d9a6527733007a686c7ad4f733f3d62b02b423fd558f13feabc89be301409da9",
+    "test_modeling_hlwm.py": "badbce008926ee3c114febc8802ae04ab4c0129ac52c449ac223ae7711ef30cf",
+    "train_kaggle.py": "fa32e944ed83608519d5c3d32047302176f7c99652665881742668c0daabf486"
+  },
+  "counts": {
+    "test": 421,
+    "train": 3374,
+    "validation": 601
+  },
+  "data_quality": {
+    "behavior_anchor_boundary": "Deterministic arithmetic, conversion, ordering and missing-evidence checks; not a substitute for independent human adjudication.",
+    "behavior_anchor_counts": {
+      "test": 16,
+      "train": 64,
+      "validation": 16
+    },
+    "commitment_decisions": {
+      "publish": 4277,
+      "refine": 23
+    },
+    "episodes": 4300,
+    "generation_method": "direct_fast_no_judge",
+    "independently_adjudicated_episodes": 0,
+    "lanes": 8994,
+    "policy_label_use": "masked for direct_fast_no_judge rows; enabled only for independently adjudicated or narrow programmatically verified behavior anchors",
+    "production_boundary": "This release can test architecture and optimization but cannot establish factual quality, abstention calibration or production readiness.",
+    "programmatically_verified_behavior_anchors": 96,
+    "top_routes": {
+      "root -> architecture -> specialist": 5,
+      "root -> architecture_analysis -> lstm_gates": 1,
+      "root -> autodiff_analysis -> gradient_flow": 1,
+      "root -> domain": 3,
+      "root -> domain -> empirical": 1,
+      "root -> domain -> implementation": 2,
+      "root -> domain -> latency-budget-specialist": 1,
+      "root -> domain -> sensor-path-specialist": 1,
+      "root -> domain -> specialist": 8953,
+      "root -> domain -> validation-specialist": 1
+    },
+    "verification_verdicts": {
+      "insufficient": 457,
+      "refuted": 15,
+      "supported": 22052
+    }
+  },
+  "notebook": "/Users/karthik/Documents/ChatGPT/Light of the Embel/artifacts/kaggle/hlwm-v5.1/embel-hlwm-v5.1-dual-t4.ipynb",
+  "notebook_sha256": "367d71edf4232a63ab695ace78750c93a34bf546e499b223b77320c0b0f27d9d"
+}

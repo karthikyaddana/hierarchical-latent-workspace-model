@@ -1,0 +1,52 @@
+{
+  "built": "2026-09-01",
+  "bundle": "/Users/karthik/Documents/ChatGPT/Light of the Embel/artifacts/kaggle/hlwm-v6.0/hlwm-v6.0-candidate-bundle.zip",
+  "bundle_bytes": 24252861,
+  "bundle_sha256": "39477eb5d26423b91ad3f6dc7075e0f1825c577513dc041d95423e5b6c36caf4",
+  "changes_vs_v5.7": [
+    "latent read-out memory: synthesis prefix 8 -> 43 tokens (16 windowed canvas hidden-state tokens + 1 summary token per lane), zero-init projections, input-normalized; audit ships per-row narrow-interface ablation",
+    "verified fan-in: generate_hlwm_nbest (one workspace, N candidates at 0.0/0.7/0.9/1.1, head-scored, best published); head phase harvests all candidates per anchor with within-anchor ranking pairs; calibration fits on N-best validation candidates",
+    "scalar publication rule: regularized logistic combiner + single threshold (publish_weights/bias/threshold in config), midpoint tie-break toward 0.5; triple thresholds retained report-only",
+    "audit baselines on identical budgets: self-consistency majority vote, max-mean-logprob BoN, coverage-matched logprob abstention; per-candidate mean logprobs from teacher-forced logits",
+    "gate battery 15 -> 20 (publish_threshold_non_degenerate, fan_in_no_worse_than_greedy, fan_in_beats_self_consistency, fan_in_beats_logprob_bon, calibrated_abstention_beats_logprob)"
+  ],
+  "code_sha256": {
+    "__init__.py": "15eee54eb55eb69558a57fe5b0141d6d555c010166ed5f82c9bff1b7e26c6028",
+    "data.py": "603f84c0de4c052c87dcb6061593e707c21384a1c17a765d52760c0464574d11",
+    "evaluate_checkpoint.py": "7547848294393ae3661108617ea66245fef6449d70e5a201003636d8528c766b",
+    "inference_hlwm.py": "e86173849184dbc46f3e61dcd0c3404d6a7dc31f3e00213bad0efad5a538d269",
+    "modeling_hlwm.py": "b5587d20e80d0cc721290ba5db37b47595bb1bf47d25bd109396395e07941180",
+    "semantic_grading.py": "87c0061f9f5f37c8e75efdfe89ca20db40b9d2237f90852e5cfee8b58670b0fc",
+    "test_modeling_hlwm.py": "892b75f6498753e5e512702b4f52afe8e4f5d2c60d2555c35e3988f3405c8c56",
+    "train_kaggle.py": "e3f1023389b591fa119db5d96076c30718321ee26f972e7c9e6d6799437423f2"
+  },
+  "counts": {
+    "test": 841,
+    "train": 7498,
+    "validation": 945
+  },
+  "dataset_counts": {
+    "test": 585,
+    "train": 6474,
+    "validation": 689
+  },
+  "hotfix_2026_09_01": "Session D audit crashed on first row: causal_mean_logprob called model.causal_logits outside torch.autocast, hitting the FP32-trainable/BF16-backbone dtype mismatch in the fresh-process audit loader. Autocast now lives inside the helper. Training/policy/calibration were unaffected and completed on both seeds (thresholds non-degenerate first time; validity floor met 4/4 families).",
+  "kept": [
+    "workspace-only (num-experts 1)",
+    "de-correlated head labels",
+    "validity floor 16/family (cap 1024 candidates)",
+    "domain-stratified canary",
+    "all v5.6 data/budgets/steps"
+  ],
+  "notebook_t4": "/Users/karthik/Documents/ChatGPT/Light of the Embel/artifacts/kaggle/hlwm-v6.0/embel-hlwm-v6.0-kaggle-2xt4.ipynb",
+  "notebook_t4_sha256": "5212743e1db749185c5608ef4261ac11820cf33af490cf917a9ec4312e0c2eaf",
+  "package_version": "6.0",
+  "plan": "reports/hlwm-v6.0-plan-2026-09-01.md",
+  "tests": "46/46 (4 new: read-out memory+ablation, nbest selection, combiner fit, nbest collection)",
+  "trainable_parameters": {
+    "delta_vs_study6_pct": 1.93,
+    "study6": 75174348,
+    "v5.7": 74508423,
+    "v6.0": 76627079
+  }
+}

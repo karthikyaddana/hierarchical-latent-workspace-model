@@ -1,0 +1,79 @@
+schema_version: "1.0"
+language_policy:
+  required: true
+  allowed_languages: [en]
+  minimum_confidence: 0.78
+
+collections:
+  training_discovery: sugatoray/reasoning-datasets
+  model_and_research_reference: sugatoray/rlms-reasoning-language-models
+  evaluation_reference: sugatoray/papers-benchmarks
+
+discovery_catalogs:
+  - https://github.com/mlabonne/llm-datasets
+  - https://github.com/Zjh-819/LLMDataHub
+
+# Only pinned, permissively licensed training splits with useful verification
+# material are materialized. Raw private chain-of-thought is always discarded.
+training_feeds:
+  - name: open-thoughts-verified-code
+    dataset_id: open-thoughts/OpenThoughts-114k
+    expected_revision: bd093c3994fd54d2390985b66988ddf282a55eb6
+    expected_license: apache-2.0
+    config: metadata
+    split: train
+    records: 128
+    sample_start: 89500
+    sample_end: 104000
+    batch_length: 50
+    oversample_factor: 2.0
+    normalizer: open_thoughts
+    allowed_record_domains: [code]
+    allowed_source_prefixes: [code_contests, apps, taco]
+    target_domain: programming_and_web
+    author: Open Thoughts Team
+    title: OpenThoughts verified coding problems with tests, private reasoning removed
+  - name: deepcoder-primeintellect-train
+    dataset_id: agentica-org/DeepCoder-Preview-Dataset
+    expected_revision: 177913a7bd43791646ef6a43645caa3c871ab3db
+    expected_license: mit
+    config: primeintellect
+    split: train
+    records: 128
+    batch_length: 16
+    oversample_factor: 1.5
+    normalizer: deepcoder
+    target_domain: programming_and_web
+    author: Agentica and Prime Intellect
+    title: DeepCoder PrimeIntellect verified English training problems
+  - name: deepcoder-taco-train
+    dataset_id: agentica-org/DeepCoder-Preview-Dataset
+    expected_revision: 177913a7bd43791646ef6a43645caa3c871ab3db
+    expected_license: mit
+    config: taco
+    split: train
+    records: 128
+    batch_length: 16
+    oversample_factor: 1.5
+    normalizer: deepcoder
+    target_domain: programming_and_web
+    author: Agentica and TACO contributors
+    title: DeepCoder TACO verified English training problems
+
+quarantine:
+  ServiceNow-AI/R1-Distill-SFT: CC-BY-NC-SA-4.0 and raw synthetic reasoning traces
+  bespokelabs/Bespoke-Stratos-17k: benchmark-derived AIME, MATH, GPQA and LiveCodeBench tasks plus raw reasoning traces
+  EricLu/SCP-116K: CC-BY-NC-SA-4.0
+  QuixiAI/dolphin-r1: mixed upstream provenance, unspecified language mix and raw reasoning traces
+  Magpie-Align/Magpie-Reasoning-V2-250K-CoT-Deepseek-R1-Llama-70B: Llama 3.3 terms and raw synthetic reasoning traces
+  AymanTarig/function-calling-v0.2-with-r1-cot: no declared dataset license
+  nvidia/Nemotron-CrossThink: CommonCrawl and book provenance ambiguity plus downstream Qwen license conditions
+  reasonir/reasonir-data: CC-BY-NC-4.0
+  open-r1/Mixture-of-Thoughts: no declared dataset license and raw synthetic reasoning traces
+
+excluded_splits:
+  agentica-org/DeepCoder-Preview-Dataset/codeforces/test: evaluation only
+  agentica-org/DeepCoder-Preview-Dataset/lcbv5/train: LiveCodeBench lineage reserved from training
+  agentica-org/DeepCoder-Preview-Dataset/lcbv5/test: evaluation only
+  open-thoughts/OpenThoughts-114k/metadata/math: NuminaMath and competition benchmark contamination risk
+  open-thoughts/OpenThoughts-114k/metadata/puzzle: RiddleSense benchmark lineage

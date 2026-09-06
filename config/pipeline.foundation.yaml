@@ -1,0 +1,67 @@
+project:
+  name: hlwm-foundation-model-engineering-curriculum
+  seed: 7401
+  schema_version: "1.0"
+
+azure:
+  endpoint: "https://nethandevnath-resource.services.ai.azure.com/openai/v1"
+  deployment: "DeepSeek-V4-Flash"
+  # Independent judge so the generator does not approve its own errors.
+  judge_deployment: "gpt-5.4-mini"
+  scope: "https://ai.azure.com/.default"
+  timeout_seconds: 180
+  max_retries: 5
+  max_workers: 8
+  requests_per_minute: 60
+  temperature: 0.35
+  max_completion_tokens: 12000
+
+generation:
+  target_episodes: 4000
+  chunks_per_episode: 2
+  max_source_chars: 18000
+  lanes_min: 2
+  lanes_max: 4
+  require_grounded_sources: true
+  quality_threshold: 0.84
+  repair_rejected: true
+  max_repair_rounds: 1
+  domains:
+    mathematics_and_optimization:
+      weight: 0.12
+      objectives: [linear algebra, probability, optimization, numerical stability]
+    deep_learning_fundamentals:
+      weight: 0.12
+      objectives: [forward and backward passes, initialization, optimization, failure analysis]
+    framework_engineering:
+      weight: 0.12
+      objectives: [PyTorch implementation, TensorFlow implementation, training debugging, profiling]
+    software_architecture:
+      weight: 0.12
+      objectives: [Python architecture, testing, domain modeling, maintainability]
+    distributed_data_systems:
+      weight: 0.14
+      objectives: [replication, consistency, messaging, reliability, stream processing]
+    machine_learning_systems:
+      weight: 0.14
+      objectives: [data quality, experimentation, deployment, monitoring, incident response]
+    llm_engineering:
+      weight: 0.14
+      objectives: [data pipelines, post-training, evaluation, inference, prompt and tool interfaces]
+    edge_ai:
+      weight: 0.10
+      objectives: [quantization, constrained inference, latency, energy, edge deployment]
+
+splits:
+  train: 0.80
+  validation: 0.10
+  test: 0.10
+  group_by: lineage_component_id
+
+output:
+  chunks_file: data/foundation/chunks/chunks.jsonl
+  generated_dir: data/foundation/generated
+  reviewed_dir: data/foundation/reviewed
+  final_dir: data/foundation/final
+  request_log: logs/foundation-azure-requests.jsonl
+  run_log: logs/foundation-runs.jsonl

@@ -1,0 +1,127 @@
+# Operationally lower-risk candidates, not legal advice or a legal guarantee.
+# Audit the exact revision and every upstream component before commercial training.
+recommended:
+  reasoning:
+    - name: DeepMind mathematics_dataset
+      url: https://github.com/google-deepmind/mathematics_dataset
+      stated_license: Apache-2.0
+      use: Procedural arithmetic and algebra with exact checkers
+      priority: P0
+    - name: GSM8K training split
+      url: https://huggingface.co/datasets/openai/gsm8k
+      stated_license: MIT
+      use: Audited natural-language math seeds; reserve official test data
+      priority: P1
+    - name: MBPP training split
+      url: https://huggingface.co/datasets/google-research-datasets/mbpp
+      stated_license: CC-BY-4.0
+      use: Basic programming tasks with executable tests
+      priority: P1
+
+  coding_debugging:
+    - name: Owned or commissioned repositories and bugs
+      url: null
+      stated_license: owner-authorized
+      use: Highest-value code, logs, failing tests, patches and passing outcomes
+      priority: P0
+    - name: Exercism problem specifications and permissive tracks
+      url: https://github.com/exercism/problem-specifications
+      stated_license: MIT; verify every selected track and file
+      use: Test-grounded code generation and controlled bug injection
+      priority: P0
+    - name: Permissively licensed OSS histories
+      url: null
+      stated_license: Apache-2.0, MIT, BSD-2-Clause, BSD-3-Clause or ISC allowlist
+      use: Reproducible issue-to-patch-to-test debugging episodes
+      priority: P0
+
+  project_planning:
+    - name: First-party project briefs and completed delivery records
+      url: null
+      stated_license: owner-authorized
+      use: Requirements, dependencies, plans, risks and measured outcomes
+      priority: P0
+    - name: GOV.UK Service Manual and content guidance
+      url: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+      stated_license: OGL-3.0 with exclusions and attribution
+      use: Service planning, acceptance criteria and plain-language delivery
+      priority: P0
+    - name: Apache project issue-to-commit histories
+      url: https://www.apache.org/licenses/LICENSE-2.0
+      stated_license: Apache-2.0; verify project and contribution scope
+      use: Dependency, decomposition and delivery episodes
+      priority: P1
+
+  english_writing:
+    - name: 18F Content Guide
+      url: https://github.com/18F/content-guide/blob/main/LICENSE.md
+      stated_license: CC0 for original editorial material
+      use: Clear English, UX writing and editing
+      priority: P0
+    - name: GOV.UK editorial guidance
+      url: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+      stated_license: OGL-3.0 with attribution and exclusions
+      use: Plain English and transactional copy
+      priority: P0
+    - name: Standard Ebooks or jurisdiction-cleared public-domain books
+      url: https://standardebooks.org
+      stated_license: Per-book public-domain status; contributor work commonly CC0
+      use: Edited prose and long-form English
+      priority: P1
+
+  copywriting:
+    - name: Owned product facts, landing pages and reviewed preference pairs
+      url: null
+      stated_license: owner-authorized
+      use: Grounded value propositions and message testing
+      priority: P0
+    - name: Amazon Berkeley Objects
+      url: https://amazon-berkeley-objects.s3.amazonaws.com/README.md
+      stated_license: CC-BY-4.0 with attribution
+      use: Grounded product-title and product-description exercises
+      priority: P1
+    - name: 18F and GOV.UK content guidance
+      url: https://github.com/18F/content-guide
+      stated_license: CC0 or OGL-3.0 depending on source
+      use: Truthful, clear and task-oriented copy style
+      priority: P0
+
+  marketing_advertising:
+    - name: First-party campaign creative and consented outcomes
+      url: null
+      stated_license: owner-authorized
+      use: The only strong source for creative-to-business-outcome labels
+      priority: P0
+    - name: UCI Bank Marketing
+      url: https://archive.ics.uci.edu/dataset/222/bank+marketing
+      stated_license: CC-BY-4.0
+      use: Segmentation and campaign-decision exercises, not copy performance claims
+      priority: P1
+    - name: UCI Online Retail II
+      url: https://archive.ics.uci.edu/dataset/502/online+retail+ii
+      stated_license: CC-BY-4.0
+      use: E-commerce analytics and experimentation exercises
+      priority: P1
+
+evaluation_only:
+  - name: ARC-AGI
+    url: https://github.com/fchollet/ARC-AGI
+    reason: Keep canonical tasks quarantined for evaluation and contamination checks
+  - name: HumanEval
+    url: https://github.com/openai/human-eval
+    reason: Keep canonical tests quarantined from training
+  - name: SWE-bench
+    url: https://www.swebench.com
+    reason: Evaluate with per-repository license checks and container replay
+  - name: Defects4J
+    url: https://github.com/rjust/defects4j
+    reason: Evaluate or use only after auditing each underlying project
+
+do_not_use_by_default:
+  - FineWeb, Dolma, Common Crawl, C4, RedPajama, OSCAR or BookCorpus
+  - Unfiltered Stack or StarCoderData exports
+  - Unfiltered arXiv papers
+  - Scraped advertisements, brand landing pages, reviews, Reddit or social media
+  - Datasets labelled other, unknown, research-only, non-commercial or no-derivatives
+  - Synthetic chain-of-thought datasets whose upstream question rights are unresolved
+

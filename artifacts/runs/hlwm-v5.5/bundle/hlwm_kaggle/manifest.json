@@ -1,0 +1,73 @@
+{
+  "base_model": "Qwen/Qwen3-0.6B-Base",
+  "base_revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
+  "behavior_anchor_counts": {
+    "test": 256,
+    "train": 1024,
+    "validation": 256
+  },
+  "code_sha256": {
+    "__init__.py": "15eee54eb55eb69558a57fe5b0141d6d555c010166ed5f82c9bff1b7e26c6028",
+    "data.py": "bbb9627e426e5883fb8163bec06c6552197f39fd55f0b30a04fdbb1703de71a8",
+    "evaluate_checkpoint.py": "9d93dc3a8e89444fe2d31d6b23388922be36203a293fc4f6b7304c2c6aa904e1",
+    "inference_hlwm.py": "e86173849184dbc46f3e61dcd0c3404d6a7dc31f3e00213bad0efad5a538d269",
+    "modeling_hlwm.py": "7d7d646e6916a4f085d81046513c3e3687c7b781945d53ad1f75b2930069d4f8",
+    "semantic_grading.py": "92bb44132f3535a094a289883f1ffc179168d681186e08a0f180cfa4cf7ee0ae",
+    "test_modeling_hlwm.py": "d28e9279f87d00125e6a7387c0cf52acfa17e0c3dad6201274a54556c95df39d",
+    "train_kaggle.py": "c350a9f81708fc9ab7b4b756aa8a9a75c74993ee4afce03602b0a39b85222033"
+  },
+  "counts": {
+    "test": 661,
+    "train": 4334,
+    "validation": 841
+  },
+  "name": "hlwm-reasoning9000-v5-5-candidate",
+  "package_version": "5.5.0",
+  "purpose": "on-policy-head-calibrated single-device HLWM architecture evaluation sized for an A100 MIG 1g.5gb partition inside a 3.5-hour session",
+  "reasoning9000_counts": {
+    "test": 405,
+    "train": 3310,
+    "validation": 585
+  },
+  "review_status": "unreviewed direct_fast_no_judge synthetic development release; the stronger 50-episode pilot accepted 0 and the scaling gate is false; not authorized as factual-quality or calibrated-policy evidence",
+  "seed": 17,
+  "session_plan_hours": 3.5,
+  "target_hardware": "one A100 MIG 1g.5gb partition (~4.75 GB) or one T4",
+  "training_defaults": {
+    "anchor_ratio": 0.75,
+    "brief_tokens": 96,
+    "calibration_new_tokens": 96,
+    "calibration_records": 64,
+    "canvas_tokens": 96,
+    "causal_ratio": 0.4,
+    "causal_tokens": 320,
+    "context_tokens": 160,
+    "gradient_accumulation": 4,
+    "initial_loss_scale": 1024.0,
+    "joint_steps": 1664,
+    "learning_rate": 8e-05,
+    "local_steps": 768,
+    "lora_alpha": 32.0,
+    "lora_dropout": 0.05,
+    "lora_rank": 16,
+    "lora_tail_layers": 8,
+    "max_runtime_hours": 2.3,
+    "overfit_steps": 128,
+    "policy_epochs": 400,
+    "policy_learning_rate": 0.001,
+    "policy_new_tokens": 96,
+    "policy_records": 96,
+    "precision": "auto",
+    "router_entropy_weight": 0.02,
+    "unfreeze_tail_layers": 0,
+    "warmup_updates": 32
+  },
+  "v5_5_changes": [
+    "on-policy policy-head phase on generated train-anchor emissions with semantic and mechanical hard negatives before validation threshold fitting",
+    "router marginal-entropy regularizer against the observed 5.4 routing collapse",
+    "preregistered routing gates: normalized entropy, second-route load >= 0.10, and a least-used-expert intervention on frozen candidates",
+    "BF16 autocast with disabled gradient scaling on supporting devices",
+    "joint-stage memory preflight with a 92% device headroom limit for 5 GB partitions",
+    "single-seed 2,560-microstep session sized to a 3.5-hour wall clock with exact resume"
+  ]
+}

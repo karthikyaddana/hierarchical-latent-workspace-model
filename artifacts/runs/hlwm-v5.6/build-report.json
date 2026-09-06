@@ -1,0 +1,29 @@
+{
+  "bundle": "/Users/karthik/Documents/ChatGPT/Light of the Embel/artifacts/kaggle/hlwm-v5.6/hlwm-v5.6-candidate-bundle.zip",
+  "bundle_bytes": 23874959,
+  "bundle_sha256": "937d3c67ac32a4a99109fe612d9197e45221735009a053a7d81ed384a2614cde",
+  "code_sha256": {
+    "__init__.py": "15eee54eb55eb69558a57fe5b0141d6d555c010166ed5f82c9bff1b7e26c6028",
+    "data.py": "603f84c0de4c052c87dcb6061593e707c21384a1c17a765d52760c0464574d11",
+    "evaluate_checkpoint.py": "d81e15c596983c31561c3de8149cb48dba7bb6d7de372402e4ec55811e428552",
+    "inference_hlwm.py": "e86173849184dbc46f3e61dcd0c3404d6a7dc31f3e00213bad0efad5a538d269",
+    "modeling_hlwm.py": "66cb187b10397fc02a2a84760d0157ee06b6f45f6bbfdb6ea506a8d88af8764e",
+    "semantic_grading.py": "87c0061f9f5f37c8e75efdfe89ca20db40b9d2237f90852e5cfee8b58670b0fc",
+    "test_modeling_hlwm.py": "c782158d4f7a0120df4d168fc21d24b73bd6ba4df4fde5fd74a4ce6049873059",
+    "train_kaggle.py": "8b82a867b35f66327ddf05948215e96d853b88d89cc859d6db22da78c335bc75"
+  },
+  "counts": {
+    "test": 841,
+    "train": 7498,
+    "validation": 945
+  },
+  "cross_split_prompt_collisions_dropped": 5,
+  "dataset_counts": {
+    "test": 585,
+    "train": 6474,
+    "validation": 689
+  },
+  "duplicate_train_prompts_dropped": 48,
+  "notebook_t4": "/Users/karthik/Documents/ChatGPT/Light of the Embel/artifacts/kaggle/hlwm-v5.6/embel-hlwm-v5.6-kaggle-2xt4.ipynb",
+  "notebook_t4_sha256": "66017ffd9717a03c2d8e4e34ee276df888e137883a3d5b47c053130dc430853a"
+}

@@ -1,0 +1,8 @@
+{
+  "decision": "not_applicable",
+  "reviewer": "Codex adversarial accepted-set audit",
+  "completed_at": "2026-08-17T22:09:58Z",
+  "accepted_corpus_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5",
+  "false_accept_episode_ids": [],
+  "inspections": []
+}

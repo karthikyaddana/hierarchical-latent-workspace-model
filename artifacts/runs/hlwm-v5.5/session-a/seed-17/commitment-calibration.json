@@ -1,0 +1,31 @@
+{
+  "accuracy_by_grader": {
+    "abstention": 1.0,
+    "numeric": 0.75,
+    "ordering": 0.875,
+    "unit": 0.875
+  },
+  "balanced_accuracy": 0.9444444444444444,
+  "calibrated_at_step": 4224,
+  "clean_accept_rate": 1.0,
+  "corrupt_reject_rate": 0.8888888888888888,
+  "generated_candidate_records": 64,
+  "generated_candidate_semantic_accuracy": 0.875,
+  "invalid_generated_candidates": 8,
+  "method": "validation_generated_candidate_joint_threshold_v2",
+  "negative_policy_records": 72,
+  "negative_reject_rate": 0.8888888888888888,
+  "passed_research_gate": true,
+  "policy_heads_trained_on_policy": true,
+  "positive_accept_rate": 1.0,
+  "positive_policy_records": 56,
+  "source_split": "validation",
+  "test_split_used": false,
+  "thresholds": {
+    "commitment": 0.0,
+    "risk": 0.97265625,
+    "verifier_error": 0.97265625
+  },
+  "valid_generated_candidates": 56,
+  "verified_anchor_records": 64
+}

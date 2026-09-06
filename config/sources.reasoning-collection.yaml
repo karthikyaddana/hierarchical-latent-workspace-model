@@ -1,0 +1,58 @@
+# Audited English-only subsets from the linked reasoning collection.
+language_policy:
+  required: true
+  allowed_languages:
+  - en
+  minimum_confidence: 0.78
+sources:
+- path: /Users/karthik/Documents/ChatGPT/Light of the Embel/sources/public/huggingface-curated/open-thoughts-verified-code.jsonl
+  title: OpenThoughts verified coding problems with tests, private reasoning removed
+  author: Open Thoughts Team
+  domain: programming_and_web
+  source_group: hf-open-thoughts-verified-code
+  lineage_component_id: hf-open-thoughts-verified-code
+  lineage_mode: source
+  version: hf:bd093c3994fd54d2390985b66988ddf282a55eb6:metadata:train:curation-v1
+  license: Apache-2.0
+  license_evidence: https://huggingface.co/datasets/open-thoughts/OpenThoughts-114k/blob/bd093c3994fd54d2390985b66988ddf282a55eb6/README.md
+  allowed_for_training: true
+  data_role: visible_context
+  language: en
+  url: https://huggingface.co/datasets/open-thoughts/OpenThoughts-114k
+  split_policy: train only; benchmark and excluded collection splits are not materialized
+  transformation: Private reasoning removed; only English problem, ground truth/reference answer, and compact verification
+    material retained
+- path: /Users/karthik/Documents/ChatGPT/Light of the Embel/sources/public/huggingface-curated/deepcoder-primeintellect-train.jsonl
+  title: DeepCoder PrimeIntellect verified English training problems
+  author: Agentica and Prime Intellect
+  domain: programming_and_web
+  source_group: hf-deepcoder-primeintellect-train
+  lineage_component_id: hf-deepcoder-primeintellect-train
+  lineage_mode: source
+  version: hf:177913a7bd43791646ef6a43645caa3c871ab3db:primeintellect:train:curation-v1
+  license: MIT
+  license_evidence: https://huggingface.co/datasets/agentica-org/DeepCoder-Preview-Dataset/blob/177913a7bd43791646ef6a43645caa3c871ab3db/README.md
+  allowed_for_training: true
+  data_role: visible_context
+  language: en
+  url: https://huggingface.co/datasets/agentica-org/DeepCoder-Preview-Dataset
+  split_policy: train only; benchmark and excluded collection splits are not materialized
+  transformation: Private reasoning removed; only English problem, ground truth/reference answer, and compact verification
+    material retained
+- path: /Users/karthik/Documents/ChatGPT/Light of the Embel/sources/public/huggingface-curated/deepcoder-taco-train.jsonl
+  title: DeepCoder TACO verified English training problems
+  author: Agentica and TACO contributors
+  domain: programming_and_web
+  source_group: hf-deepcoder-taco-train
+  lineage_component_id: hf-deepcoder-taco-train
+  lineage_mode: source
+  version: hf:177913a7bd43791646ef6a43645caa3c871ab3db:taco:train:curation-v1
+  license: MIT
+  license_evidence: https://huggingface.co/datasets/agentica-org/DeepCoder-Preview-Dataset/blob/177913a7bd43791646ef6a43645caa3c871ab3db/README.md
+  allowed_for_training: true
+  data_role: visible_context
+  language: en
+  url: https://huggingface.co/datasets/agentica-org/DeepCoder-Preview-Dataset
+  split_policy: train only; benchmark and excluded collection splits are not materialized
+  transformation: Private reasoning removed; only English problem, ground truth/reference answer, and compact verification
+    material retained

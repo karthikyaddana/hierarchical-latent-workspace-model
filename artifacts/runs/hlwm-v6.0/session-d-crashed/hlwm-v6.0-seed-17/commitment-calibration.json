@@ -1,0 +1,56 @@
+{
+  "accuracy_by_grader": {
+    "abstention": 0.984375,
+    "numeric": 0.171875,
+    "ordering": 0.171875,
+    "unit": 0.375
+  },
+  "balanced_accuracy": 0.8839514553546906,
+  "calibrated_at_step": 4224,
+  "candidate_temperatures": [
+    0.0,
+    0.7,
+    0.9,
+    1.1
+  ],
+  "clean_accept_rate": 0.8532110091743119,
+  "commitment_threshold_non_degenerate": true,
+  "corrupt_reject_rate": 0.9241706161137441,
+  "generated_candidate_records": 256,
+  "generated_candidate_semantic_accuracy": 0.42578125,
+  "invalid_generated_candidates": 147,
+  "method": "validation_generated_nbest_scalar_publish_v3",
+  "negative_policy_records": 211,
+  "negative_reject_rate": 0.9146919250488281,
+  "passed_research_gate": true,
+  "policy_heads_trained_on_policy": true,
+  "positive_accept_rate": 0.853210985660553,
+  "positive_policy_records": 109,
+  "publish_rule": {
+    "bias": -0.22401173412799835,
+    "fitted": true,
+    "threshold": 0.578213095664978,
+    "weights": [
+      2.5296711921691895,
+      -1.507691740989685,
+      -1.508111596107483
+    ]
+  },
+  "publish_threshold_non_degenerate": true,
+  "selection": {
+    "anchors": 64,
+    "greedy_valid_rate": 0.46875,
+    "oracle_any_valid_rate": 0.46875,
+    "selected_valid_rate": 0.421875,
+    "selection_gain": -0.046875
+  },
+  "source_split": "validation",
+  "test_split_used": false,
+  "thresholds": {
+    "commitment": 0.43677563965320587,
+    "risk": 0.13296423852443695,
+    "verifier_error": 0.4101654887199402
+  },
+  "valid_generated_candidates": 109,
+  "verified_anchor_records": 64
+}

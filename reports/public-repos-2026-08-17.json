@@ -1,0 +1,63 @@
+{
+  "repositories": [
+    {
+      "repo": "google-deepmind/mathematics_dataset",
+      "commit": "427f45075f84b8b9774950196ad63867ca20ffb3",
+      "license": "Apache-2.0",
+      "enabled": true
+    },
+    {
+      "repo": "exercism/problem-specifications",
+      "commit": "03f83310ed0547b902d211a05d23b3d74661df02",
+      "license": "MIT",
+      "enabled": true
+    },
+    {
+      "repo": "18F/content-guide",
+      "commit": "1b1723d3d5b8f91d92c16487c88b56265dc0ec3a",
+      "license": "CC0-1.0",
+      "enabled": true,
+      "manual_license_audit": "Verified from pinned LICENSE.md"
+    },
+    {
+      "repo": "microsoft/ML-For-Beginners",
+      "commit": "d0d0ea2b2d22cddca31f9c6d108df7daa87a1b46",
+      "license": "MIT",
+      "enabled": true
+    },
+    {
+      "repo": "microsoft/Web-Dev-For-Beginners",
+      "commit": "5f220217d35499881cfff61a5b4c2dab033ab228",
+      "license": "MIT",
+      "enabled": true
+    },
+    {
+      "repo": "microsoft/generative-ai-for-beginners",
+      "commit": "645f932514e9f22f688c8feb3e49a7a7f2eb6f1b",
+      "license": "MIT",
+      "enabled": true
+    },
+    {
+      "repo": "eugeneyan/applied-ml",
+      "commit": "d58606b6ec039e9cc242f43fd64d16af71cd1297",
+      "license": "MIT",
+      "enabled": true
+    },
+    {
+      "repo": "open-guides/og-aws",
+      "commit": "cde02946c221492d46c03777de41894b88b7d1ff",
+      "license": "CC-BY-4.0",
+      "enabled": true
+    },
+    {
+      "repo": "rust-lang/book",
+      "commit": "917544888a55e4da7109bdba8c88c893c0da70f4",
+      "license": "Apache-2.0 OR MIT",
+      "enabled": true,
+      "manual_license_audit": "Verified from pinned LICENSE-APACHE and LICENSE-MIT"
+    }
+  ],
+  "enabled": 9,
+  "quarantined": 0,
+  "manifest": "/Users/karthik/Documents/ChatGPT/Light of the Embel/config/sources.public-repos.yaml"
+}

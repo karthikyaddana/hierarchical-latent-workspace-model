@@ -1,0 +1,12 @@
+{
+  "bundle": "/Users/karthik/Documents/ChatGPT/Light of the Embel/artifacts/kaggle/hlwm-prototype/hlwm-kaggle-bundle.zip",
+  "bundle_bytes": 1314721,
+  "bundle_sha256": "db5f5faa465856663cde8e7ac96075fb773f1b6261d261bae8e77ffe127fa512",
+  "counts": {
+    "test": 32,
+    "train": 192,
+    "validation": 32
+  },
+  "notebook": "/Users/karthik/Documents/ChatGPT/Light of the Embel/artifacts/kaggle/hlwm-prototype/embel-hlwm-kaggle-t4.ipynb",
+  "notebook_sha256": "f65631241ea848a8addc7228f19ea02b70f696eeaf64ca8d4e7dae756ed78544"
+}

@@ -1,0 +1,60 @@
+{
+  "base_model": "Qwen/Qwen3-0.6B-Base",
+  "base_revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
+  "behavior_anchor_counts": {
+    "test": 256,
+    "train": 1024,
+    "validation": 256
+  },
+  "code_sha256": {
+    "__init__.py": "15eee54eb55eb69558a57fe5b0141d6d555c010166ed5f82c9bff1b7e26c6028",
+    "data.py": "bbb9627e426e5883fb8163bec06c6552197f39fd55f0b30a04fdbb1703de71a8",
+    "evaluate_checkpoint.py": "c2900637d2f1f66bb6b334f81666e164826f8de0013344a3b4c341eac1d8b01e",
+    "inference_hlwm.py": "06236cab5fd179302ebda613d80fa83f8c44d03a1b8bec9a833846b5048821ca",
+    "modeling_hlwm.py": "5c58ea8a9ca6bf5abbf0c3d65d3073973cbadb561ab2a4445d20862102652240",
+    "semantic_grading.py": "92bb44132f3535a094a289883f1ffc179168d681186e08a0f180cfa4cf7ee0ae",
+    "test_modeling_hlwm.py": "98f4feec01b6bcc977e4b88a289b060a24c85357ccf1e6b4c6c9e53d5d4a1167",
+    "train_kaggle.py": "50790894d6cf81af99732d69e88dd7753046a1696965e39fbfba82ac1fe890ff"
+  },
+  "counts": {
+    "test": 661,
+    "train": 4334,
+    "validation": 841
+  },
+  "name": "hlwm-reasoning9000-v5-4-candidate",
+  "package_version": "5.4.0",
+  "purpose": "generated-emission-calibrated dual-seed HLWM architecture evaluation",
+  "reasoning9000_counts": {
+    "test": 405,
+    "train": 3310,
+    "validation": 585
+  },
+  "review_status": "unreviewed direct_fast_no_judge synthetic development release; the stronger 50-episode pilot accepted 0 and the scaling gate is false; not authorized as factual-quality or calibrated-policy evidence",
+  "seed": 17,
+  "training_defaults": {
+    "anchor_ratio": 0.75,
+    "calibration_new_tokens": 96,
+    "calibration_records": 64,
+    "causal_ratio": 0.4,
+    "gradient_accumulation": 4,
+    "initial_loss_scale": 1024.0,
+    "joint_steps": 3072,
+    "learning_rate": 8e-05,
+    "local_steps": 1024,
+    "lora_alpha": 32.0,
+    "lora_dropout": 0.05,
+    "lora_rank": 16,
+    "lora_tail_layers": 8,
+    "max_runtime_hours": 10.0,
+    "overfit_steps": 128,
+    "unfreeze_tail_layers": 0,
+    "warmup_updates": 32
+  },
+  "v5_4_changes": [
+    "candidate-level verifier head replaces private denoising error as a hard publication gate",
+    "policy thresholds fit on semantically labeled generated validation emissions",
+    "multi-template split-isolated behavior anchors with matched operand distributions",
+    "longer anchor-rich causal and joint training with wider LoRA coverage",
+    "larger held-out audit and split checkpoint downloads"
+  ]
+}

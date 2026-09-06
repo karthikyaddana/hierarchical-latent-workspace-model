@@ -1,0 +1,37 @@
+{
+  "accuracy_by_grader": {
+    "abstention": 1.0,
+    "numeric": 0.15625,
+    "ordering": 0.125,
+    "unit": 0.0
+  },
+  "emitted": 128,
+  "epochs": 120,
+  "first_loss": 1.930489182472229,
+  "invalid_emissions": 87,
+  "label_smoothing": 0.05,
+  "last_loss": 0.3984890282154083,
+  "learning_rate": 0.001,
+  "method": "on_policy_train_anchor_head_fit_v1",
+  "negative_records": 343,
+  "positive_records": 41,
+  "ranking_pairs": 82,
+  "semantic_negatives": 128,
+  "separation_after": {
+    "mean_negative_commit_probability": 0.05168920010328293,
+    "mean_positive_commit_probability": 0.9499735832214355,
+    "pairwise_commit_ranking_accuracy": 1.0,
+    "pairwise_risk_ranking_accuracy": 1.0,
+    "pairwise_verifier_ranking_accuracy": 1.0
+  },
+  "separation_before": {
+    "mean_negative_commit_probability": 0.5638532042503357,
+    "mean_positive_commit_probability": 0.9880774617195129,
+    "pairwise_commit_ranking_accuracy": 0.9527127742767334,
+    "pairwise_risk_ranking_accuracy": 0.9527838826179504,
+    "pairwise_verifier_ranking_accuracy": 0.9548460245132446
+  },
+  "source_split": "train",
+  "trained": true,
+  "valid_emissions": 41
+}

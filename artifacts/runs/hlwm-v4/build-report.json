@@ -1,0 +1,20 @@
+{
+  "bundle": "/Users/karthik/Documents/ChatGPT/Light of the Embel/artifacts/kaggle/hlwm-v4/hlwm-v4-full-bundle.zip",
+  "bundle_bytes": 21614649,
+  "bundle_sha256": "c526af3b6b96313993f7741569b0c80fc59aee60696806dd7a3f32d018b0bccd",
+  "code_sha256": {
+    "__init__.py": "15eee54eb55eb69558a57fe5b0141d6d555c010166ed5f82c9bff1b7e26c6028",
+    "data.py": "c4e3c0d1ceefa77e1fbb44efb346b1b7a5306a43eb5262fc209c67d795ff83f4",
+    "evaluate_checkpoint.py": "1d9b92046829c87581796d414afb896a48446aa2ea9104d2eac429700afa35a6",
+    "modeling_hlwm.py": "9f24ad3c71037cda838bae53574291b3ae6602197d136ca3295b05001364c040",
+    "test_modeling_hlwm.py": "e2f7a9ce74c3c78880b40e46c0f8f00233b251f9474bf7160508c3ad433ce7a2",
+    "train_kaggle.py": "0ad2eab541a3ddef225d30d57dffa955a2ff8bbd4b8ac8074ac779d1eb1253f3"
+  },
+  "counts": {
+    "test": 405,
+    "train": 3310,
+    "validation": 585
+  },
+  "notebook": "/Users/karthik/Documents/ChatGPT/Light of the Embel/artifacts/kaggle/hlwm-v4/embel-hlwm-v4-kaggle-t4.ipynb",
+  "notebook_sha256": "3cf1bed7c76555ad78859ad30b9d80b4b9e61ea2a1f67cd40039c15e82776cb5"
+}

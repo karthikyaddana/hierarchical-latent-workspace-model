@@ -1,0 +1,27 @@
+{
+  "anchor_counts": {
+    "test": 576,
+    "train": 1024,
+    "validation": 384
+  },
+  "built": "2026-09-02",
+  "bundle_sha256": "a107c493014ca4fc1cdc6430352a5a696b32e34f4465ec01ad11be2fa59890b8",
+  "code_sha256": {
+    "README.md": "34f5da01a231153b087863ad9d33626f1df511ada0a133505d1fd88b2ec9a438",
+    "__init__.py": "15eee54eb55eb69558a57fe5b0141d6d555c010166ed5f82c9bff1b7e26c6028",
+    "data.py": "45cd32a17559f2c41481b414d7797712065fc6b62f357b9d32aae1d04451a17f",
+    "evaluate_checkpoint.py": "53ce35140f3f7ba557745c4e1fcba0e01a3016589cb36d5019652817a9f2e95a",
+    "inference_hlwm.py": "5fc80eefd30d783120b0cd16e08fdd7ca55c7da3d989d2e9e804d478a7ef43b7",
+    "modeling_hlwm.py": "ce74a8fb030ead62e7af3726ffbdd2071c7aefa1b0e1bac3f7c2baa882e2c01b",
+    "semantic_grading.py": "87c0061f9f5f37c8e75efdfe89ca20db40b9d2237f90852e5cfee8b58670b0fc",
+    "test_modeling_hlwm.py": "3d8bb435c98d51545df3f37f351e0852682c219b7f60c38dd831449081367145",
+    "train_kaggle.py": "cdace14b005707d0c76ff656e91a1588d42eb4bb3fe91da27521ba72c2f87174"
+  },
+  "counts": {
+    "test": 1161,
+    "train": 7498,
+    "validation": 1073
+  },
+  "notebook_sha256": "e96923064aded0b38e718d2491727b17f4ec1c2592b1538f8b878b60fdb4c2e3",
+  "package_version": "9.0"
+}

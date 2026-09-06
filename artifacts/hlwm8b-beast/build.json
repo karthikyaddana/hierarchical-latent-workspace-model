@@ -1,0 +1,8 @@
+{
+  "code_bundle": "/Users/karthik/Documents/ChatGPT/Light of the Embel/artifacts/hlwm8b-beast/hlwm8b-kaggle-code.zip",
+  "code_bundle_sha256": "ca2508d10a915057ab0fe57ec633a5eb87bbd83d6007634f6571aa57f4a78b10",
+  "notebook": "/Users/karthik/Documents/ChatGPT/Light of the Embel/artifacts/hlwm8b-beast/embel-hlwm8b-resumable-dual-t4.ipynb",
+  "notebook_sha256": "3e3d804a86994f67a1bffece797260d43a8fcaf8f84b9b5f16c9f48b9c4b2e04",
+  "data_snapshot": "/Users/karthik/Documents/ChatGPT/Light of the Embel/artifacts/hlwm8b-beast/hlwm-beast-teacher-snapshot.zip",
+  "data_snapshot_sha256": "1a2b57f3a6aeec64c624b36a68fdbaff87097fe9492c7dd8159099389e23fd32"
+}

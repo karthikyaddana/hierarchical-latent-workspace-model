@@ -1,0 +1,13 @@
+{
+  "base_model": "Qwen/Qwen3-0.6B-Base",
+  "base_revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
+  "counts": {
+    "test": 32,
+    "train": 192,
+    "validation": 32
+  },
+  "name": "hlwm-reasoning9000-prototype",
+  "purpose": "architecture testing only",
+  "review_status": "unreviewed synthetic",
+  "seed": 17
+}

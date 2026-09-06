@@ -1,0 +1,95 @@
+schema_version: "1.0"
+policy:
+  allowed_languages: [en]
+  private_reasoning_allowed: false
+  benchmark_validation_and_test_allowed_for_training: false
+  allowed_licenses: [apache-2.0, mit, cc-by-4.0, cc0-1.0]
+  note: Dataset-level licensing does not replace per-record provenance checks.
+
+training_feeds:
+  - name: helpsteer3-edits
+    dataset_id: nvidia/HelpSteer3
+    revision: f6d145777bcbde96137596340fab89793acd1031
+    license: cc-by-4.0
+    config: edit
+    split: train
+    normalizer: helpsteer_edit
+    pilot_records: 512
+    purpose: Edited answers and direct rejected-versus-improved preference pairs
+
+  - name: hermes-function-calling
+    dataset_id: NousResearch/hermes-function-calling-v1
+    revision: dae3e1d28cfbcf4b915c04ea1e072030529b4bda
+    license: apache-2.0
+    config: func_calling
+    split: train
+    normalizer: hermes_tool
+    pilot_records: 512
+    purpose: JSON-schema-grounded tool selection and argument construction
+
+  - name: swe-gym-small-patches
+    dataset_id: SWE-Gym/SWE-Gym
+    revision: bb94ed9e39bbeb96a7fcbfb533b80f25a7fd59cb
+    license: mit
+    config: default
+    split: train
+    normalizer: swe_gym
+    pilot_records: 256
+    purpose: Repository issue to compact patch and test evidence
+
+  - name: websight-compact-ui
+    dataset_id: HuggingFaceM4/WebSight
+    revision: b11f8172f89c992b56ac702319e02c428cca4a4e
+    license: cc-by-4.0
+    config: v0.2
+    split: train
+    normalizer: websight
+    pilot_records: 256
+    purpose: Synthetic English interface brief to compact HTML and CSS
+
+deferred_training_feeds:
+  - dataset_id: nvidia/SWE-Hero-openhands-trajectories
+    revision: 150bc119e52c647216fce285fd801f16b6fd745b
+    reason: Replay patches and tests before accepting trajectories.
+  - dataset_id: bigcode/commitpackft
+    revision: fc56fe33c030c6daa414c2b112c932b8eed085e6
+    reason: Filter every row by its source-repository licence before accepting it.
+  - dataset_id: Salesforce/xlam-function-calling-60k
+    revision: 26d14ebfe18b1f7b524bd39b404b50af5dc97866
+    reason: Dataset is gated and requires explicit access.
+  - dataset_id: nvidia/Nemotron-Post-Training-Dataset-v1
+    revision: 74e23eb6f830fef4a9e96a92f6f6262214cbb9a8
+    reason: Strip private reasoning and audit embedded source licences before sampling.
+
+kaggle_training_candidates:
+  - ref: faviovaz/marketing-ab-testing
+    version: 1
+    declared_license: CC0-1.0
+    use: Deterministically computed experimentation and campaign-analysis tasks only.
+  - ref: dhrubangtalukdar/startup-funding-and-outcome-dataset
+    version: 1
+    declared_license: Apache-2.0
+    use: Synthetic tabular-analysis exercises only; never present rows as real company facts.
+
+kaggle_evaluation_only:
+  - ref: sunil123kumar/ai-agent-failure-benchmark-dataset
+    version: 1
+    declared_license: Apache-2.0
+    use: Held-out agent failure analysis; never include in teacher prompts or training.
+
+evaluation_only:
+  - dataset_id: princeton-nlp/SWE-bench_Verified
+    revision: c104f840cc67f8b6eec6f759ebc8b2693d585d4
+  - dataset_id: openai/openai_humaneval
+    revision: 7dce6050a7d6d172f3cc5c32aa97f52fa1a2e544
+  - dataset_id: google-research-datasets/mbpp
+    revision: 4bb6404fdc6cacfda99d4ac4205087b89d32030c
+  - dataset_id: gorilla-llm/Berkeley-Function-Calling-Leaderboard
+    revision: 61fc0608cfd831fcfbbaa676ebdfef0ed963eeda
+  - dataset_id: ibm-research/finqa
+    revision: 1d0076a55b609744218081ff6ea693aefe824677
+
+prohibited_scrapes:
+  - Spotify, LinkedIn, X, Substack, proprietary pitch decks and private investor emails
+  - Brand logos, album art, profile data and proprietary interface assets
+  - Unknown, noncommercial, no-derivatives or research-only datasets

@@ -1,0 +1,72 @@
+{
+  "session": "F",
+  "package_version": "8.0",
+  "computed": "locally, notebook cell-17 logic (notebook crashed in a debug print before cells 16-18)",
+  "pooled_claim_s": {
+    "medium_rows": 75,
+    "wins": 2,
+    "losses": 0,
+    "mcnemar_mid_p": 0.125
+  },
+  "per_seed_passed": {
+    "17": false,
+    "29": false
+  },
+  "failed_gates": {
+    "17": [
+      "corrupt_verifier_ranked_above_clean",
+      "readout_live",
+      "quality_pass_rate_at_least_70pct",
+      "weighted_sc_beats_sc_medium",
+      "selection_headroom_present",
+      "abstention_beats_logprob_augrc",
+      "lanes_materially_distinct"
+    ],
+    "29": [
+      "corrupt_verifier_ranked_above_clean",
+      "readout_live",
+      "quality_pass_rate_at_least_70pct",
+      "selection_headroom_present",
+      "coverage_in_band",
+      "abstention_beats_logprob_augrc",
+      "lanes_materially_distinct"
+    ]
+  },
+  "gates_passed_count": {
+    "17": 17,
+    "29": 17
+  },
+  "shared_failures": [
+    "abstention_beats_logprob_augrc",
+    "corrupt_verifier_ranked_above_clean",
+    "lanes_materially_distinct",
+    "quality_pass_rate_at_least_70pct",
+    "readout_live",
+    "selection_headroom_present"
+  ],
+  "replication": {
+    "claim_g": {
+      "parity": "PASS both (gap +0.0125 / -0.0031; f1_ratio 1.015/1.025)",
+      "leak": "PASS both (0/320 audit; canary marker 0 at 17/18 boundaries)",
+      "readout_live": "FAIL both (delta 0.000 / -0.022; gate tanh flat ~0.050 all run)",
+      "verdict": "claim G FAILED on liveness, replicated"
+    },
+    "claim_s": {
+      "headroom": "VOID both (medium exactly_one_valid_fraction 0.0/0.0)",
+      "pooled_mid_p": 0.125,
+      "verdict": "claim S VOID for headroom on both seeds (preregistered design outcome)"
+    },
+    "claim_a": {
+      "augrc": "FAIL both (heads 0.0637/0.0654 vs logprob 0.0594/0.0623; bootstrap 0.13/0.179)",
+      "coverage": "s17 0.244 in band; s29 0.1875 below 0.20 (pre-mortem predicted one-seed band miss)",
+      "operational": "selective accuracy 1.000 on BOTH seeds (78/78, 60/60); risk UCB 0.038/0.049; SQL commit coverage 0.000 both",
+      "verdict": "claim A FAILED as preregistered on both seeds; operational selective prediction replicated"
+    },
+    "lanes": "FAIL both (0.9396/0.9751) - failures #8 and #9; unconditional exit fires: demote to single lane"
+  },
+  "ladder_rung": {
+    "notebook_prereg": "rung 1 (dead read-out is enumerated in the notebook's rung 1)",
+    "paper_prereg_gap": "paper Study 9 text words the generative-falsification rung as 'parity or leak'; liveness-only failure is not explicitly assigned - disclosed, notebook governs",
+    "consequence": "generative read-out mechanism retired at 0.6B; plain-LoRA control remains UNAUTHORIZED; benchmarks remain gated"
+  }
+}

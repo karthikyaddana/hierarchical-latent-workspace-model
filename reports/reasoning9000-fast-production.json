@@ -1,0 +1,8 @@
+{
+  "status": "complete",
+  "generation_mode": "direct_fast_no_judge",
+  "accepted_checkpoints": 4311,
+  "final_episodes_after_deduplication": 4300,
+  "minimum_final": 4000,
+  "manifest": "/Users/karthik/Documents/ChatGPT/Light of the Embel/data/reasoning9000/final/manifest.json"
+}

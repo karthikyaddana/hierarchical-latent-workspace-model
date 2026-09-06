@@ -1,0 +1,27 @@
+# Add one entry per file, directory, or dataset export. Paths are relative to this file.
+# Set allowed_for_training=false for reference-only material.
+sources: []
+
+# Example:
+# sources:
+#   - path: ../sources/private/project-management-book.epub
+#     title: Project management reference
+#     domain: project_planning
+#     source_group: pm-book-001
+#     lineage_component_id: pm-book-001
+#     license: user-provided
+#     license_evidence: I own this copy and authorize private model training
+#     allowed_for_training: true
+#     author: Author name
+#     version: first-edition
+#     url: null
+#
+#   - path: ../sources/private/python-debugging-cases
+#     title: Python debugging cases
+#     domain: coding_debugging
+#     source_group: python-cases-001
+#     lineage_component_id: python-cases-001
+#     license: MIT
+#     license_evidence: https://github.com/owner/repo/blob/main/LICENSE
+#     allowed_for_training: true
+#     version: git-commit-or-date

@@ -1,0 +1,32 @@
+{
+  "base_model": "Qwen/Qwen3-0.6B-Base",
+  "base_revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
+  "code_sha256": {
+    "__init__.py": "15eee54eb55eb69558a57fe5b0141d6d555c010166ed5f82c9bff1b7e26c6028",
+    "data.py": "875e91b99dfb04adadee89586b741c4fe66f805b229d6e0622cefea50e4471a3",
+    "evaluate_checkpoint.py": "838412840e3e936dd147b5bf02d5f2d37298094e13d253b8da74bcb7d27ea693",
+    "modeling_hlwm.py": "06c3ae417637c6f29c7475d328ce34d4f4cd0c4dcea6d712965c05efe52cd179",
+    "test_modeling_hlwm.py": "cdb1c4c13b00ddac2535312f7c26e598038e6c6cec0891ba641dd2733bd189ae",
+    "train_kaggle.py": "c9512cf6813185cbbdc74b4fead902e9d24d53a18ace581c881d3939b4cfe890"
+  },
+  "counts": {
+    "test": 405,
+    "train": 3310,
+    "validation": 585
+  },
+  "name": "hlwm-reasoning9000-v5-candidate",
+  "package_version": "5.0.0",
+  "purpose": "correctness-gated architecture training and evaluation",
+  "review_status": "unreviewed direct_fast_no_judge synthetic development release; the stronger 50-episode pilot accepted 0 and the scaling gate is false; not authorized as factual-quality or calibrated-policy evidence",
+  "seed": 17,
+  "training_defaults": {
+    "gradient_accumulation": 4,
+    "initial_loss_scale": 1024.0,
+    "joint_steps": 80,
+    "learning_rate": 0.0001,
+    "local_steps": 120,
+    "max_runtime_hours": 7.5,
+    "overfit_steps": 48,
+    "warmup_updates": 10
+  }
+}

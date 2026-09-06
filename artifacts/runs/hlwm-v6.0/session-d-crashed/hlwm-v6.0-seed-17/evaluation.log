@@ -1,0 +1,53 @@
+Generating pinned base-model controls...
+Reloading the HLWM checkpoint...
+Traceback (most recent call last):
+  File "/kaggle/working/hlwm-v6.0/hlwm_kaggle/evaluate_checkpoint.py", line 995, in <module>
+    main()
+  File "/kaggle/working/hlwm-v6.0/hlwm_kaggle/evaluate_checkpoint.py", line 441, in main
+    causal_mean_logprob(
+  File "/kaggle/working/hlwm-v6.0/hlwm_kaggle/evaluate_checkpoint.py", line 89, in causal_mean_logprob
+    logits = model.causal_logits(generated, torch.ones_like(generated))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/working/hlwm-v6.0/hlwm_kaggle/modeling_hlwm.py", line 1178, in causal_logits
+    hidden = self._encode_committed(input_ids, attention_mask)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/working/hlwm-v6.0/hlwm_kaggle/modeling_hlwm.py", line 1164, in _encode_committed
+    hidden = self.backbone(
+             ^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/working/hlwm-v6.0/hlwm_kaggle/modeling_hlwm.py", line 560, in forward
+    hidden = layer(
+             ^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/working/hlwm-v6.0/hlwm_kaggle/modeling_hlwm.py", line 488, in forward
+    hidden = residual + self.self_attn(
+                        ^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/working/hlwm-v6.0/hlwm_kaggle/modeling_hlwm.py", line 367, in forward
+    query_projection = self.q_proj(hidden)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/linear.py", line 134, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: expected mat1 and mat2 to have the same dtype, but got: float != c10::BFloat16

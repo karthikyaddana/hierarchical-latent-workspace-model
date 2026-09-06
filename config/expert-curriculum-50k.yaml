@@ -1,0 +1,137 @@
+version: "1.0"
+date: "2026-08-19"
+
+student:
+  model: allenai/Olmo-3-7B-Think
+  revision: d97e442d7cc678210054dbcc9b440894d62c89a4
+  method: 4-bit QLoRA plus trainable HLWM sidecar
+  language: English only; programming languages are allowed
+
+catalogs:
+  complete_discovery: catalog/public-dataset-discovery-2026-08-19-expanded.json
+  ranked_manual_audit_queue: catalog/expert-training-audit-queue-1500-2026-08-19.json
+  benchmark_discovery: catalog/benchmark-discovery-2026-08-19-expanded.json
+  curated_benchmark_registry: catalog/benchmark-registry-2026-08-19.json
+
+scale:
+  discovered_candidates: 2484
+  candidates_requiring_content_audit: 1289
+  ranked_manual_audit_queue: 1500
+  first_training_and_system_gate: 8000
+  main_accepted_training_target: 50000
+  protected_expert_evaluation_cases: 1500
+
+benchmark_training_policy:
+  allowed:
+    - Official upstream training splits with permissive rights and preserved split lineage
+    - New problems generated from the underlying skill with different entities, numbers, structure and solution path
+    - Training records whose answers are recomputed by tests, SQL, formulas, simulators or source-grounded rubrics
+  forbidden:
+    - Validation, test, hidden, challenge, leaderboard or post-cutoff evaluation questions
+    - Test-answer repositories, benchmark result dumps and contaminated mirrors
+    - Paraphrases, translations or cosmetic mutations of protected evaluation questions
+    - Selecting checkpoints on the protected test set
+  reporting:
+    - Scores from a family whose training split was used are labelled trained-on-family diagnostics
+    - Primary claims use untouched task families, post-cutoff releases and ExpertBench-1500
+    - Base-model pretraining contamination is reported as unknown
+
+official_training_split_candidates:
+  mathematics_reasoning:
+    - GSM8K train; test protected
+    - MATH train; test and MATH-500 protected
+    - ARC train; challenge evaluation protected
+    - BBH skill analogues only; canonical BBH tasks protected
+  coding:
+    - MBPP sanitized train and prompt; validation/test protected
+    - APPS train; test protected
+    - CodeContests train; validation/test protected
+    - CodeXGLUE training tasks; evaluation splits protected
+    - SWE-Gym, SWE-Smith and successful agent trajectories after repository/issue/commit exclusion against SWE-bench
+  data_sql_spreadsheets:
+    - Spider train; development/test protected
+    - BIRD train; development/test protected
+    - WikiSQL train; validation/test protected
+    - SParC and CoSQL train; evaluation splits protected
+    - DS-1000-like generated analogues with fresh libraries and tests; canonical DS-1000 protected
+  finance_business:
+    - FinQA train; validation/test protected
+    - ConvFinQA train; validation/test protected
+    - TAT-QA train; validation/test protected
+    - MultiHiertt train; validation/test protected
+    - BizBench training material only when its split and licence permit it
+  tools_agents:
+    - ToolBench training trajectories after live API removal and local replay
+    - API-Bank training split with deterministic simulator replay
+    - ToolAlpaca training split after tool-schema validation
+    - xLAM and Glaive function-calling training records after deduplication against BFCL
+    - OpenHands, SWE-agent and browser-use trajectories only when observations can be replayed
+
+accepted_training_mix:
+  coding_repository_debugging: 12000
+  tool_agent_browser_trajectories: 8000
+  data_sql_spreadsheet_analysis: 7000
+  end_to_end_expert_workflows: 7000
+  business_product_operations: 5000
+  ui_ux_accessibility: 4000
+  finance_marketing_experimentation: 3500
+  instruction_structured_output: 2000
+  corrections_risk_abstention: 1500
+
+conversion_contract:
+  universal_required_fields:
+    - source identifier, exact revision and licence evidence
+    - original split and immutable record identifier
+    - English-language result
+    - task, constraints, available evidence and expected artifacts
+    - final answer or artifact plus machine-verifiable evidence where possible
+    - provenance chain for every derived record
+  coding:
+    - Reproduce the issue in a pinned container
+    - Retain minimal patch, tests, commands, exit codes and rollback
+    - Reject patches that do not apply or whose claimed tests were not executed
+  data_analysis:
+    - Freeze a source table and generate business questions from its real columns
+    - Compute answers independently with SQL or formulas
+    - Include assumptions, denominator, units, uncertainty and reconciliation
+    - Generate counterfactual variants by changing data, not by rewriting the answer
+  business_analysis:
+    - Require stakeholder, objective, constraints, process, requirements, alternatives, risks and acceptance criteria
+    - Ground conclusions in supplied evidence and mark unresolved questions
+    - Use one teacher for subjective synthesis and human-audit a stratified sample
+  tools_agents:
+    - Validate JSON Schema and argument types
+    - Replay every tool observation in a deterministic sandbox
+    - Include timeout, malformed result, permission failure and recovery cases
+    - Reject fabricated browsing or repository inspection claims
+  ui_ux:
+    - Generate original layouts rather than copied branded pages or assets
+    - Render fixed desktop and mobile viewports
+    - Test keyboard navigation, empty/loading/error states and accessibility
+  finance_marketing:
+    - Preserve an evidence ledger and recompute every number
+    - Separate facts, assumptions, recommendations and uncertainty
+    - Reject unsupported investment, revenue or campaign-performance claims
+
+quality_gates:
+  exact_and_near_duplicate_free: true
+  semantic_task_family_isolation: true
+  protected_split_hash_and_embedding_index: true
+  executable_records_must_pass: true
+  subjective_records_human_audit_fraction: 0.10
+  maximum_unverified_claim_rate: 0.0
+  maximum_visible_private_reasoning_rate: 0.0
+  one_teacher_calls_per_subjective_record: 1
+
+expertbench_1500:
+  coding_repository_debugging: 300
+  data_sql_spreadsheet_analysis: 300
+  business_product_operations: 300
+  tool_agent_browser_use: 300
+  finance_marketing_and_expert_delivery: 300
+  requirements:
+    - English only
+    - Independent task families not present in owner training seeds
+    - No case sent to the teacher or used for checkpoint training
+    - Deterministic or executable gold evidence for at least 1200 cases
+    - Blind human review for the remaining subjective cases

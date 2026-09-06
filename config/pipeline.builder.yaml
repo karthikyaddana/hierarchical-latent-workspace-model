@@ -1,0 +1,96 @@
+project:
+  name: hlwm-builder-teacher-factory
+  seed: 60309
+  schema_version: "1.0"
+
+azure:
+  endpoint: "https://nethandevnath-resource.services.ai.azure.com/openai/v1"
+  deployment: "DeepSeek-V4-Flash"
+  scope: "https://ai.azure.com/.default"
+  timeout_seconds: 600
+  max_retries: 2
+  requests_per_minute: 60
+  temperature: 0.3
+  max_completion_tokens: 12000
+
+builder_factory:
+  output_dir: data/builder
+  request_log: logs/builder-requests.jsonl
+  stop_file: data/builder/STOP
+  scale: medium
+  max_repair_rounds: 3
+  judge_domains:
+    - fullstack_product
+    - website_frontend
+    - copywriting
+    - pitch_deck
+    - investor_analysis
+    - project_planning
+  # Deterministic-only domains (coding_debugging, devops) are gated purely by
+  # executed tests and policy scans; judged domains additionally require both
+  # independent judges and fail closed on disagreement.
+  mix:
+    fullstack_product: 4
+    coding_debugging: 12
+    website_frontend: 4
+    copywriting: 3
+    pitch_deck: 2
+    investor_analysis: 4
+    project_planning: 4
+    devops: 4
+
+teacher_factory:
+  providers:
+    # Catalog-listed but its completions route returned empty-body 404 on
+    # 2026-08-30 (not yet served to this account). Flip enabled when live.
+    nvidia_nemotron_ultra:
+      type: openai_compatible
+      enabled: false
+      base_url: "https://integrate.api.nvidia.com/v1"
+      model: "nvidia/nemotron-3-ultra-550b-a55b"
+      api_key_env: NVIDIA_API_KEY
+      requests_per_minute: 36
+      max_retries: 3
+      timeout_seconds: 900
+      temperature: 0.6
+      top_p: 0.95
+      max_completion_tokens: 12288
+      stream: true
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: true
+      roles: [builder_heavy, builder]
+    nvidia_nemotron_super:
+      type: openai_compatible
+      base_url: "https://integrate.api.nvidia.com/v1"
+      model: "nvidia/nemotron-3-super-120b-a12b"
+      api_key_env: NVIDIA_API_KEY
+      requests_per_minute: 36
+      max_retries: 3
+      timeout_seconds: 900
+      temperature: 0.6
+      top_p: 0.95
+      max_completion_tokens: 16384
+      stream: true
+      # Thinking improves build quality; reasoning deltas are read past and
+      # never persisted (private chain-of-thought is not a training target).
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: true
+      roles: [builder_heavy, builder]
+    azure_deepseek_v4_flash:
+      type: azure
+      model: DeepSeek-V4-Flash
+      roles: [builder, bug_injector]
+    azure_gpt56_luna:
+      type: azure
+      model: gpt-5.6-luna
+      roles: [planner, editor]
+    azure_gpt54_mini:
+      type: azure
+      model: gpt-5.4-mini
+      roles: [judge]
+    azure_kimi_k26:
+      type: azure
+      model: Kimi-K2.6
+      roles: [judge]

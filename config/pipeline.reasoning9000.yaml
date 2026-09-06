@@ -1,0 +1,140 @@
+project:
+  name: hlwm-expert-reasoning-9000
+  seed: 90210
+  schema_version: "1.0"
+
+azure:
+  endpoint: "https://nethandevnath-resource.services.ai.azure.com/openai/v1"
+  deployment: "DeepSeek-V4-Flash"
+  blueprint_deployment: "gpt-5.6-luna"
+  blueprint_judge_deployment: "Kimi-K2.5"
+  episode_critic_deployment: "DeepSeek-V3.2-Speciale"
+  episode_editor_deployment: "gpt-5.6-luna"
+  judge_deployment: "gpt-5.4-mini"
+  secondary_judge_deployment: "Kimi-K2.6"
+  fast_deployments:
+    - "DeepSeek-V4-Flash"
+    - "gpt-5.6-luna"
+    - "Kimi-K2.5"
+    - "DeepSeek-V3.2-Speciale"
+  scope: "https://ai.azure.com/.default"
+  timeout_seconds: 180
+  max_retries: 5
+  max_workers: 16
+  requests_per_minute: 60
+  temperature: 0.30
+  max_completion_tokens: 12000
+  fast_timeout_seconds: 110
+  fast_max_retries: 0
+  fast_max_completion_tokens: 9000
+  fast_temperature: 0.45
+  fast_requests_per_minute: 60
+
+generation:
+  allowed_languages: [en]
+  minimum_language_confidence: 0.78
+  reject_non_substantive_source_chunks: true
+  target_accepted_episodes: 9000
+  initial_generation_target: 13000
+  stable_indexed_jobs: true
+  chunks_per_episode: 3
+  max_source_chars: 22000
+  fast_max_source_chars: 10000
+  fast_candidate_multiplier: 1.60
+  fast_minimum_language_confidence: 0.62
+  lanes_min: 2
+  lanes_max: 4
+  require_grounded_sources: true
+  quality_threshold: 0.84
+  minimum_expertise_uplift: 0.80
+  require_dual_judge: true
+  require_distinct_model_roles: true
+  require_blueprint_quality_judge: true
+  require_episode_quality_critic: true
+  require_construction_critic_calibration: true
+  construction_critic_calibration_dataset: data/reasoning9000/critic-calibration/cases.jsonl
+  construction_critic_calibration_report: reports/reasoning9000-construction-critic-calibration.json
+  minimum_construction_critic_calibration_cases: 12
+  blueprint_quality_threshold: 0.84
+  minimum_blueprint_expertise_uplift: 0.80
+  episode_quality_threshold: 0.84
+  minimum_episode_expertise_uplift: 0.80
+  max_blueprint_attempts: 4
+  max_episode_attempts: 4
+  repair_rejected: true
+  max_repair_rounds: 1
+  max_repair_validation_attempts: 2
+  domains:
+    mathematics_and_optimization:
+      weight: 0.06
+      objectives: [formal derivation, numerical verification, optimization, probability, counterexample construction]
+    deep_learning_fundamentals:
+      weight: 0.06
+      objectives: [mechanism analysis, gradient diagnosis, experimental design, failure analysis]
+    framework_engineering:
+      weight: 0.06
+      objectives: [PyTorch implementation, TensorFlow implementation, testing, debugging, profiling]
+    software_architecture:
+      weight: 0.08
+      objectives: [domain modeling, API design, maintainability, trade-off analysis, testing]
+    distributed_data_systems:
+      weight: 0.06
+      objectives: [consistency, replication, messaging, reliability, failure recovery]
+    machine_learning_systems:
+      weight: 0.06
+      objectives: [data quality, experimentation, deployment, monitoring, incident response]
+    llm_engineering:
+      weight: 0.08
+      objectives: [data pipelines, post-training, evaluation, inference, retrieval, tool interfaces]
+    edge_ai:
+      weight: 0.03
+      objectives: [quantization, constrained inference, latency, energy, accuracy trade-offs]
+    programming_and_web:
+      weight: 0.09
+      objectives: [implementation, debugging, test design, frontend architecture, backend reliability]
+    cloud_and_devops:
+      weight: 0.05
+      objectives: [cloud architecture, deployment, observability, cost analysis, failure recovery]
+    product_strategy:
+      weight: 0.07
+      objectives: [customer discovery, experiment design, prioritization, product metrics, evidence-based iteration]
+    entrepreneurship_and_operations:
+      weight: 0.06
+      objectives: [business-model reasoning, operating systems, delegation, pricing, execution planning]
+    marketing_and_brand:
+      weight: 0.05
+      objectives: [positioning, segmentation, campaign design, ethical persuasion, measurement]
+    sales_and_copywriting:
+      weight: 0.05
+      objectives: [needs diagnosis, objection handling, truthful copy, offer design, conversion experiments]
+    communication_and_writing:
+      weight: 0.05
+      objectives: [clear explanation, audience adaptation, editing, structured speaking, concise synthesis]
+    research_and_decision_making:
+      weight: 0.04
+      objectives: [hypothesis testing, evidence weighting, uncertainty, decision analysis, debiasing]
+    psychology_and_behavior:
+      weight: 0.03
+      objectives: [behavioral analysis, ethical influence, cognitive bias, interpersonal reasoning]
+    general_reasoning_and_learning:
+      weight: 0.02
+      objectives: [learning strategy, analogical transfer, planning, critique, general synthesis]
+
+splits:
+  train: 0.80
+  validation: 0.10
+  test: 0.10
+  group_by: lineage_component_id
+
+evaluation:
+  benchmark_dir: sources/evaluation
+  contamination_coverage_threshold: 0.45
+
+output:
+  chunks_file: data/reasoning9000/chunks/chunks.jsonl
+  blueprints_dir: data/reasoning9000/blueprints
+  generated_dir: data/reasoning9000/generated
+  reviewed_dir: data/reasoning9000/reviewed
+  final_dir: data/reasoning9000/final
+  request_log: logs/reasoning9000-azure-requests.jsonl
+  run_log: logs/reasoning9000-runs.jsonl

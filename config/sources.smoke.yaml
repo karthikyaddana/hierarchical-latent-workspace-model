@@ -1,0 +1,13 @@
+sources:
+  - path: ../sources/examples/python-timeout.md
+    title: Deterministic timeout debugging seed
+    domain: coding_debugging
+    source_group: smoke-python-timeout
+    lineage_component_id: smoke-python-timeout
+    license: CC0-1.0
+    license_evidence: Authored for this repository and released as CC0-1.0
+    allowed_for_training: true
+    author: HLWM dataset factory
+    version: "1.0"
+    url: null
+

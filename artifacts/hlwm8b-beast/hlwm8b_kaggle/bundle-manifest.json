@@ -1,0 +1,56 @@
+{
+  "name": "hlwm8b-kaggle-code",
+  "version": "1.0.0",
+  "base_model": "Qwen/Qwen3-8B",
+  "base_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+  "files": {
+    "README.md": {
+      "bytes": 348,
+      "sha256": "69343cc683e4f0e84439ced0c6cf7c6abf5fb16775264c593468f08dc6c6ba1d"
+    },
+    "checkpointing_hlwm8b.py": {
+      "bytes": 8621,
+      "sha256": "972502cdeb72a21a6ba904b200b4c1bd975f490a1a68e6ae1417544533838402"
+    },
+    "data_hlwm8b.py": {
+      "bytes": 8659,
+      "sha256": "d7358fd6177dc6bd6c325dfd2cd1889a5fb4e2490c84fe4248fe96db294eb92b"
+    },
+    "energy_hlwm8b.py": {
+      "bytes": 2195,
+      "sha256": "aa6f8bdbb01a4ceae78a04ecb6bb41226429c4a886a46dfb398ce2ff39c3602f"
+    },
+    "evaluate_hlwm8b.py": {
+      "bytes": 16723,
+      "sha256": "50a826633e823fc75bbd3dc366ee3e0f157be80dd6f1f57f773de858d96c3796"
+    },
+    "inference_hlwm8b.py": {
+      "bytes": 4968,
+      "sha256": "032121a68fd721a4081dd18e8d76eb5d1b90e89f35bc259ad22f9f24621c2633"
+    },
+    "modeling_hlwm8b.py": {
+      "bytes": 30819,
+      "sha256": "d764a7c08c4f01b1623ca50f3965ed2aed8c2711e1cb0679f25597f4cad498d9"
+    },
+    "package_hlwm8b.py": {
+      "bytes": 4689,
+      "sha256": "3f59e86418984478acd595dcd66e86938f39d75039e812beec4f7b19c6228eb7"
+    },
+    "requirements.txt": {
+      "bytes": 157,
+      "sha256": "7ce3d6fd2ee574ca5890bd9952e6bb1b91a260c9a7c62d99d4e7cc0a5dbf3703"
+    },
+    "semantic_hlwm8b.py": {
+      "bytes": 1439,
+      "sha256": "6cb3ee45d79592831771b7c911feb9bfab994780d5a9a82c513e4ce4ad66681d"
+    },
+    "test_hlwm8b.py": {
+      "bytes": 8458,
+      "sha256": "1bd3f5d06d6874d5200fd2537dc6bbfbfa3af6d9f97623538ca573088d56d6d0"
+    },
+    "train_hlwm8b.py": {
+      "bytes": 30533,
+      "sha256": "acc99a1987b9b073a0284a3651326c7a6425e676dc102bf8fa07d154d94fd408"
+    }
+  }
+}

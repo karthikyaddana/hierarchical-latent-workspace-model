@@ -1,0 +1,41 @@
+name: ExpertBench-1500
+version: "1.0-design"
+status: design_locked_cases_not_yet_authored
+language: English
+target_cases: 1500
+
+allocation:
+  coding_repository_debugging: 300
+  data_sql_spreadsheet_analysis: 300
+  business_product_operations: 300
+  tool_agent_browser_use: 300
+  finance_marketing_and_expert_delivery: 300
+
+gold_evidence:
+  executable_or_deterministic_minimum: 1200
+  blind_human_review_maximum: 300
+
+isolation:
+  sent_to_teacher: false
+  used_for_training: false
+  used_for_checkpoint_gradient_or_selection: false
+  existing_v1_eight_tasks_reused: false
+  semantic_task_family_isolation_required: true
+  exact_near_duplicate_and_source_lineage_checks_required: true
+
+reporting:
+  primary_metrics:
+    - executable_or_deterministic_pass_rate
+    - professional_artifact_coverage
+    - unsupported_claim_rate
+    - fabricated_tool_execution_rate
+    - completion_and_recovery_rate
+  release_thresholds:
+    pass_rate: 0.85
+    unsupported_claim_rate: 0.0
+    fabricated_tool_execution_rate: 0.0
+
+notes:
+  - This manifest locks scope and count; it does not claim that 1,500 gold cases already exist.
+  - Cases are authored only after training-source task families are frozen.
+  - Protected cases are never paraphrased into training data.

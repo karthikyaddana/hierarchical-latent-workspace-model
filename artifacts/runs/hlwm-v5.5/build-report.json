@@ -1,0 +1,68 @@
+{
+  "bundle": "/Users/karthik/Documents/ChatGPT/Light of the Embel/artifacts/kaggle/hlwm-v5.5/hlwm-v5.5-candidate-bundle.zip",
+  "bundle_bytes": 21837292,
+  "bundle_sha256": "4c9fe57a23161704e2e3d01e71cb62277556e67c9c7f8b3f9ba824406fa3fe3d",
+  "code_sha256": {
+    "__init__.py": "15eee54eb55eb69558a57fe5b0141d6d555c010166ed5f82c9bff1b7e26c6028",
+    "data.py": "bbb9627e426e5883fb8163bec06c6552197f39fd55f0b30a04fdbb1703de71a8",
+    "evaluate_checkpoint.py": "9d93dc3a8e89444fe2d31d6b23388922be36203a293fc4f6b7304c2c6aa904e1",
+    "inference_hlwm.py": "e86173849184dbc46f3e61dcd0c3404d6a7dc31f3e00213bad0efad5a538d269",
+    "modeling_hlwm.py": "7d7d646e6916a4f085d81046513c3e3687c7b781945d53ad1f75b2930069d4f8",
+    "semantic_grading.py": "92bb44132f3535a094a289883f1ffc179168d681186e08a0f180cfa4cf7ee0ae",
+    "test_modeling_hlwm.py": "d28e9279f87d00125e6a7387c0cf52acfa17e0c3dad6201274a54556c95df39d",
+    "train_kaggle.py": "c350a9f81708fc9ab7b4b756aa8a9a75c74993ee4afce03602b0a39b85222033"
+  },
+  "counts": {
+    "test": 661,
+    "train": 4334,
+    "validation": 841
+  },
+  "data_quality": {
+    "behavior_anchor_boundary": "Deterministic semantic arithmetic, conversion, ordering and missing-evidence checks; all prompts are split-isolated and task-balanced, but they are not a substitute for independent human adjudication.",
+    "behavior_anchor_counts": {
+      "test": 256,
+      "train": 1024,
+      "validation": 256
+    },
+    "behavior_anchor_task_types": [
+      "numeric",
+      "unit",
+      "ordering",
+      "abstention"
+    ],
+    "commitment_decisions": {
+      "publish": 4277,
+      "refine": 23
+    },
+    "episodes": 4300,
+    "generation_method": "direct_fast_no_judge",
+    "independently_adjudicated_episodes": 0,
+    "lanes": 8994,
+    "policy_calibration_split": "generated_validation_emissions_only",
+    "policy_label_use": "masked for direct_fast_no_judge rows; enabled only for independently adjudicated or narrow programmatically verified behavior anchors",
+    "production_boundary": "This release can test architecture and optimization but cannot establish factual quality, abstention calibration or production readiness.",
+    "programmatically_verified_behavior_anchors": 1536,
+    "safe_abstention_is_public_target": true,
+    "top_routes": {
+      "root -> architecture -> specialist": 5,
+      "root -> architecture_analysis -> lstm_gates": 1,
+      "root -> autodiff_analysis -> gradient_flow": 1,
+      "root -> domain": 3,
+      "root -> domain -> empirical": 1,
+      "root -> domain -> implementation": 2,
+      "root -> domain -> latency-budget-specialist": 1,
+      "root -> domain -> sensor-path-specialist": 1,
+      "root -> domain -> specialist": 8953,
+      "root -> domain -> validation-specialist": 1
+    },
+    "verification_verdicts": {
+      "insufficient": 457,
+      "refuted": 15,
+      "supported": 22052
+    }
+  },
+  "notebook": "/Users/karthik/Documents/ChatGPT/Light of the Embel/artifacts/kaggle/hlwm-v5.5/embel-hlwm-v5.5-a100-mig.ipynb",
+  "notebook_sha256": "c04b4ea5d202628189561731f0052dc200b8740dc4b39b2b8882f61f6b63f5a3",
+  "notebook_t4": "/Users/karthik/Documents/ChatGPT/Light of the Embel/artifacts/kaggle/hlwm-v5.5/embel-hlwm-v5.5-kaggle-2xt4.ipynb",
+  "notebook_t4_sha256": "c73dba6cffe0772982a79df9db2f92dc2d34ba715d34e65b315c614f6945941c"
+}
