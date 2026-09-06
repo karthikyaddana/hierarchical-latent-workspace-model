@@ -1,6 +1,9 @@
 # Hierarchical Latent Workspace Model
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22343152.svg)](https://doi.org/10.5281/zenodo.22343152)
+[![Paper 1 DOI](https://img.shields.io/badge/Paper%201%20DOI-10.5281%2Fzenodo.22538269-1682D4.svg)](https://doi.org/10.5281/zenodo.22538269)
+[![Paper 2 DOI](https://img.shields.io/badge/Paper%202%20DOI-10.5281%2Fzenodo.22538271-1682D4.svg)](https://doi.org/10.5281/zenodo.22538271)
+[![Record DOI](https://img.shields.io/badge/Record%20DOI-10.5281%2Fzenodo.22343152-1682D4.svg)](https://doi.org/10.5281/zenodo.22343152)
+[![Data on Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Data-slashgg%2Fhlwm--corpora-FFD21E.svg)](https://huggingface.co/datasets/slashgg/hlwm-corpora)
 [![Code: Apache 2.0](https://img.shields.io/badge/Code-Apache%202.0-blue.svg)](LICENSE-CODE)
 [![Papers: CC BY 4.0](https://img.shields.io/badge/Papers-CC%20BY%204.0-lightgrey.svg)](LICENSE)
 
