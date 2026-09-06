@@ -10,6 +10,26 @@
   ],
   "license": "cc-by-4.0",
   "access_right": "open",
+  "related_identifiers": [
+    {
+      "identifier": "10.5281/zenodo.22538269",
+      "relation": "hasPart",
+      "scheme": "doi",
+      "resource_type": "publication-preprint"
+    },
+    {
+      "identifier": "10.5281/zenodo.22538271",
+      "relation": "hasPart",
+      "scheme": "doi",
+      "resource_type": "publication-preprint"
+    },
+    {
+      "identifier": "https://huggingface.co/datasets/slashgg/hlwm-corpora",
+      "relation": "isSupplementedBy",
+      "scheme": "url",
+      "resource_type": "dataset"
+    }
+  ],
   "keywords": [
     "machine learning",
     "language models",
