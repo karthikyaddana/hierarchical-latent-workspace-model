@@ -1,0 +1,1 @@
+seed 17 gates: {'training_complete': False, 'zero_skipped_updates': True, 'warm_gate_passed': True, 'infrastructure_ok': True, 'masked_leak_zero': True, 'masked_causal_floor': True, 'latent_channel_live': False, 'beats_pause_compute': False, 'unmasked_parity': True, 'probe_generation_gap': True, 'cross_routing_cost': True, 'router_delta': True, 'passed': False}
