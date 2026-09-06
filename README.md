@@ -31,9 +31,13 @@ Karthik Yaddanapudi · Independent Researcher · <karthikyaddana@gmail.com>
 | [`evals/`](evals/) | Benchmark registries (`expertbench_1500`, `expert_workflows`) |
 | [`DATA.md`](DATA.md) | Where the 11 GB of checkpoints and training corpora live |
 
-Model checkpoints, the 9.6 GB of Kaggle run bundles and the 1.4 GB training corpus are
-too large for Git and are distributed separately — see [`DATA.md`](DATA.md). Everything
-needed to *check the reported numbers* is in this repository.
+Model checkpoints and the run bundles are too large for Git and are distributed
+separately — see [`DATA.md`](DATA.md). Everything needed to *check the reported numbers*
+is in this repository.
+
+The training corpora are published as a Hugging Face dataset:
+**<https://huggingface.co/datasets/slashgg/hlwm-corpora>** — the 9,092-row SFT corpus,
+its underlying episode records, the v5.6 splits and the evaluation packets.
 
 ## The papers
 

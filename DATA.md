@@ -55,13 +55,54 @@ Review it for third-party licensing before publishing that directory.
 
 ## Where to get it
 
-Distribution is in progress. Planned split:
+### Training corpora — published
 
-- **Hugging Face dataset** — training corpora (`data/combined`, `data/hlwm-v5.6`, and
-  the benchmark packets). Use [`tools/upload_data_hf.sh`](tools/upload_data_hf.sh).
-- **Zenodo dataset record** — checkpoints and full run bundles, minted as its own DOI
-  and cross-linked to the code record. Use
-  [`tools/zenodo_deposit.py`](tools/zenodo_deposit.py).
+**<https://huggingface.co/datasets/slashgg/hlwm-corpora>** (CC BY 4.0, 98 files, 242 MB).
+
+Carries `combined/` (the 9,092-row SFT corpus, its `master/` episode records and 25 DPO
+pairs), `hlwm-v5.6/`, the expert and benchmark packets, and the small export splits.
+
+```python
+from huggingface_hub import snapshot_download
+snapshot_download("slashgg/hlwm-corpora", repo_type="dataset", local_dir="data")
+```
+
+`data/reasoning9000/` is **not** in that dataset. It holds provenance records tied to
+ingested third-party source documents and is held back pending a licensing review. To
+publish it anyway, re-run the upload script with `INCLUDE_REASONING9000=1`.
+
+The upload set was swept for credential patterns before publication. Strings such as
+`OPENAI_API_KEY` appear only as `os.getenv(...)` inside episode *code content*; no
+literal secret values are present.
+
+### Checkpoints — not yet published
+
+Recommended deposit is the **ten adapter checkpoints (3.4 GB)**, not the full 9.6 GB
+tree:
+
+```
+hlwm-v5.5/session-a/seed-{17,29}/hlwm-adapter-step-004224.safetensors    287 MB each
+hlwm-v5.6/hlwm-v5-{3,4}/hlwm-adapter-step-004224.safetensors             287 MB each
+hlwm-v5.6.1/hlwm-v5-{3,4}/hlwm-adapter-step-004224.safetensors           287 MB each
+hlwm-v5.6.2/hlwm-v5-{3,4}/hlwm-adapter-step-004224.safetensors           285 MB each
+hlwm-v6.0/session-e/seed-{17,29}/hlwm-adapter-step-004224.safetensors    292 MB each
+```
+
+The rest of the 9.6 GB is not worth a DOI: 1.7 GB of `.pt` resumable optimizer state,
+~2 GB of `*-candidate-bundle.zip` files that
+[`scripts/`](scripts/) regenerates from [`config/`](config/), and 1.2 GB of ten
+near-identical copies of the same `train.jsonl` — now published once, deduplicated, on
+Hugging Face.
+
+Deposit them with [`tools/zenodo_deposit.py`](tools/zenodo_deposit.py). It creates a
+**draft**, so nothing goes public until you publish it in the Zenodo UI:
+
+```sh
+export ZENODO_TOKEN=...   # scopes: deposit:write, deposit:actions
+python tools/zenodo_deposit.py --target checkpoints --apply \
+  $(find artifacts/kaggle -name 'hlwm-adapter-step-004224.safetensors' \
+    -exec printf -- '--file %s ' {} +)
+```
 
 Both scripts read credentials from the environment and print what they will upload
 before uploading anything. Neither runs automatically.

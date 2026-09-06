@@ -140,11 +140,29 @@ def main() -> None:
     if "publication_type" in spec:
         metadata["publication_type"] = spec["publication_type"]
 
+    # Several runs ship the same basename (hlwm-adapter-step-004224.safetensors), and
+    # Zenodo keys files by name — uploading them raw would silently overwrite. Flatten
+    # the path into the key whenever a basename is not unique.
+    counts = {}
+    for p in files:
+        counts[p.name] = counts.get(p.name, 0) + 1
+    named = [
+        (p, p.name if counts[p.name] == 1 else "-".join(p.parts).lstrip("-"))
+        for p in files
+    ]
+    keys = [key for _, key in named]
+    if len(set(keys)) != len(keys):
+        sys.exit("could not derive unique upload names: " + ", ".join(sorted(keys)))
+
     print(f"target   : {args.target}")
     print(f"type     : {spec['upload_type']}")
     print(f"title    : {spec['title']}")
-    for p in files:
-        print(f"  file   : {p}  ({p.stat().st_size / 1e6:.1f} MB)")
+    total = 0
+    for p, key in named:
+        size = p.stat().st_size
+        total += size
+        print(f"  file   : {key}  ({size / 1e6:.1f} MB)")
+    print(f"  total  : {total / 1e9:.2f} GB")
 
     if not args.apply:
         print("\ndry run — re-run with --apply to create the draft deposit.")
@@ -161,9 +179,9 @@ def main() -> None:
 
     dep = api(base, token, "POST", "/deposit/depositions", {"metadata": metadata})
     bucket = dep["links"]["bucket"]
-    for p in files:
-        print(f">>> uploading {p.name}")
-        api(base, token, "PUT", f"{bucket}/{p.name}", raw=p.read_bytes(),
+    for p, key in named:
+        print(f">>> uploading {key}  ({p.stat().st_size / 1e6:.1f} MB)")
+        api(base, token, "PUT", f"{bucket}/{key}", raw=p.read_bytes(),
             ctype="application/octet-stream")
 
     print(f"\ndraft   : {dep['links']['html']}")
