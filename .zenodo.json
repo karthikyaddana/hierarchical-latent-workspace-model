@@ -1,8 +1,7 @@
 {
-  "title": "Hierarchical Latent Workspace Model: two negative-results preprints",
-  "description": "<p>Two preprints from a twenty-day, ten-experiment preregistered attempt to build a latent-workspace language model: a frozen Qwen3-0.6B decoder wrapped in 73M-132M trainable sidecars implementing a root-preserving expert graph, isolated parallel reasoning lanes, and a private diffusion canvas behind a calibrated publication rule.</p><p><strong>All three proposed mechanisms failed their preregistered gates.</strong> Routing was never causally live in any of ten seed-runs. In the decisive experiment, with the operative premise physically deleted from the decoder's input token ids so the latent channel was the only route from evidence to answer, generation through the channel scored 0.000 on all 99 masked rows on both seeds, while a linear probe recovered roughly 0.30 of the withheld premise. The channel was readable but not usable.</p><p>Includes a novelty audit of the work's own six architectural claims and an instrument-failure taxonomy with detectors covering roughly thirty documented defects in five classes. The matched plain-LoRA control was never run, so no capability claim is made.</p>",
-  "upload_type": "publication",
-  "publication_type": "preprint",
+  "title": "Hierarchical Latent Workspace Model: code, experimental record and two negative-results preprints",
+  "description": "<p>The complete experimental record and both preprints from a twenty-day, ten-experiment preregistered attempt to build a latent-workspace language model: a frozen Qwen3-0.6B decoder wrapped in 73M-132M trainable sidecars implementing a root-preserving expert graph, isolated parallel reasoning lanes, and a private diffusion canvas behind a calibrated publication rule.</p><p><strong>All three proposed mechanisms failed their preregistered gates.</strong> Routing was never causally live in any of ten seed-runs. In the decisive experiment, with the operative premise physically deleted from the decoder's input token ids so the latent channel was the only route from evidence to answer, generation through the channel scored 0.000 on all 99 masked rows on both seeds, while a linear probe recovered roughly 0.30 of the withheld premise. The channel was readable but not usable.</p><p>This record carries 213 result files across 17 experiment versions (gate verdicts, per-step metrics, training logs, replication reports), 48 dated preregistration plans and results write-ups, the bundle-build and evaluation scripts, the experiment configurations and the dataset factory package. Model checkpoints and the training corpora are distributed separately and described in DATA.md.</p><p>Includes a novelty audit of the work's own six architectural claims and an instrument-failure taxonomy with detectors covering roughly thirty documented defects in five classes. The matched plain-LoRA control was never run, so no capability claim is made.</p>",
+  "upload_type": "software",
   "creators": [
     {
       "name": "Yaddanapudi, Karthik",
@@ -18,6 +17,7 @@
     "interpretability",
     "negative results",
     "preregistration",
+    "reproducibility",
     "mixture of experts",
     "conformal prediction"
   ]
