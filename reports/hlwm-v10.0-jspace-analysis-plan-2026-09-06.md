@@ -89,3 +89,29 @@ site, so an external probe reads it while the frozen decoder cannot.
 ## Deviations
 
 Any deviation from this plan will be recorded in the results file with a reason.
+
+## Amendment A1 (frozen 2026-09-06, after seed 17's primary result, before any secondary run)
+
+Seed 17's primary outcome was INCONCLUSIVE with a diagnosed power failure, not a
+signal failure: probe(S-component) = 0.000, probe(complement) = 0.188, but the
+flat 6144-d reference probe collapsed to chance (0.125) on 64 rows, while the
+same content probes at 0.530 from 1024-d mean features on 263 rows (G1). The
+6144-d flattened features are unlearnable at n=64; the split itself is not.
+
+Secondary analysis, preregistered here before it runs (on Kaggle T4, the
+audit's own fp16/CUDA conditions; the local primary continues unchanged):
+
+- Rows: ALL labelled masked-core rows per seed (up to 160), not 64.
+- Features: mean over the six thought positions of the PER-POSITION projected
+  embeds (reshape the row's S basis to [8, 6, 1024]; project each position;
+  mean over positions) -> 1024-d features for the S-side and the complement,
+  matching the geometry in which G1's probe demonstrably works.
+- Power check (binding): the same-rows 1024-d mean-embed reference probe must
+  reach >= chance + 0.20; otherwise the secondary is also underpowered and the
+  analysis stops at INCONCLUSIVE with no further amendment.
+- Readings (same thresholds as the primary, on the new features):
+  H1 CONFIRMED if probe(S̄) < chance + 0.10 and probe(complement̄) >= chance + 0.20
+  on both seeds; H1 REFUTED if probe(S̄) >= chance + 0.20 on both seeds;
+  otherwise INCONCLUSIVE, final.
+- The primary metrics are still computed and reported on the first 64 rows for
+  continuity with the local run; the deadness reading (M1) is unchanged.

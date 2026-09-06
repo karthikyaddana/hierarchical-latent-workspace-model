@@ -1,0 +1,33 @@
+[17] loading checkpoint (weights_only, mmap) ...
+[17] G0: greedy decode 20 masked core + 20 unmasked rows ...
+[17] G0 masked=0.000 unmasked=0.533 (recorded 0.517) passed=True
+[17] G1: preparing 263 held-out probe rows ...
+[17] G1 states=0.6060606241226196 (recorded 0.621) embeds=0.5303030014038086 chance=0.129
+[17] stage 2: 64 labelled core rows ...
+[17]   jacobian 8/64 (median ratio so far 0.2881)
+[17]   jacobian 16/64 (median ratio so far 0.2989)
+[17]   jacobian 24/64 (median ratio so far 0.2966)
+[17]   jacobian 32/64 (median ratio so far 0.2881)
+[17]   jacobian 40/64 (median ratio so far 0.2896)
+[17]   jacobian 48/64 (median ratio so far 0.2896)
+[17]   jacobian 56/64 (median ratio so far 0.2916)
+[17]   jacobian 64/64 (median ratio so far 0.2916)
+[17] OUTCOME: INCONCLUSIVE  M1=0.2916  S=0.000 perp=0.188 flat=0.125 (1197.3s)
+=== seed 17 done, starting 29 ===
+[29] loading checkpoint (weights_only, mmap) ...
+[29] G0: greedy decode 20 masked core + 20 unmasked rows ...
+[29] G0 masked=0.000 unmasked=0.533 (recorded 0.527) passed=True
+[29] G1: preparing 263 held-out probe rows ...
+[29] G1 states=0.7878788113594055 (recorded 0.758) embeds=0.7575757503509521 chance=0.129
+[29] stage 2: 64 labelled core rows ...
+[29]   jacobian 8/64 (median ratio so far 0.3448)
+[29]   jacobian 16/64 (median ratio so far 0.3448)
+[29]   jacobian 24/64 (median ratio so far 0.3142)
+[29]   jacobian 32/64 (median ratio so far 0.3114)
+[29]   jacobian 40/64 (median ratio so far 0.3142)
+[29]   jacobian 48/64 (median ratio so far 0.3448)
+[29]   jacobian 56/64 (median ratio so far 0.3632)
+[29]   jacobian 64/64 (median ratio so far 0.3632)
+[29] OUTCOME: H1_CONFIRMED  M1=0.3632  S=0.062 perp=0.375 flat=0.375 (1267.6s)
+
+[exited with code 0]

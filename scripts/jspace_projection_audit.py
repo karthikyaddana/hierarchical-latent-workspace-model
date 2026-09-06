@@ -26,15 +26,30 @@ from pathlib import Path
 import torch
 from torch import Tensor
 
+import glob
 import os
 
 PROJECT = Path(__file__).resolve().parent.parent
-# Default to the certified kernel's own code+data copy (exact bytes that
-# produced the recorded audit; sha256s in its manifest). Overridable because
-# the repo bundle copy lives under iCloud eviction on this machine.
-BUNDLE = Path(os.environ.get(
-    "HLWM_BUNDLE", PROJECT / "artifacts/kaggle/hlwm-v10.0/bundle/hlwm_kaggle"
-))
+
+
+def _find_bundle() -> Path:
+    """Locate the harness package: env override, repo copy, or Kaggle mount.
+
+    Defaults prefer the certified kernel's own code+data copy (exact bytes
+    that produced the recorded audit; sha256s in its manifest).
+    """
+    env = os.environ.get("HLWM_BUNDLE")
+    if env:
+        return Path(env)
+    default = PROJECT / "artifacts/kaggle/hlwm-v10.0/bundle/hlwm_kaggle"
+    if (default / "evaluate_v10.py").exists():
+        return default
+    for candidate in glob.glob("/kaggle/input/*/hlwm-v10.0/hlwm_kaggle"):
+        return Path(candidate)
+    return default
+
+
+BUNDLE = _find_bundle()
 sys.path.insert(0, str(BUNDLE))
 
 import evaluate_checkpoint as ec  # noqa: E402
@@ -82,6 +97,9 @@ def main() -> None:
     parser.add_argument("--device", default="mps")
     parser.add_argument("--out", required=True)
     parser.add_argument("--core-rows", type=int, default=64)
+    parser.add_argument("--secondary-rows", type=int, default=160,
+                        help="Amendment A1: labelled core rows for the "
+                             "mean-projected secondary probes (0 disables)")
     parser.add_argument("--g0-rows", type=int, default=20)
     parser.add_argument("--g0-unmasked-rows", type=int, default=60)
     parser.add_argument("--probe-rows", type=int, default=512)
@@ -123,7 +141,10 @@ def main() -> None:
     result["step"] = payload.get("step")
     result["trainer_state"] = payload.get("trainer_state")
 
-    ec.AMP_DTYPE = torch.bfloat16  # D3: bf16 substrate, fp32 trainables
+    # CUDA: the audit's own float16 (exact parity with the recorded run).
+    # MPS/CPU: bfloat16 (D3) to avoid fp16 gradient underflow off-GPU.
+    ec.AMP_DTYPE = torch.float16 if device.type == "cuda" else torch.bfloat16
+    result["substrate_dtype"] = str(ec.AMP_DTYPE)
     from transformers import AutoTokenizer
 
     tokenizer = AutoTokenizer.from_pretrained(
@@ -235,12 +256,15 @@ def main() -> None:
     # ---------------- Stage 2: sensitivity + subspace on masked-core rows ----------------
     digit_ids = digit_token_ids(tokenizer)
     core_labelled = [row for row in core_rows if ev.probe_digit_label(row) is not None]
-    stage_rows = core_labelled[: args.core_rows]
-    print(f"[{args.seed}] stage 2: {len(stage_rows)} labelled core rows ...", flush=True)
+    n_stage = max(args.core_rows, args.secondary_rows)
+    stage_rows = core_labelled[:n_stage]
+    print(f"[{args.seed}] stage 2: {len(stage_rows)} labelled core rows "
+          f"(primary on first {args.core_rows}) ...", flush=True)
 
     deadness_ratios, s_components, perp_components, flat_embeds, stage_labels = (
         [], [], [], [], []
     )
+    mean_s, mean_perp, mean_flat = [], [], []  # Amendment A1 features (1024-d)
     slot_grad_norms = []
     skipped = 0
     embed_module = model.backbone.embed_tokens
@@ -332,6 +356,10 @@ def main() -> None:
         perp_components.append(e_perp.unsqueeze(0))
         flat_embeds.append(embeds_flat.unsqueeze(0))
         stage_labels.append(ev.probe_digit_label(row))
+        width = thoughts_leaf.shape[-1]
+        mean_s.append(e_s.reshape(-1, width).mean(dim=0, keepdim=True))
+        mean_perp.append(e_perp.reshape(-1, width).mean(dim=0, keepdim=True))
+        mean_flat.append(embeds_flat.reshape(-1, width).mean(dim=0, keepdim=True))
 
         del out, logits, thoughts_leaf, states_leaf, captured, item
         if (index + 1) % 8 == 0:
@@ -339,14 +367,24 @@ def main() -> None:
                   f"(median ratio so far "
                   f"{torch.tensor(deadness_ratios).median():.4f})", flush=True)
 
-    ratios = torch.tensor(deadness_ratios)
+    def acc(p):
+        return -1.0 if p.get("probe_accuracy") is None else float(p["probe_accuracy"])
+
+    n_primary = min(args.core_rows, len(deadness_ratios))
+    ratios = torch.tensor(deadness_ratios[:n_primary])
     m1 = float(ratios.median())
-    probe_s = probe_on(torch.cat(s_components), stage_labels, seed=args.seed + 4)
-    probe_perp = probe_on(torch.cat(perp_components), stage_labels, seed=args.seed + 4)
-    probe_flat = probe_on(torch.cat(flat_embeds), stage_labels, seed=args.seed + 4)
+    probe_s = probe_on(
+        torch.cat(s_components[:n_primary]), stage_labels[:n_primary], seed=args.seed + 4
+    )
+    probe_perp = probe_on(
+        torch.cat(perp_components[:n_primary]), stage_labels[:n_primary], seed=args.seed + 4
+    )
+    probe_flat = probe_on(
+        torch.cat(flat_embeds[:n_primary]), stage_labels[:n_primary], seed=args.seed + 4
+    )
 
     stage2 = {
-        "n_rows": len(deadness_ratios),
+        "n_rows": n_primary,
         "n_skipped_no_digit": skipped,
         "M1_deadness_ratio_median": m1,
         "deadness_ratio_quartiles": [
@@ -359,10 +397,7 @@ def main() -> None:
     }
     result["stage2"] = stage2
 
-    # ---------------- preregistered reading ----------------
-    def acc(p):
-        return -1.0 if p.get("probe_accuracy") is None else float(p["probe_accuracy"])
-
+    # ---------------- preregistered primary reading ----------------
     if m1 < 0.10:
         outcome = "DEAD_CHANNEL"
     elif acc(probe_s) < chance + 0.10 and acc(probe_perp) >= chance + 0.20:
@@ -372,12 +407,60 @@ def main() -> None:
     else:
         outcome = "INCONCLUSIVE"
     result["outcome"] = outcome
+
+    # ---------------- Amendment A1: mean-projected secondary ----------------
+    if args.secondary_rows > 0 and len(stage_labels) >= 8:
+        sec_s = probe_on(torch.cat(mean_s), stage_labels, seed=args.seed + 4)
+        sec_perp = probe_on(torch.cat(mean_perp), stage_labels, seed=args.seed + 4)
+        sec_ref = probe_on(torch.cat(mean_flat), stage_labels, seed=args.seed + 4)
+        power_ok = acc(sec_ref) >= chance + 0.20
+        if not power_ok:
+            sec_outcome = "INCONCLUSIVE_UNDERPOWERED_FINAL"
+        elif acc(sec_s) < chance + 0.10 and acc(sec_perp) >= chance + 0.20:
+            sec_outcome = "H1_CONFIRMED"
+        elif acc(sec_s) >= chance + 0.20:
+            sec_outcome = "H1_REFUTED"
+        else:
+            sec_outcome = "INCONCLUSIVE_FINAL"
+        result["secondary_A1"] = {
+            "n_rows": len(stage_labels),
+            "probe_S_mean": sec_s,
+            "probe_perp_mean": sec_perp,
+            "probe_flat_mean_reference": sec_ref,
+            "power_ok": power_ok,
+            "outcome": sec_outcome,
+        }
+        print(f"[{args.seed}] A1 secondary (n={len(stage_labels)}): "
+              f"S={acc(sec_s):.3f} perp={acc(sec_perp):.3f} ref={acc(sec_ref):.3f} "
+              f"power_ok={power_ok} -> {sec_outcome}", flush=True)
+
     result["runtime_seconds"] = round(time.time() - started, 1)
     Path(args.out).write_text(json.dumps(result, indent=2))
-    print(f"[{args.seed}] OUTCOME: {outcome}  M1={m1:.4f}  "
+    print(f"[{args.seed}] PRIMARY OUTCOME: {outcome}  M1={m1:.4f}  "
           f"S={acc(probe_s):.3f} perp={acc(probe_perp):.3f} flat={acc(probe_flat):.3f} "
           f"({result['runtime_seconds']}s)", flush=True)
 
 
+def _kaggle_main() -> None:
+    """Run both seeds against the certified-run kernel output mounted as input."""
+    roots = glob.glob("/kaggle/input/*/hlwm-v10.0-seed-17")
+    if not roots:
+        raise SystemExit("certified-run kernel output is not mounted as an input")
+    root = Path(roots[0]).parent
+    for seed in (17, 29):
+        sys.argv = [
+            "jspace_projection_audit",
+            "--seed", str(seed),
+            "--ckpt", str(root / f"hlwm-v10.0-seed-{seed}/checkpoint-step-001200.pt"),
+            "--audit-json", str(root / f"hlwm-v10.0-seed-{seed}/v10-audit.json"),
+            "--device", "cuda",
+            "--out", f"/kaggle/working/jspace-{seed}.json",
+        ]
+        main()
+
+
 if __name__ == "__main__":
-    main()
+    if Path("/kaggle/input").exists() and len(sys.argv) == 1:
+        _kaggle_main()
+    else:
+        main()
