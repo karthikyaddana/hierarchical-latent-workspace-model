@@ -1,0 +1,69 @@
+bundle: /kaggle/input/notebooks/sirishayaddanapudi/hlwm-v10-0-certified-run/hlwm-v10.0/hlwm_kaggle
+input: /kaggle/input/notebooks
+input: /kaggle/input/notebooks/sirishayaddanapudi
+[17] loading checkpoint (weights_only, mmap) ...
+[17] G0: greedy decode 20 masked core + 20 unmasked rows ...
+[17] G0 masked=0.000 unmasked=0.533 (recorded 0.517) passed=True
+[17] G1: preparing 263 held-out probe rows ...
+[17]   prepared 50/263
+[17]   prepared 100/263
+[17]   prepared 150/263
+[17]   prepared 200/263
+[17]   prepared 250/263
+[17] G1 states=0.6212121248245239 (recorded 0.621) embeds=0.5151515007019043 chance=0.129
+[17] stage 2: 160 labelled core rows (primary on first 64) ...
+[17]   jacobian 8/160 (median ratio so far 0.2854)
+[17]   jacobian 16/160 (median ratio so far 0.2991)
+[17]   jacobian 24/160 (median ratio so far 0.2991)
+[17]   jacobian 32/160 (median ratio so far 0.2854)
+[17]   jacobian 40/160 (median ratio so far 0.2854)
+[17]   jacobian 48/160 (median ratio so far 0.2854)
+[17]   jacobian 56/160 (median ratio so far 0.2964)
+[17]   jacobian 64/160 (median ratio so far 0.2964)
+[17]   jacobian 72/160 (median ratio so far 0.2832)
+[17]   jacobian 80/160 (median ratio so far 0.2832)
+[17]   jacobian 88/160 (median ratio so far 0.2854)
+[17]   jacobian 96/160 (median ratio so far 0.2854)
+[17]   jacobian 104/160 (median ratio so far 0.2889)
+[17]   jacobian 112/160 (median ratio so far 0.2889)
+[17]   jacobian 120/160 (median ratio so far 0.2889)
+[17]   jacobian 128/160 (median ratio so far 0.2873)
+[17]   jacobian 136/160 (median ratio so far 0.2889)
+[17]   jacobian 144/160 (median ratio so far 0.2889)
+[17]   jacobian 152/160 (median ratio so far 0.2889)
+[17]   jacobian 160/160 (median ratio so far 0.2896)
+[17] A1 secondary (n=160): S=0.075 perp=0.400 ref=0.425 power_ok=True -> H1_CONFIRMED
+[17] PRIMARY OUTCOME: INCONCLUSIVE  M1=0.2964  S=0.125 perp=0.250 flat=0.188 (622.8s)
+[29] loading checkpoint (weights_only, mmap) ...
+[29] G0: greedy decode 20 masked core + 20 unmasked rows ...
+[29] G0 masked=0.000 unmasked=0.533 (recorded 0.527) passed=True
+[29] G1: preparing 263 held-out probe rows ...
+[29]   prepared 50/263
+[29]   prepared 100/263
+[29]   prepared 150/263
+[29]   prepared 200/263
+[29]   prepared 250/263
+[29] G1 states=0.7575757503509521 (recorded 0.758) embeds=0.7424242496490479 chance=0.129
+[29] stage 2: 160 labelled core rows (primary on first 64) ...
+[29]   jacobian 8/160 (median ratio so far 0.3386)
+[29]   jacobian 16/160 (median ratio so far 0.3386)
+[29]   jacobian 24/160 (median ratio so far 0.3150)
+[29]   jacobian 32/160 (median ratio so far 0.3104)
+[29]   jacobian 40/160 (median ratio so far 0.3150)
+[29]   jacobian 48/160 (median ratio so far 0.3386)
+[29]   jacobian 56/160 (median ratio so far 0.3520)
+[29]   jacobian 64/160 (median ratio so far 0.3520)
+[29]   jacobian 72/160 (median ratio so far 0.3150)
+[29]   jacobian 80/160 (median ratio so far 0.3386)
+[29]   jacobian 88/160 (median ratio so far 0.3255)
+[29]   jacobian 96/160 (median ratio so far 0.3255)
+[29]   jacobian 104/160 (median ratio so far 0.3255)
+[29]   jacobian 112/160 (median ratio so far 0.3457)
+[29]   jacobian 120/160 (median ratio so far 0.3515)
+[29]   jacobian 128/160 (median ratio so far 0.3386)
+[29]   jacobian 136/160 (median ratio so far 0.3457)
+[29]   jacobian 144/160 (median ratio so far 0.3515)
+[29]   jacobian 152/160 (median ratio so far 0.3515)
+[29]   jacobian 160/160 (median ratio so far 0.3515)
+[29] A1 secondary (n=160): S=0.100 perp=0.725 ref=0.800 power_ok=True -> H1_CONFIRMED
+[29] PRIMARY OUTCOME: INCONCLUSIVE  M1=0.3520  S=0.062 perp=0.312 flat=0.438 (587.7s)

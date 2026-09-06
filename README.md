@@ -32,6 +32,7 @@ Karthik Yaddanapudi · Independent Researcher · <karthikyaddana@gmail.com>
 | [`src/`](src/) | `hlwm_data` — the dataset factory package |
 | [`tests/`](tests/) | 12 test modules |
 | [`evals/`](evals/) | Benchmark registries (`expertbench_1500`, `expert_workflows`) |
+| [`successor/`](successor/) | Untested aligned-write / declared-routing prototype from the J-space result |
 | [`DATA.md`](DATA.md) | Where the 11 GB of checkpoints and training corpora live |
 
 Model checkpoints and the run bundles are too large for Git and are distributed
@@ -67,7 +68,7 @@ classes, including gates hardcoded to pass and an expert graph the trainer never
 
 ### 2. The Hierarchical Latent Workspace Model — [`paper/hlwm-paper.pdf`](paper/hlwm-paper.pdf)
 
-*Root-Preserving Variable-Depth Expertise for Parallel Diffusion Reasoning* (56 pp) ·
+*Root-Preserving Variable-Depth Expertise for Parallel Diffusion Reasoning* (58 pp) ·
 [doi:10.5281/zenodo.22538271](https://doi.org/10.5281/zenodo.22538271)
 
 The full technical report: the proposed architecture, and the ten preregistered
@@ -137,8 +138,16 @@ the uploadable run bundles. Credentials are read from environment variables only
 - The matched plain-LoRA control **never ran**, so no capability claim is made.
 - The calibrated-abstention thread never beat a free mean-log-probability baseline at
   its own preregistered bar.
-- The dense-supervision successor was terminated at 125 optimizer updates, so that
-  question closes **undecidable, not falsified**.
+- The dense-supervision successor's launched run was terminated at 125 optimizer
+  updates. A certified re-run later completed unattended (75 updates) and aborted at
+  the same go/no-go — with the premise probe reading **0.62/0.76** against the 0.50
+  decodability bar while generation stayed at exactly 0.000. A preregistered follow-up
+  analysis localizes the failure to **write alignment**: the probe-readable content
+  sits almost entirely outside the decoder-sensitive subspace
+  ([`reports/hlwm-v10.0-jspace-results-2026-09-06.md`](reports/hlwm-v10.0-jspace-results-2026-09-06.md),
+  paper §"Post-termination addendum"). The budget caveat is unchanged, so the
+  capability question still closes **undecidable, not falsified** — but the failure
+  at this budget now has a measured mechanism.
 
 ## Citing
 

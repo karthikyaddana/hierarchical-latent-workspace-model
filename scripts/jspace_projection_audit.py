@@ -44,8 +44,10 @@ def _find_bundle() -> Path:
     default = PROJECT / "artifacts/kaggle/hlwm-v10.0/bundle/hlwm_kaggle"
     if (default / "evaluate_v10.py").exists():
         return default
-    for candidate in glob.glob("/kaggle/input/*/hlwm-v10.0/hlwm_kaggle"):
-        return Path(candidate)
+    for candidate in sorted(
+        glob.glob("/kaggle/input/**/evaluate_v10.py", recursive=True)
+    ):
+        return Path(candidate).parent
     return default
 
 
@@ -443,7 +445,10 @@ def main() -> None:
 
 def _kaggle_main() -> None:
     """Run both seeds against the certified-run kernel output mounted as input."""
-    roots = glob.glob("/kaggle/input/*/hlwm-v10.0-seed-17")
+    print("bundle:", BUNDLE, flush=True)
+    for path in sorted(glob.glob("/kaggle/input/*")) + sorted(glob.glob("/kaggle/input/*/*")):
+        print("input:", path, flush=True)
+    roots = glob.glob("/kaggle/input/**/hlwm-v10.0-seed-17", recursive=True)
     if not roots:
         raise SystemExit("certified-run kernel output is not mounted as an input")
     root = Path(roots[0]).parent

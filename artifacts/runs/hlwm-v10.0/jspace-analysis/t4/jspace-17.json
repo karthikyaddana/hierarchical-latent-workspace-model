@@ -1,0 +1,131 @@
+{
+  "plan": "reports/hlwm-v10.0-jspace-analysis-plan-2026-09-06.md",
+  "seed": 17,
+  "checkpoint": "/kaggle/input/notebooks/sirishayaddanapudi/hlwm-v10-0-certified-run/hlwm-v10.0-seed-17/checkpoint-step-001200.pt",
+  "checkpoint_sha256": "aba8926cc2cc4297e0dc82752dd5ca74c3bcd54589cf7ccffc23a64a622c2acb",
+  "device": "cuda",
+  "dtype": "float32",
+  "deviations": [
+    "D1: the plan said Jacobian 'at the first answer position'; answers begin with non-digit boilerplate (e.g. 'The result is ...'), so the Jacobian is taken at the first GOLD DIGIT position of the teacher-forced gold answer. Frozen before any Jacobian was computed.",
+    "D2: G0's unmasked sample grows from 20 to 60 rows; at 20 rows the sampling SE (~0.11) exceeds the +/-0.10 band, so the gate would fail on noise alone. The masked requirement (exact 0.000 on 20 rows) is unchanged. Recorded before the confirmatory run; the 4-row smoke that exposed the power problem decoded 4 masked rows (EM 0.000) and 4 unmasked rows (0.750, n too small to read).",
+    "D3: the frozen substrate runs in bfloat16, not the audit's float16, to avoid fp16 gradient underflow in the Jacobian stage (trainables stay fp32, matching the harness). The plan's fp32 intent drowned the 9 GB analysis machine in swap; G0/G1 replication gates validate parity with the recorded fp16 audit empirically."
+  ],
+  "step": 1200,
+  "trainer_state": {
+    "microsteps": 1200,
+    "optimizer_updates": 75,
+    "skipped_optimizer_updates": 0
+  },
+  "substrate_dtype": "torch.float16",
+  "base_model": "Qwen/Qwen3-0.6B-Base",
+  "base_revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
+  "n_rows": 1152,
+  "legacy_rows_excluded": 585,
+  "G0": {
+    "masked_accuracy": 0.0,
+    "unmasked_accuracy": 0.5333333333333333,
+    "recorded_unmasked_accuracy": 0.5171467764060357,
+    "masked_sample_texts": [
+      "The result is 10779.",
+      "The result is 10773.",
+      "47 hours equals 580 minutes."
+    ],
+    "passed": true
+  },
+  "G1": {
+    "recorded_probe_accuracy": 0.6212121248245239,
+    "states_probe": {
+      "state": "trained",
+      "probe_accuracy": 0.6212121248245239,
+      "chance": 0.12927756653992395,
+      "live": true,
+      "n": 263,
+      "n_train": 197,
+      "n_eval": 66
+    },
+    "embeds_probe": {
+      "state": "trained",
+      "probe_accuracy": 0.5151515007019043,
+      "chance": 0.12927756653992395,
+      "live": true,
+      "n": 263,
+      "n_train": 197,
+      "n_eval": 66
+    },
+    "chance": 0.12927756653992395,
+    "replicated": true,
+    "embeds_carry_content": true
+  },
+  "stage2": {
+    "n_rows": 64,
+    "n_skipped_no_digit": 0,
+    "M1_deadness_ratio_median": 0.2963600754737854,
+    "deadness_ratio_quartiles": [
+      0.2540149390697479,
+      0.2963600754737854,
+      0.3214126229286194
+    ],
+    "slot_grad_norm_median": 0.007805160246789455,
+    "probe_S_component": {
+      "state": "trained",
+      "probe_accuracy": 0.125,
+      "chance": 0.1875,
+      "live": false,
+      "n": 64,
+      "n_train": 48,
+      "n_eval": 16
+    },
+    "probe_perp_component": {
+      "state": "trained",
+      "probe_accuracy": 0.25,
+      "chance": 0.1875,
+      "live": false,
+      "n": 64,
+      "n_train": 48,
+      "n_eval": 16
+    },
+    "probe_flat_reference": {
+      "state": "trained",
+      "probe_accuracy": 0.1875,
+      "chance": 0.1875,
+      "live": false,
+      "n": 64,
+      "n_train": 48,
+      "n_eval": 16
+    }
+  },
+  "outcome": "INCONCLUSIVE",
+  "secondary_A1": {
+    "n_rows": 160,
+    "probe_S_mean": {
+      "state": "trained",
+      "probe_accuracy": 0.07500000298023224,
+      "chance": 0.175,
+      "live": false,
+      "n": 160,
+      "n_train": 120,
+      "n_eval": 40
+    },
+    "probe_perp_mean": {
+      "state": "trained",
+      "probe_accuracy": 0.4000000059604645,
+      "chance": 0.175,
+      "live": true,
+      "n": 160,
+      "n_train": 120,
+      "n_eval": 40
+    },
+    "probe_flat_mean_reference": {
+      "state": "trained",
+      "probe_accuracy": 0.42500001192092896,
+      "chance": 0.175,
+      "live": true,
+      "n": 160,
+      "n_train": 120,
+      "n_eval": 40
+    },
+    "power_ok": true,
+    "outcome": "H1_CONFIRMED"
+  },
+  "runtime_seconds": 622.8
+}

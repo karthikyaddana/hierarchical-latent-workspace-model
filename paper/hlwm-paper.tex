@@ -3679,6 +3679,69 @@ Emergence is nowhere load-bearing.}
 \label{fig:densesup}
 \end{figure}
 
+\subsection{Post-termination addendum: the certified run and the misaligned write}
+\label{sec:certified}
+
+This subsection was added after the program closed and reports events dated
+2026-09-05 to 2026-09-07; nothing before it has been rewritten in light of it.
+The successor run described above completed unattended after termination
+(1{,}200 microsteps, 75 optimizer updates, zero skipped, both seeds). Its
+warm-phase reconstruction gate passed on both seeds (exact match 0.596 and
+0.603 against the 0.50 floor), the preregistered go/no-go then read masked
+exact match 0.000 on both seeds, and the run aborted per protocol --- the
+second independent abort of the dense-supervision channel at this budget
+class. The post-abort audit battery ran to completion, and one number in it
+changes what the failure is: the premise probe read \textbf{0.6212 and
+0.7576} against 0.129 chance on 263 held-out masked rows per seed. For the
+first time in the program's history the preregistered decodability bar
+($\geq 0.50$) \emph{passed} while generation through the same channel
+measured exactly zero on every masked-core row, with unmasked parity intact
+(0.517/0.510) and zero leaked rows. The dissociation is no longer ``weakly
+readable, unusable''; it is strongly readable and exactly unusable.
+
+A preregistered analysis (plan and amendment frozen before their results
+existed; both are in the repository with the run artifacts) then asked
+\emph{where} the readable content sits relative to what the decoder listens
+to. For each labelled masked-core row, the Jacobian of the ten digit-token
+logits at the first gold-digit position was taken with respect to the six
+thought embeddings; the top-8 right singular subspace of that $10 \times
+6144$ map is the row's \emph{decoder-sensitive subspace}, and the audit's own
+probe protocol was retrained separately on the component of the thoughts
+inside that subspace and on its orthogonal complement. Instrument gates
+replicated the recorded audit before any reading was taken: masked exact
+match 0.000, and the held-out probe reproduced to three decimals on the
+audit's own fp16/CUDA conditions. Two findings, consistent across two
+environments (Apple M2/bf16 and Tesla T4/fp16):
+
+\begin{itemize}
+\item \textbf{The channel is not gradient-dead.} The Jacobian norm through
+  the six thoughts is a median 0.29--0.36 of the norm through an equal count
+  of real prompt tokens. The decoder listens to the thought positions.
+\item \textbf{The content is not where the decoder listens.} At $n{=}160$
+  rows with mean-projected features (the adjudicating reading under the
+  frozen amendment, power checks passed), the probe recovers the withheld
+  digit at \textbf{0.075 and 0.100} (chance 0.129) from the
+  decoder-sensitive component, and at \textbf{0.400 and 0.725} from the
+  orthogonal complement (same-row references 0.425 and 0.800).
+\end{itemize}
+
+The failure therefore localizes: not capacity, not liveness, not
+readability, but \emph{write alignment}. The training objective stored the
+premise in directions the decoder's output map is insensitive to, an
+external probe read it there, and the preregistered decodability bar ---
+which the run passed --- was measuring membership in the wrong subspace.
+This is the constructive counterpart of the verbalizable-workspace
+finding~\cite{workspace2026}: probe decodability and availability for the
+model's own use are different properties, and only the second one was ever
+the target. The budget caveat is unchanged --- 75 optimizer updates is two
+to five orders of magnitude below published successes in this class --- so
+the result is a mechanism for the failure at this budget, not a proof the
+write cannot align under more training. Any successor inherits two concrete
+obligations: supervise the write \emph{into} the decoder-sensitive subspace
+rather than hoping dense targets land there, and audit channel liveness in
+declared, token-visible form~\cite{da2026} rather than through learned
+implicit gates whose alignment cannot be read off the token stream.
+
 \subsection{Scale-up candidate: status and blocking audit}
 
 A preregistered protocol exists for a Qwen3-8B-class candidate. It pins
@@ -3953,7 +4016,14 @@ token-update mask, never as semantic commitment~\cite{benhamu2025}.
 Tree of Thoughts and self-consistency retain several candidate trajectories
 through external search or sampling~\cite{yao2023,wang2023}. Continuous
 latent reasoning demonstrates that intermediate computation need not be
-rendered as public chain of thought~\cite{hao2024}. Weight-tied recurrent
+rendered as public chain of thought~\cite{hao2024}. Hierarchical Latent
+Prediction pushes the same premise into pretraining, adding an auxiliary
+higher-level abstract latent that curbs compounding error in latent-space
+rollouts and lengthens coherent belief-state horizons~\cite{hilp2026}; it
+shares HLWM's bet on a slower, more abstract latent tier, but implements it
+as an objective on a trainable backbone rather than as sidecar structure
+around a frozen one --- a distinction the certified run's misaligned-write
+result makes material (Section~\ref{sec:certified}). Weight-tied recurrent
 depth, adaptive computation time, and Mixture-of-Depths provide precedents
 for increasing or allocating executed computation without requiring one
 fixed-depth path~\cite{graves2016,dehghani2019,raposo2024}. HLWM turns these
@@ -3961,7 +4031,30 @@ general principles into a root-preserving multi-rate computation: the same
 transition drives fast state-isolated lanes, private consolidation, verified
 global updates, and synthesis while the expert graph and halt policy vary by
 lane and time. The paper's claim concerns this measured interaction, not
-recurrence alone.
+recurrence alone. Declarative Attention shows that allocation can also be
+declared rather than learned: off-the-shelf models emit in-band declarations
+of which context region each generation segment needs, parsed like tool
+calls, shedding half the attended tokens zero-shot at a cost of one to three
+accuracy points~\cite{da2026}. Explicit token-level declarations succeeding
+without any training is the mirror image of the result reported here, where
+implicit learned gating never passed a causal-liveness gate
+(Section~\ref{sec:experiments}).
+
+Concurrent interpretability work reports that a functional global workspace
+already exists inside pretrained language models: a privileged subset of
+representations available for verbal report, directed modulation, and
+flexible internal reasoning, sitting atop a much larger volume of automatic
+processing~\cite{workspace2026}. HLWM's premise was that such a workspace
+should be built and supervised explicitly, outside a frozen decoder. The
+program's terminal measurement --- latent content recoverable by a probe yet
+unused by generation (Section~\ref{sec:study10}) --- reads, in that
+vocabulary, as content that reached the automatic tier and never entered the
+verbalizable one. The post-termination analysis of the certified run makes
+this concrete in one system: the probe-readable premise content lies almost
+entirely outside the subspace the decoder's answer logits are sensitive to
+(Section~\ref{sec:certified}). Probe decodability and availability for the
+decoder's own use are measurably different properties here, which is the
+property the program's preregistered decodability bar did not test.
 
 Verifier training and post-hoc calibration motivate explicit risk prediction,
 but shared parameters create correlated blind spots; internal verification is
@@ -4661,6 +4754,21 @@ arXiv:2509.21164, 2025.
 \bibitem{tidar2025}
 TiDAR: Think in diffusion, talk in autoregression.
 arXiv:2511.08923, 2025.
+
+\bibitem{hilp2026}
+C.~Shi, T.~Pearce, M.~Tomar, S.~Sen, and J.~Langford.
+Hierarchical latent prediction for language models.
+arXiv:2608.05806, 2026.
+
+\bibitem{da2026}
+N.~Ho et~al.
+Language models can control their own attention.
+arXiv:2609.02737, 2026.
+
+\bibitem{workspace2026}
+W.~Gurnee, N.~Sofroniew, et~al.
+Verbalizable representations form a global workspace in language models.
+Transformer Circuits Thread, 2026.
 
 \end{thebibliography}
 
