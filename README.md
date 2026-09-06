@@ -60,7 +60,7 @@ classes, including gates hardcoded to pass and an expert graph the trainer never
 
 ### 2. The Hierarchical Latent Workspace Model — [`paper/hlwm-paper.pdf`](paper/hlwm-paper.pdf)
 
-*Root-Preserving Variable-Depth Expertise for Parallel Diffusion Reasoning* (52 pp)
+*Root-Preserving Variable-Depth Expertise for Parallel Diffusion Reasoning* (56 pp)
 
 The full technical report: the proposed architecture, and the ten preregistered
 prototype experiments that falsified it at this scale. Routing passed its load gates on
