@@ -10,6 +10,10 @@ before hitting publish.
     python tools/zenodo_deposit.py --target hlwm-paper
     python tools/zenodo_deposit.py --target checkpoints --apply
 
+To correct an already-published record, supersede it rather than minting a new DOI:
+
+    python tools/zenodo_deposit.py --target hlwm-paper --new-version 22538272 --apply
+
 Use --sandbox against sandbox.zenodo.org first; it is a separate account and token.
 """
 
@@ -113,6 +117,16 @@ def main() -> None:
     ap.add_argument("--file", action="append", default=[], help="extra file to attach")
     ap.add_argument("--sandbox", action="store_true")
     ap.add_argument("--apply", action="store_true", help="actually create the deposit")
+    ap.add_argument(
+        "--new-version",
+        metavar="RECORD_ID",
+        help=(
+            "supersede an existing published record instead of minting a new one. "
+            "Pass the numeric id of the latest version (not the concept DOI). The "
+            "concept DOI keeps resolving; it will point at the new version once "
+            "you publish the draft."
+        ),
+    )
     args = ap.parse_args()
 
     spec = TARGETS[args.target]
@@ -177,7 +191,21 @@ def main() -> None:
         else "https://zenodo.org/api"
     )
 
-    dep = api(base, token, "POST", "/deposit/depositions", {"metadata": metadata})
+    if args.new_version:
+        # A new version starts as a copy of the previous one, files included. Zenodo
+        # keys files by name, so leaving the old ones in place would keep a stale PDF
+        # alongside the corrected one — delete them before uploading.
+        dep = api(base, token, "POST",
+                  f"/deposit/depositions/{args.new_version}/actions/newversion")
+        draft_url = dep["links"]["latest_draft"]
+        dep = api(base, token, "GET", draft_url)
+        for old in dep.get("files", []):
+            print(f">>> removing inherited file {old['filename']}")
+            api(base, token, "DELETE", f"{draft_url}/files/{old['id']}")
+        api(base, token, "PUT", draft_url, {"metadata": metadata})
+        dep = api(base, token, "GET", draft_url)
+    else:
+        dep = api(base, token, "POST", "/deposit/depositions", {"metadata": metadata})
     bucket = dep["links"]["bucket"]
     for p, key in named:
         print(f">>> uploading {key}  ({p.stat().st_size / 1e6:.1f} MB)")

@@ -3967,6 +3967,402 @@ Verifier training and post-hoc calibration motivate explicit risk prediction,
 but shared parameters create correlated blind spots; internal verification is
 therefore never treated as proof~\cite{cobbe2021,kadavath2022,guo2017}.
 
+% ================================================================ 12b
+\section{Post-Hoc Novelty Audit: Anticipated Mechanisms and Residual Deltas}
+\label{sec:novelty-audit}
+
+After the program closed, a fine-grained novelty audit (2026-09-05) decomposed
+the design into ten atomic mechanisms plus the architecture-level combination
+and subjected each to multi-angle literature search followed by adversarial,
+refutation-first judging. This section records the outcome, because several
+distinction sentences in Section~\ref{sec:prior} were written before that
+audit and are now known to be too strong. Claims below marked
+\emph{source-verified} were confirmed against the cited paper's text or the
+cited system's shipped code during the audit; remaining attributions rest on
+abstract-level search and should be re-verified before reuse.
+Table~\ref{tab:audit} summarizes the outcome: \emph{anticipated} means the
+mechanism exists in prior work and nothing remains; \emph{fractional} means
+every ingredient exists separately but the specific assembly was not found in
+any single system.
+
+\begin{table}[htbp]
+\caption{Audit outcome per atomic mechanism. ``Residual'' names what, if
+anything, no single prior system was found to contain.}
+\label{tab:audit}
+\centering\small
+\begin{tabularx}{\textwidth}{@{}llX@{}}
+\toprule
+\textbf{Mechanism} & \textbf{Verdict} & \textbf{Closest prior art / residual} \\
+\midrule
+Diffusion as private scratchpad & anticipated & TiDAR~\cite{tidar2025}; residual none. \\
+One-pass local training of tied kernel & anticipated & DiffusionBlocks~\cite{shing2025}; residual none. \\
+Graded generalist--specialist strength & anticipated & Residual-MoE code~\cite{rajbhandari2022}; Qwen-MoE gate. \\
+Prefix-monotone depth requests & fractional & MoR~\cite{mor2025}; residual: joint lane/expert/step admission. \\
+Compute ledger with escrowed fallback & fractional & CLSR soft budget~\cite{zhang2021clsr}; residual: hard per-block admission (D3). \\
+Two-sweep root-preserving operator & fractional & S'MoRE~\cite{smore2025}, Jordan--Jacobs~\cite{jordan1994}; residual: D2. \\
+Behavioral root constraints & fractional & constrained training, per-exit guarantees; residual: D7. \\
+Briefed isolated lanes + LOO utility & fractional & parallel-thread decoders; residual: evaluation triad. \\
+Multi-rate tied kernel & fractional & pairwise tyings exist; residual: three-axis tying (D6). \\
+Verification-gated workspace & fractional & solve--verify systems, gated memory; residual: D5. \\
+\midrule
+Four-property expert graph (D1) & unbuilt & NLLB CMR at 3/4~\cite{nllb2022}. \\
+Three-pillar combination & unbuilt & all pairwise combinations exist~\cite{mot2025,tidar2025}. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Mechanisms that are fully anticipated}
+
+Two mechanisms, and two claimed distinctions, did not survive.
+
+\textbf{Diffusion as a private scratchpad behind an autoregressive public
+interface.} Section~\ref{sec:prior} distinguishes HLWM from diffusion
+language models on the ground that those systems use diffusion as the public
+generation interface. That distinction no longer holds: TiDAR
+(source-verified) drafts privately in diffusion and commits output
+autoregressively within a single model and a single forward pass, with exact
+key--value-cache support~\cite{tidar2025} --- precisely the private-draft,
+causal-commit integration this paper treats as its hardest publication
+sub-problem. Adjacent systems occupy the same design point. The residual
+delta for this mechanism is zero.
+
+\textbf{Prefix-monotone depth requests.} The claim that prior adaptive-depth
+work allocates depth only for a single stream is falsified by
+Mixture-of-Recursions, which routes per-token recursion depth as a monotone
+budgeted decision over a weight-tied stack~\cite{mor2025}, and by the
+stick-breaking prefix parameterization in sparse universal-transformer
+variants. What survives is only the joint admission of (lane, expert,
+step-increment) triples under one hard ledger (Section~\ref{sec:graph}), a
+scheduling construction rather than a new principle.
+
+\textbf{One-pass local training of the tied transition.} The hybrid estimator
+of Section~\ref{sec:hybrid} is anticipated by this paper's own citation:
+DiffusionBlocks trains a weight-tied recurrence with a single-sampled noise
+level and one forward pass per update~\cite{shing2025}.
+
+\textbf{Graded generalist--specialist dominance control.} The
+route-conditioned specialist strength $s(x,m,j)$ in
+equation~\eqref{eq:hupdate} is anticipated in shipped production code
+(source-verified): the DeepSpeed Residual-MoE implementation computes a
+learned per-token two-way softmax blend between an always-executed dense path
+and the routed expert path~\cite{rajbhandari2022}, and Qwen-MoE models ship a
+learned per-token sigmoid gate scaling an always-on shared expert. Notably,
+the Residual-MoE \emph{paper} describes only an unweighted sum; the learned
+blend exists only in the released code, so paper-level search alone misses
+it. DeepSeekMoE, by contrast, is not this mechanism: its shared experts carry
+a fixed unit coefficient~\cite{dai2024}. The binary antecedent is CLSR
+(source-verified), whose learned per-token gate is explicitly hard binary,
+may bypass the shared path entirely, and originated the budget-constrained
+routing objective as a soft batch-level penalty~\cite{zhang2021clsr}.
+
+\subsection{Residual deltas}
+
+The following conjunctions were not found instantiated in any single
+published system. They are stated as unbuilt design positions, not results;
+none carries empirical support, and Sections~\ref{sec:experiments}
+and~\ref{sec:failure} record evidence against several.
+
+\begin{enumerate}[label=\textbf{D\arabic*.},leftmargin=2.8em]
+\item \textbf{The four-property expert-graph conjunction.} No system combines
+  (i) a genuine expert hierarchy that routing descends parent-to-child,
+  (ii) dormancy of unselected specialists, (iii) an always-executed
+  generalist root that routing cannot remove, and (iv) learned,
+  input-conditioned, graded dominance control between the two. The
+  literature splits on a visible seam: systems with real descending
+  hierarchy (S'MoRE~\cite{smore2025}; DAG-structured expert aggregation,
+  whose routing selects a flat top-$k$ \emph{before} learning an aggregation
+  structure among the selected experts; classical hierarchical
+  mixtures~\cite{jordan1994}) have neither the always-on root nor the graded
+  blend, while systems with root-plus-blend (Conditional MoE Routing in
+  NLLB-200, source-verified at
+  $\mathrm{CMR}(x)=(1-g(x))\,\mathrm{FFN}_{\mathrm{shared}}(x)+g(x)\,\mathrm{MoE}(x)$
+  with sigmoid $g$~\cite{nllb2022}; Residual-MoE~\cite{rajbhandari2022})
+  keep their specialists as a flat pool. S'MoRE explicitly names a
+  degenerate shallow case of its own framework that ``becomes a
+  shared-expert MoE'' and does not build it. The closest single system is
+  NLLB's CMR at three of four properties. Figure~\ref{fig:seam} shows the
+  full scorecard.
+\item \textbf{The two-sweep root-preserving execution operator.} A
+  reverse-topological evidence sweep whose aggregate re-enters the residual
+  stream solely as the gated root delta
+  $s(x,m,j)\,\gamma_s W_s (u_0 - r_0)$ of equation~\eqref{eq:hupdate},
+  alongside an ungated root message that conditions every specialist
+  downward, with an exactly-zero specialist residual when no specialist is
+  active.
+\item \textbf{Hard per-block admission control over compute.} A ledger that
+  reserves each admitted lane's minimum complete downstream schedule
+  (verification, synthesis, commitment, cache extension) before any solver
+  spends, and shrinks the lane set when reservations are infeasible
+  (Section~\ref{sec:graph}; Figure~\ref{fig:pubchannel}). CLSR's budget is the soft antecedent: an
+  $L_1$ penalty pulling batch-average gate mass toward a target
+  fraction~\cite{zhang2021clsr}. Soft regularization of average routing mass
+  and hard per-block admission control are mechanically distinct.
+\item \textbf{The conformal continuation bound.} An episode-level
+  maximum-residual conformal quantile giving simultaneous coverage of a
+  compute-priced expected-value-of-continuation bound across all adaptively
+  inspected macrocycles (Section~\ref{sec:diffusion}; Figure~\ref{fig:pubchannel}). The audit judged this
+  the most precisely statable surviving construction, while noting it is a
+  tool substitution on a solved stopping problem and plausibly weaker than
+  existing anytime-valid machinery.
+\item \textbf{Verification-gated workspace writes.} Structured verification
+  records --- not attention competition and not text-memory admission --- as
+  the gating input to a learned permutation-invariant update of a persistent
+  latent workspace, behind a two-barrier solve-then-verify-then-write cycle,
+  natively inside one model (Figure~\ref{fig:workspace-audit}).
+\item \textbf{Three-axis kernel tying.} One transition kernel tied
+  simultaneously across parallel isolated lanes, functional modes, and the
+  timescale hierarchy, with three explicitly gated state rates. Each
+  pairwise tying exists in recent tied-recurrence and parallel-thread
+  systems; the audit found no three-way instance
+  (Figure~\ref{fig:workspace-audit}).
+\item \textbf{Behavioral root preservation as a hard constraint.}
+  Preregistered non-inferiority of the root-only ablated subpath against a
+  frozen reference, enforced at the maximum over all halt-eligible readout
+  depths (Section~\ref{sec:root}).
+\end{enumerate}
+
+The architecture-level combination of the three pillars was likewise found
+unclaimed as a whole (Figure~\ref{fig:pillars}), but every pairwise
+combination exists (routed experts
+with parallel isolated lanes~\cite{mot2025}; private diffusion behind an
+autoregressive commit~\cite{tidar2025}; expert routing inside diffusion
+language models), and the hardest integration sub-problem is solved
+in~\cite{tidar2025}.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[font=\small]
+% dot macros: yes / partial / no
+\def\Y#1#2{\fill[navy] (#1,#2) circle (0.125);}
+\def\N#1#2{\draw[black!40] (#1,#2) circle (0.125);}
+\def\P#1#2{\draw[navy] (#1,#2) circle (0.125);
+  \fill[navy] (#1,#2) ++(90:0.125) arc (90:270:0.125);}
+% highlight row for the proposed design
+\fill[accent!10] (-4.6,-4.10) rectangle (5.6,-3.60);
+% column headers
+\node[rotate=32, anchor=south west, font=\footnotesize] at (-0.15,0.35) {descending hierarchy};
+\node[rotate=32, anchor=south west, font=\footnotesize] at (1.45,0.35) {dormancy};
+\node[rotate=32, anchor=south west, font=\footnotesize] at (3.05,0.35) {always-on root};
+\node[rotate=32, anchor=south west, font=\footnotesize] at (4.65,0.35) {graded dominance};
+% row labels
+\node[anchor=east, font=\footnotesize] at (-0.55,0)     {Jordan--Jacobs (1994)~\cite{jordan1994}};
+\node[anchor=east, font=\footnotesize] at (-0.55,-0.55) {CLSR (2021)~\cite{zhang2021clsr}};
+\node[anchor=east, font=\footnotesize] at (-0.55,-1.10) {Residual-MoE (2022)~\cite{rajbhandari2022}};
+\node[anchor=east, font=\footnotesize] at (-0.55,-1.65) {NLLB CMR (2022)~\cite{nllb2022}};
+\node[anchor=east, font=\footnotesize] at (-0.55,-2.20) {DeepSeekMoE (2024)~\cite{dai2024}};
+\node[anchor=east, font=\footnotesize] at (-0.55,-2.75) {S'MoRE (2025)~\cite{smore2025}};
+\node[anchor=east, font=\footnotesize] at (-0.55,-3.30) {DAG expert aggregation (2026)};
+\node[anchor=east, font=\footnotesize\itshape] at (-0.55,-3.85) {this design (proposed, untested)};
+% dots: columns at x = 0.15, 1.75, 3.35, 4.95
+\Y{0.15}{0}     \N{1.75}{0}     \N{3.35}{0}     \N{4.95}{0}
+\N{0.15}{-0.55} \P{1.75}{-0.55} \N{3.35}{-0.55} \P{4.95}{-0.55}
+\N{0.15}{-1.10} \Y{1.75}{-1.10} \Y{3.35}{-1.10} \Y{4.95}{-1.10}
+\P{0.15}{-1.65} \Y{1.75}{-1.65} \Y{3.35}{-1.65} \Y{4.95}{-1.65}
+\N{0.15}{-2.20} \Y{1.75}{-2.20} \Y{3.35}{-2.20} \P{4.95}{-2.20}
+\Y{0.15}{-2.75} \Y{1.75}{-2.75} \N{3.35}{-2.75} \N{4.95}{-2.75}
+\P{0.15}{-3.30} \Y{1.75}{-3.30} \N{3.35}{-3.30} \N{4.95}{-3.30}
+\Y{0.15}{-3.85} \Y{1.75}{-3.85} \Y{3.35}{-3.85} \Y{4.95}{-3.85}
+% legend
+\Y{-4.35}{-4.65} \node[anchor=west, font=\scriptsize] at (-4.15,-4.65) {yes};
+\P{-3.25}{-4.65} \node[anchor=west, font=\scriptsize] at (-3.05,-4.65) {partial};
+\N{-1.95}{-4.65} \node[anchor=west, font=\scriptsize] at (-1.75,-4.65) {no};
+\node[anchor=west, font=\scriptsize, text=black!55] at (-0.9,-4.65)
+  {upper block: hierarchy side of the seam lacks root+blend; middle block: root+blend side stays flat};
+\end{tikzpicture}
+\caption{The D1 seam as a property scorecard. No published system fills all
+four columns: works with a genuine descending expert hierarchy (S'MoRE, DAG
+aggregation, Jordan--Jacobs) lack the always-on root and the graded blend,
+while works with an always-on root and a learned graded blend (NLLB CMR,
+Residual-MoE) keep their specialists flat. Verdicts follow the
+source-verified audit scorecards; the final row is this paper's proposal,
+which was never executed at scale (Section~\ref{sec:experiments}).}
+\label{fig:seam}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  font=\small,
+  pillar/.style={draw=navy, fill=navy!8, rounded corners=3pt, align=center,
+    inner sep=5pt, font=\footnotesize},
+  pairlabel/.style={font=\scriptsize, text=black!60, align=center},
+  centernode/.style={draw=failred, dashed, rounded corners=3pt, align=center,
+    inner sep=5pt, font=\footnotesize\itshape, text=failred}
+]
+\node[pillar] (A) at (0,3.4)     {(a) typed expert DAG,\\always-on root, budgeted depth};
+\node[pillar] (B) at (-4.8,-1.4) {(b) isolated parallel lanes,\\barrier-synchronized workspace};
+\node[pillar] (C) at (4.8,-1.4)  {(c) private diffusion,\\atomic AR publication~\cite{tidar2025}};
+\draw[thick, accent] (A) -- (B) node[pairlabel, pos=0.45, sloped, above=3pt]
+  {exists: routed experts\\+ parallel lanes~\cite{mot2025}};
+\draw[thick, accent] (B) -- (C) node[pairlabel, midway, below=4pt]
+  {exists: parallel latent-diffusion drafting};
+\draw[thick, accent] (A) -- (C) node[pairlabel, pos=0.45, sloped, above=3pt]
+  {exists: MoE routing\\in diffusion LMs};
+\node[centernode] at (0,0.35) {three-way union:\\unbuilt, untested};
+\end{tikzpicture}
+\caption{The combination claim. Each pillar exists, and every pairwise
+combination exists in a published system; only the three-way union in one
+natively trained model was not found. The audit rates this bare union as a
+design position, not a contribution, since no experiment shows the union
+outperforming its best pairwise baseline.}
+\label{fig:pillars}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  font=\footnotesize,
+  known/.style={draw=navy, fill=navy!8, rounded corners=2pt, align=center,
+    inner sep=4pt, font=\footnotesize},
+  delta/.style={draw=failred, dashed, thick, rounded corners=2pt,
+    align=center, inner sep=4pt, font=\footnotesize, text=failred},
+  note/.style={font=\scriptsize, text=black!55, align=center},
+  flow/.style={-{Stealth[length=2.2mm]}, thick, accent}
+]
+% solver lanes
+\node[known] (l1) at (-6.0,1.0)  {lane 1};
+\node[known] (l2) at (-6.0,0.2)  {lane 2};
+\node[known] (l3) at (-6.0,-0.6) {lane 3};
+\node[note] at (-6.7,1.85) {solver lanes\\(mask-isolated)};
+\node[note] at (-6.0,-1.35) {exists: parallel-\\thread decoders};
+% barrier 1
+\draw[very thick, navy] (-4.5,-1.1) -- (-4.5,1.5);
+\node[note] at (-3.9,1.95) {barrier 1:\\summaries $A^j$};
+% verifiers
+\node[known] (ver) at (-2.7,0.2) {verifier lanes\\(same masks)};
+\node[note] at (-2.7,-1.35) {exists: solve--verify\\systems};
+% barrier 2
+\draw[very thick, navy] (-1.0,-1.1) -- (-1.0,1.5);
+\node[note] at (-1.0,1.95) {barrier 2:\\records $V^k$};
+% gated write (delta)
+\node[delta] (gate) at (1.15,0.2) {verification-gated\\write (D5)};
+% workspace
+\node[known] (gw) at (3.9,0.2) {global workspace\\$g_{b,r+1}$};
+% flows
+\draw[flow] (l1.east) -- (-4.55,1.0);
+\draw[flow] (l2.east) -- (-4.55,0.2);
+\draw[flow] (l3.east) -- (-4.55,-0.6);
+\draw[flow] (-4.45,0.2) -- (ver.west);
+\draw[flow] (ver.east) -- (-1.05,0.2);
+\draw[flow] (-0.95,0.2) -- (gate.west);
+\draw[flow] (gate.east) -- (gw.west);
+\draw[flow, dashed] (gw.north) to[out=145,in=35]
+  node[note, above, pos=0.5] {broadcast: briefs and routes redispatched, next macrocycle}
+  (l1.north);
+% tied kernel (delta)
+\node[delta, minimum width=11.6cm] at (-1.05,-2.35)
+  {one tied kernel $\Phi_\theta$ executes every stage above ---
+   three-axis tying across lanes, modes, and timescales (D6);\\
+   each pairwise tying exists in a published system};
+\end{tikzpicture}
+\caption{The parallel-workspace pillar under the audit. Solid navy components
+are anticipated: mask-isolated parallel lanes with fork--join summaries, and
+native solve-then-verify stages, each exist in published systems. Dashed red
+components are residual deltas: using structured verification records as the
+gating input to the workspace write (D5), and tying one transition kernel
+simultaneously across lanes, functional modes, and timescales (D6). Neither
+delta carries empirical support; the workspace channel of this program
+reached parity, not improvement (Section~\ref{sec:experiments}).}
+\label{fig:workspace-audit}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  font=\footnotesize,
+  known/.style={draw=navy, fill=navy!8, rounded corners=2pt, align=center,
+    inner sep=4pt, font=\footnotesize},
+  delta/.style={draw=failred, dashed, thick, rounded corners=2pt,
+    align=center, inner sep=4pt, font=\footnotesize, text=failred},
+  note/.style={font=\scriptsize, text=black!55, align=center},
+  flow/.style={-{Stealth[length=2.2mm]}, thick, accent}
+]
+\node[known] (canvas) at (-6.7,0) {private diffusion\\canvas};
+\node[note] at (-6.7,-1.05) {exists: TiDAR-class\\private drafting~\cite{tidar2025}};
+\node[known] (snap) at (-4.0,0) {frozen snapshot $\Sigma_b$:\\exact IDs + hashes};
+\node[known] (risk) at (-0.7,1.15) {calibrated risk gates\\$\overline{q}_k \le \tau_k$};
+\node[note] at (-0.7,2.0) {exists: selective prediction};
+\node[delta] (evi) at (-0.7,-1.15) {conformal EVI bound\\$\op{UCB}(\widehat{\op{EVI}}_r) \le 0$ (D4)};
+\node[known] (commit) at (2.7,0) {atomic append +\\causal re-encode $K_b$};
+\node[note] at (2.7,-1.05) {exists: diffusion draft into\\exact AR cache~\cite{tidar2025}};
+\node[known] (pub) at (5.7,0) {public context\\$C_b \,\|\, y^\star_b$};
+\node[delta] (fb) at (2.7,-2.55) {refine / escrowed causal\\fallback / abstain (D3)};
+\draw[flow] (canvas.east) -- (snap.west);
+\draw[flow] (snap.east) -- (risk.west);
+\draw[flow] (snap.east) -- (evi.west);
+\draw[flow] (risk.east) -- (commit.north west);
+\draw[flow] (evi.east) -- (commit.south west);
+\draw[flow] (commit.east) -- (pub.west);
+\draw[flow, failred] (evi.south) to[out=-90,in=180]
+  node[note, below left, pos=0.3, text=failred] {any gate fails}
+  (fb.west);
+\end{tikzpicture}
+\caption{The private-to-public publication channel under the audit. Solid
+navy components are anticipated: private non-autoregressive drafting behind
+an exact autoregressive cache is solved by TiDAR~\cite{tidar2025}, and
+calibrated per-failure-mode risk gating is standard selective prediction.
+Dashed red components are residual deltas: the episode-level conformal bound
+on compute-priced continuation value, valid under repeated adaptive
+inspection (D4), and the ledger-escrowed fallback path that a failed gate
+cannot bypass (D3). Both are untested constructions.}
+\label{fig:pubchannel}
+\end{figure}
+
+\emph{In plain terms:} what remains unbuilt is (D1--D2) an expert layer
+organized like a staffing tree, where a generalist always speaks first,
+specialists are consulted only down the relevant branch, their evidence is
+passed back up, and a learned dial sets how loudly the specialists speak
+relative to the generalist; (D3) a budget office that will not let the model
+start work it cannot afford to check and publish; (D4) a statistically
+calibrated rule for deciding whether one more attempt is worth its compute
+price; (D5) a shared whiteboard that only fact-checked notes may update;
+(D6) one engine reused for every role instead of separate machinery per
+role; and (D7) a training-time guarantee that the generalist provably stays
+competent while specialists are added.
+
+\subsection{Evidence on performance}
+
+To be unambiguous about what the record does and does not contain: this
+program produced \emph{no evidence that any of the residual deltas improves
+model performance}. The experiments of Section~\ref{sec:experiments} retired
+the mechanisms that were built. The strongest positive internal results are
+of two kinds. First, calibrated selective prediction --- the one component
+that repeatedly passed its preregistered gates --- worked reliably, but it is
+an anticipated mechanism, not a residual delta. Second, the repaired
+workspace channel of Experiment~9 reached \emph{parity} with causal
+decoding, and the expert-graph removal in the reduction study cost roughly a
+quarter of probe content accuracy while the graph was failing every causal
+gate: the experts demonstrably carried content without demonstrably causing
+better answers. Parity and stranded capacity are not improvements.
+
+The positive performance evidence that exists attaches to the anticipated
+\emph{ingredients}, in other people's systems, as reported by their authors
+and not re-verified here: Residual-MoE reports quality on par with
+substantially larger standard MoE models~\cite{rajbhandari2022};
+Mixture-of-Recursions reports matched or improved quality at equal training
+compute with higher inference throughput~\cite{mor2025}; conditional MoE
+routing was adopted in the production-scale NLLB-200 system~\cite{nllb2022};
+CLSR reports multilingual translation gains while allocating only 10--30\%
+of routed computation to language-specific capacity~\cite{zhang2021clsr};
+and TiDAR reports autoregressive-level quality at substantially higher
+decoding throughput~\cite{tidar2025}. This is precisely the asymmetry the
+audit exposes: the ingredients have performance evidence, the seven
+assemblies have none, and no experiment anywhere --- including here --- has
+yet tested whether any assembly outperforms its best flat or pairwise
+baseline.
+
+\subsection{Interpretation}
+
+Novelty and validation are separate axes. Every item above is novel in the
+narrow sense that no prior instantiation was found under adversarial search;
+none is validated, and this paper's own experiments retire the program that
+proposed them. The audit rated each surviving delta as, at most, material
+for a related-work distinction. D1 is the best characterized: it is a named
+seam between two developed lineages, with a minimal decisive experiment
+available --- hold NLLB's CMR blend fixed and replace the flat expert pool
+with a hierarchy that routing descends --- which is far smaller than the
+program this paper reports.
+
 % ================================================================ 13
 \section{Conclusion}
 \label{sec:conclusion}
@@ -4229,13 +4625,50 @@ On calibration of modern neural networks.
 \emph{International Conference on Machine Learning}, 2017.
 arXiv:1706.04599.
 
+\bibitem{rajbhandari2022}
+S.~Rajbhandari, C.~Li, Z.~Yao, M.~Zhang, R.~Y. Aminabadi, A.~A. Awan,
+J.~Rasley, and Y.~He.
+DeepSpeed-MoE: Advancing mixture-of-experts inference and training to power
+next-generation AI scale.
+\emph{International Conference on Machine Learning}, 2022.
+arXiv:2201.05596. Residual-MoE blend verified in the released
+\texttt{deepspeed/moe/layer.py}.
+
+\bibitem{zhang2021clsr}
+B.~Zhang, A.~Bapna, R.~Sennrich, and O.~Firat.
+Share or not? Learning to schedule language-specific capacity for
+multilingual translation.
+\emph{International Conference on Learning Representations}, 2021.
+
+\bibitem{nllb2022}
+NLLB Team, M.~R. Costa-juss\`a, et~al.
+No language left behind: Scaling human-centered machine translation.
+arXiv:2207.04672, 2022. Conditional MoE Routing, \S8.
+
+\bibitem{smore2025}
+Structural mixture of residual experts (S'MoRE).
+arXiv:2504.06426, 2025.
+
+\bibitem{mor2025}
+Mixture-of-Recursions: Learning dynamic recursive depths for adaptive
+token-level computation.
+arXiv:2507.10524, 2025.
+
+\bibitem{mot2025}
+Mixture of Thoughts.
+arXiv:2509.21164, 2025.
+
+\bibitem{tidar2025}
+TiDAR: Think in diffusion, talk in autoregression.
+arXiv:2511.08923, 2025.
+
 \end{thebibliography}
 
 \appendix
 \section{Artifact Provenance and Reproducibility}
 \label{app:provenance}
 
-Every experiment in Section~\ref{sec:studies} maps to an internal artifact
+Every experiment in Section~\ref{sec:experiments} maps to an internal artifact
 tag that identifies its preregistered plan, training checkpoints, and audit
 records in the project repository. The tags are reproduced here so that
 any reported number can be traced to its on-disk provenance.
