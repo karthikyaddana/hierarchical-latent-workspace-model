@@ -1,0 +1,25 @@
+{
+ "changes": [
+  "modeling_hlwm.py: HLWMConfig.vocab_grounded_thoughts/vocab_thought_tau; produce_latent_thoughts vocabulary bottleneck (frozen lm_head softmax -> frozen embedding average)",
+  "train_kaggle.py: in-context aligned decode CE on the student's segment_logits (frozen lm_head over thought positions in the masked context); CLI flags --vocab-grounded-thoughts, --vocab-thought-tau, --incontext-decode-weight"
+ ],
+ "code_sha256": {
+  "__init__.py": "15eee54eb55eb69558a57fe5b0141d6d555c010166ed5f82c9bff1b7e26c6028",
+  "data.py": "604f92900315a91d01fc6ee9954cb0d838aca6c25c8da82ca3ea01fd644a69e8",
+  "evaluate_checkpoint.py": "53ce35140f3f7ba557745c4e1fcba0e01a3016589cb36d5019652817a9f2e95a",
+  "evaluate_v10.py": "31591f21e479e7c40091b0213b8a6c7a3e5fc12a957087b7fa39cd5b0e5102ba",
+  "inference_hlwm.py": "5fc80eefd30d783120b0cd16e08fdd7ca55c7da3d989d2e9e804d478a7ef43b7",
+  "modeling_hlwm.py": "b5974e1d6a5f1a68fca3ed3d98c369c4485188a1b4e5c0bfcae970537c78e2ff",
+  "selective_stats.py": "637ade8d72a43ed3ec019d5f30361d808ae4fdcec2d76154c78b9772659bfd0c",
+  "semantic_grading.py": "87c0061f9f5f37c8e75efdfe89ca20db40b9d2237f90852e5cfee8b58670b0fc",
+  "test_data_v10.py": "edae00ab0db9842da4757e06c15fc95b7857b80ac4083b7b59ed18c43a1d3adf",
+  "test_evaluate_v10.py": "ca349a9de33038709ef41a26ba8a3e920df3955dfd90ec95c32751abc7ac3798",
+  "test_modeling_hlwm.py": "a614210886e87fb967dfb1e1c71c18fa45784c333f64c8b9800915631cd4761f",
+  "test_selective_stats.py": "a4dba5eb62d9e92b03d084c6e67dd520838dfff5b9e9ae2308eebdd00720286e",
+  "train_kaggle.py": "5e33d527622e628fb2ee63edb976ebe59f66f53d3ac2b7967b6c1417654f5fa7"
+ },
+ "derived_from": "certified v10.0 harness (kernel sirishayaddanapudi/hlwm-v10-0-certified-run)",
+ "name": "hlwm-v11-vocab-grounded",
+ "preregistration": "hlwm-v11-vocab-grounded-plan-2026-09-07.md",
+ "tests": "106 passed (test_modeling_hlwm.py, test_data_v10.py) on 2026-09-07, flags-off path byte-compatible with v10 behavior"
+}
