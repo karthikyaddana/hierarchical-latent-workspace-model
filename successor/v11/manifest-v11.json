@@ -4,23 +4,28 @@
   "train_kaggle.py: in-context aligned decode CE on the student's segment_logits (frozen lm_head over thought positions in the masked context); CLI flags --vocab-grounded-thoughts, --vocab-thought-tau, --incontext-decode-weight",
   "modeling_hlwm.py: LoRAResidual mode in {lora,dora,pissa}; DoRA per-row magnitude (arXiv:2402.09353) with init_from_base after transplant; PiSSA principal-SVD init with frozen residual reference (arXiv:2404.02948), zero-output at step 0; HLWMConfig.adapter_mode validated",
   "train_kaggle.py: --adapter {lora,dora,pissa} (default lora, byte-compatible with v10/v11)",
-  "verify_adapters.py + conftest.py: adapter verification battery and HLWM_TEST_ADAPTER_MODE suite switch"
+  "verify_adapters.py + conftest.py: adapter verification battery and HLWM_TEST_ADAPTER_MODE suite switch",
+  "modeling_hlwm.py: declared routing (Version 12) -- ROUTE_PATTERN/route_declaration/parse_declaration/strip_declarations, HLWMConfig.declared_routing/declared_within_mix, bounded per-expert within-mix in QwenMLP, and the substrate-freeze exemption for it",
+  "data.py: V10AnchorCollator(declared_routing=) prefixes supervised targets with <route:family>, validated to survive canvas truncation (raises otherwise)",
+  "evaluate_v10.py: arm (i) arm_declaration_routed -- two-phase decode where the route is parsed from the model's own emitted tokens; grade_decode strips declarations so all arms share one grading surface",
+  "train_kaggle.py: --declared-routing (default off, byte-compatible with v10/v11)"
  ],
  "code_sha256": {
   "__init__.py": "15eee54eb55eb69558a57fe5b0141d6d555c010166ed5f82c9bff1b7e26c6028",
   "conftest.py": "549f455e92bfd1f336d1c278c0611d5f33b79358437be73c67348db8fa9c0673",
-  "data.py": "604f92900315a91d01fc6ee9954cb0d838aca6c25c8da82ca3ea01fd644a69e8",
+  "data.py": "2996c7a31b984671476934459e00d5f96e1349bcc3ea41fefccab7d06233a6d9",
   "evaluate_checkpoint.py": "53ce35140f3f7ba557745c4e1fcba0e01a3016589cb36d5019652817a9f2e95a",
-  "evaluate_v10.py": "31591f21e479e7c40091b0213b8a6c7a3e5fc12a957087b7fa39cd5b0e5102ba",
+  "evaluate_v10.py": "1e6e49b3e1e225f1ab10ccc4319c4508e528964fc0772930d902d6ccae4221c5",
   "inference_hlwm.py": "5fc80eefd30d783120b0cd16e08fdd7ca55c7da3d989d2e9e804d478a7ef43b7",
-  "modeling_hlwm.py": "b2b0576a4100c871257d1fce9d28dcefb9a3b594c1e4be332d5fad80fe59cf7d",
+  "modeling_hlwm.py": "62797e2c0965a0397b6d92cf0eca2b715b4b043c3889eb715dd216dfd88f6c89",
   "selective_stats.py": "637ade8d72a43ed3ec019d5f30361d808ae4fdcec2d76154c78b9772659bfd0c",
   "semantic_grading.py": "87c0061f9f5f37c8e75efdfe89ca20db40b9d2237f90852e5cfee8b58670b0fc",
   "test_data_v10.py": "edae00ab0db9842da4757e06c15fc95b7857b80ac4083b7b59ed18c43a1d3adf",
+  "test_declared_routing.py": "71205ec2849ba50bfc989b55ebee5f28b743453bf663cf1d916637d411558f6e",
   "test_evaluate_v10.py": "ca349a9de33038709ef41a26ba8a3e920df3955dfd90ec95c32751abc7ac3798",
   "test_modeling_hlwm.py": "a614210886e87fb967dfb1e1c71c18fa45784c333f64c8b9800915631cd4761f",
   "test_selective_stats.py": "a4dba5eb62d9e92b03d084c6e67dd520838dfff5b9e9ae2308eebdd00720286e",
-  "train_kaggle.py": "7f8fabaff15a848aeafe1830b092d20dc9ff95cfce0b7f53fe4376d540f0c6bd",
+  "train_kaggle.py": "365a4dd09b5e0822c235ff59b2ba473f2a089c212ba54b0e22943e51c0a18593",
   "verify_adapters.py": "67471281dc05dc80a7dbf6159babebdd5bc6659ee5d658d06bcda7cdc8357050"
  },
  "derived_from": "certified v10.0 harness (kernel sirishayaddanapudi/hlwm-v10-0-certified-run)",
@@ -29,5 +34,5 @@
   "hlwm-v11-vocab-grounded-plan-2026-09-07.md",
   "hlwm-v11.1-adapter-decomposition-plan-2026-09-07.md"
  ],
- "tests": "148 passed under each of HLWM_TEST_ADAPTER_MODE={lora,dora,pissa} on 2026-09-07; verify_adapters.py 11/11 (init identity 0.000e+00, 0 dead of 28 adapter sites per mode, mode separation, DoRA magnitude liveness); flags-off path byte-compatible with v10 behavior"
+ "tests": "170 passed under each of HLWM_TEST_ADAPTER_MODE={lora,dora,pissa} on 2026-09-07 (22 in test_declared_routing.py); verify_adapters.py 11/11; flags-off paths byte-compatible with v10 behavior"
 }

@@ -1,0 +1,60 @@
+{
+  "calibrated_gamma": 20.0,
+  "checks": {
+    "decode_parity": true,
+    "gamma_sweep": {
+      "10.0": {
+        "distill_l1": 0.19789674878120422,
+        "scaled": 1.9789674878120422,
+        "student_ce": 3.6762542724609375
+      },
+      "20.0": {
+        "distill_l1": 0.18878401815891266,
+        "scaled": 3.775680363178253,
+        "student_ce": 3.5414867401123047
+      },
+      "5.0": {
+        "distill_l1": 0.1957978755235672,
+        "scaled": 0.978989377617836,
+        "student_ce": 3.6045172214508057
+      }
+    },
+    "gate_closed_equivalent": true,
+    "gate_closed_max_delta": 0.0,
+    "gate_grad_norm": 3.383748736232519,
+    "gate_perturbation_delta": 1.390625,
+    "gate_perturbation_live": true,
+    "group_grad_norms": {
+      "student": 288003.03125,
+      "teacher": 150407.625
+    },
+    "groups_live": true,
+    "liveness_three_part": true,
+    "masked_anchor_buckets_train": [
+      "numeric|m",
+      "ordering|m",
+      "unit|m"
+    ],
+    "masked_anchor_buckets_validation": [
+      "numeric|m",
+      "ordering|m",
+      "unit|m"
+    ],
+    "masked_numeric_rows": 30,
+    "memory_within_gate": true,
+    "peak_memory_gb": 2.934731776,
+    "producer_grad_norm": 2393.5871711969376,
+    "projected_training_hours": 3.725893841849433,
+    "projector_grad_norm": 1727.069857865572,
+    "seconds_per_step": 5.831833839416504,
+    "teacher_ceiling_by_family": {
+      "abstention": 0.125,
+      "numeric": 0.0,
+      "ordering": 0.0,
+      "unit": 0.0
+    },
+    "tripwire_population_live": true
+  },
+  "failed_checks": [],
+  "passed": true
+}

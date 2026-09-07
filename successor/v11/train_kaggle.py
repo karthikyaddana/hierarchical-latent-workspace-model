@@ -124,6 +124,12 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--vocab-thought-tau", type=float, default=1.0)
     parser.add_argument(
+        "--declared-routing", action="store_true",
+        help="Version 12.0: the expert route is a literal <route:family> token "
+        "the model emits and the harness parses back, instead of a gold label "
+        "(training-only) or a detached probe. Off reproduces v10/v11 exactly.",
+    )
+    parser.add_argument(
         "--adapter", choices=("lora", "dora", "pissa"), default="lora",
         help="Version 11.1 shared-sidecar family: DoRA (arXiv:2402.09353) or "
         "PiSSA-init residual variant (arXiv:2404.02948). Routed family "
@@ -2530,6 +2536,7 @@ def main() -> None:
             tokenizer,
             latent_thoughts=args.latent_thoughts,
             trace_tokens=args.trace_tokens,
+            declared_routing=bool(getattr(args, "declared_routing", False)),
             num_lanes=args.num_lanes,
             context_tokens=args.context_tokens,
             canvas_tokens=args.canvas_tokens,
@@ -2585,6 +2592,7 @@ def main() -> None:
         "vocab_grounded_thoughts": bool(getattr(args, "vocab_grounded_thoughts", False)),
         "adapter_mode": str(getattr(args, "adapter", "lora")),
         "vocab_thought_tau": float(getattr(args, "vocab_thought_tau", 1.0)),
+        "declared_routing": bool(getattr(args, "declared_routing", False)),
         "kv_prefix_slots": args.kv_prefix_slots if args.latent_thoughts > 0 else 0,
         "kv_prefix_rank": args.kv_prefix_rank,
         "prefix_attn_gate_init": args.prefix_attn_gate_init,

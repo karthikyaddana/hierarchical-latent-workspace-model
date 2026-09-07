@@ -20,12 +20,54 @@ HLWM modules to be learned.
 from __future__ import annotations
 
 import math
+import re
 from dataclasses import dataclass, field, replace
 from typing import Any, Dict, Iterable, List, Mapping, Optional, Sequence, Tuple, Union
 
 import torch
 from torch import Tensor, nn
 from torch.nn import functional as F
+
+
+# ----------------------------------------------------------------------
+# Declared routing (Version 12).
+#
+# One declaration per route, emitted by the model at the head of its answer
+# and parsed back out of the emitted text. Deliberately plain ASCII: the
+# pinned tokenizer splits it into ordinary subwords, so no token is added to
+# the vocabulary and the frozen embedding matrix is untouched. Every arm in
+# this record shares one substrate; adding tokens would end that.
+
+ROUTE_PATTERN = re.compile(r"<route:([a-z0-9_-]{1,32})>")
+
+
+def route_declaration(name: str) -> str:
+    """The declaration string the model is trained to emit for ``name``."""
+
+    return "<route:%s>" % name
+
+
+def parse_declaration(text: str, routes: Sequence[str]) -> Optional[int]:
+    """Index of the first declared route in ``text``, else None.
+
+    Unknown route names return None rather than raising: whether an
+    unparseable declaration falls back to the always-on root path or voids
+    the row is a preregistered gate decision, not this function's.
+    """
+
+    match = ROUTE_PATTERN.search(text)
+    if not match:
+        return None
+    try:
+        return list(routes).index(match.group(1))
+    except ValueError:
+        return None
+
+
+def strip_declarations(text: str) -> str:
+    """Remove declarations before any text reaches an evaluation surface."""
+
+    return ROUTE_PATTERN.sub("", text).strip()
 
 
 @dataclass
@@ -202,6 +244,21 @@ class HLWMConfig:
     # Routed family experts keep plain LoRA in every mode (their nonzero-init
     # gradient-race semantics are load-bearing, v5.6.2).
     adapter_mode: str = "lora"
+    # Declared routing (Version 12): the route is a literal token the model
+    # emits, parsed from its own output, instead of a gold family label
+    # (training-only, unavailable at deployment) or a detached probe over the
+    # prompt (audit arm h). Learned latent routing failed causal liveness on
+    # 10 of 10 seed-runs in this record; a declaration is causally live by
+    # construction, because the tokens that select the expert are in the
+    # output stream and can be read off it. Declaration strings are ordinary
+    # ASCII tokenized by the pinned tokenizer -- no vocabulary surgery, so
+    # the frozen substrate keeps its exact embedding matrix.
+    declared_routing: bool = False
+    # Bounded per-expert mix surviving INSIDE the declared expert. It can
+    # attenuate the declared expert but never reassign the route, so the
+    # recorded collapse mode (a router silently concentrating on one expert
+    # with no token-level trace) cannot recur undetected.
+    declared_within_mix: bool = True
     # Per-layer key/value slot count (m): thought states are attention-pooled
     # into m shared slot states and projected by factorized per-layer heads
     # into K/V slots appended at every attention layer.  Slots never pass
@@ -744,6 +801,16 @@ class QwenMLP(nn.Module):
             )
         else:
             self.mlp_experts = None
+        # Declared routing keeps a bounded scalar per expert. sigmoid(4.0) =
+        # 0.982, so the declared expert starts essentially fully open and the
+        # only thing the mix can learn is to ATTENUATE it; it cannot reassign
+        # the route, which stays a property of the emitted tokens. 1-D, so the
+        # optimizer's no-decay group covers it (as for the prefix gates).
+        if self.mlp_experts is not None and getattr(config, "declared_routing", False) \
+                and getattr(config, "declared_within_mix", True):
+            self.expert_within_mix = nn.Parameter(torch.full((config.mlp_expert_count,), 4.0))
+        else:
+            self.expert_within_mix = None
 
     def forward(self, hidden: Tensor, route_index: Optional[Tensor] = None) -> Tensor:
         gate = self.gate_proj(hidden)
@@ -768,7 +835,10 @@ class QwenMLP(nn.Module):
                 if not bool(selected.any()):
                     continue
                 mask = selected.view(-1, 1, 1).to(output.dtype)
-                output = output + mask * expert(activated).to(output.dtype)
+                delta = expert(activated).to(output.dtype)
+                if self.expert_within_mix is not None:
+                    delta = delta * torch.sigmoid(self.expert_within_mix[expert_id]).to(output.dtype)
+                output = output + mask * delta
         return output
 
 
@@ -1669,8 +1739,13 @@ class HLWMForConditionalGeneration(nn.Module):
         # at init — the v8 frozen-alpha catastrophe reborn through the
         # freeze path, invisible to every test that skips main()'s
         # freeze/unfreeze sequence.
+        # Same class, same fix, for the Version 12 declared-routing mix: it
+        # lives inside the backbone MLP but is HLWM-native. Left frozen it
+        # would pin every declared expert at its init strength while the run
+        # reported a live routing path -- the failure this record has already
+        # paid for twice.
         for name, parameter in self.backbone.named_parameters():
-            if "prefix_attn_gate" in name:
+            if "prefix_attn_gate" in name or "expert_within_mix" in name:
                 parameter.requires_grad_(True)
 
     def unfreeze_language_tail(self, layer_count: int = 1) -> None:
