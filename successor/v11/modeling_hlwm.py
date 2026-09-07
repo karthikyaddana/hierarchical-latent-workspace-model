@@ -187,6 +187,21 @@ class HLWMConfig:
     vocab_grounded_thoughts: bool = False
     # Softmax temperature of the vocabulary bottleneck.
     vocab_thought_tau: float = 1.0
+    # Version 11.1 adapter family for the shared language sidecars:
+    #   "lora"  -- the v10 zero-init residual sidecar, unchanged;
+    #   "dora"  -- DoRA (arXiv:2402.09353): trained magnitude times the
+    #              row-normalized direction of (W + s*BA); exact identity at
+    #              init (m = ||W||_row, BA = 0);
+    #   "pissa" -- PiSSA-init, residual-compatible variant (arXiv:2404.02948):
+    #              A,B initialized from the top-r SVD of the frozen W and the
+    #              sidecar returns s*(BAx - B0A0x) with frozen B0A0 buffers,
+    #              so the delta is exactly zero at init and the pinned base is
+    #              never modified (true PiSSA replaces the base with a
+    #              residual, which this record's checkpoint format cannot
+    #              reconstruct). Weight decay acts around B0A0, not 0.
+    # Routed family experts keep plain LoRA in every mode (their nonzero-init
+    # gradient-race semantics are load-bearing, v5.6.2).
+    adapter_mode: str = "lora"
     # Per-layer key/value slot count (m): thought states are attention-pooled
     # into m shared slot states and projected by factorized per-layer heads
     # into K/V slots appended at every attention layer.  Slots never pass
@@ -287,6 +302,8 @@ class HLWMConfig:
                     raise ValueError("response cue token %d is outside the vocabulary" % token_id)
         if self.latent_thoughts < 0:
             raise ValueError("latent_thoughts cannot be negative")
+        if self.adapter_mode not in ("lora", "dora", "pissa"):
+            raise ValueError("adapter_mode must be one of lora, dora, pissa")
         if self.kv_prefix_slots < 0:
             raise ValueError("kv_prefix_slots cannot be negative")
         if self.kv_prefix_slots > 0 and self.kv_prefix_rank <= 0:
@@ -427,10 +444,11 @@ class QwenSelfAttention(nn.Module):
         self.v_proj = nn.Linear(config.hidden_size, kv_width, bias=config.attention_bias)
         self.o_proj = nn.Linear(q_width, config.hidden_size, bias=config.attention_bias)
         rank = config.lora_rank if enable_lora else 0
-        self.q_lora = LoRAResidual(config.hidden_size, q_width, rank, config.lora_alpha, config.lora_dropout)
-        self.k_lora = LoRAResidual(config.hidden_size, kv_width, rank, config.lora_alpha, config.lora_dropout)
-        self.v_lora = LoRAResidual(config.hidden_size, kv_width, rank, config.lora_alpha, config.lora_dropout)
-        self.o_lora = LoRAResidual(q_width, config.hidden_size, rank, config.lora_alpha, config.lora_dropout)
+        adapter_mode = getattr(config, "adapter_mode", "lora")
+        self.q_lora = LoRAResidual(config.hidden_size, q_width, rank, config.lora_alpha, config.lora_dropout, mode=adapter_mode)
+        self.k_lora = LoRAResidual(config.hidden_size, kv_width, rank, config.lora_alpha, config.lora_dropout, mode=adapter_mode)
+        self.v_lora = LoRAResidual(config.hidden_size, kv_width, rank, config.lora_alpha, config.lora_dropout, mode=adapter_mode)
+        self.o_lora = LoRAResidual(q_width, config.hidden_size, rank, config.lora_alpha, config.lora_dropout, mode=adapter_mode)
         self.q_norm = RMSNorm(self.head_dim, config.rms_norm_eps) if config.use_qk_norm else None
         self.k_norm = RMSNorm(self.head_dim, config.rms_norm_eps) if config.use_qk_norm else None
         self.rotary = RotaryEmbedding(self.head_dim, config.rope_theta)
@@ -497,6 +515,10 @@ class QwenSelfAttention(nn.Module):
             query_projection = query_projection + self.q_lora(hidden).to(query_projection.dtype)
             key_projection = key_projection + self.k_lora(hidden).to(key_projection.dtype)
             value_projection = value_projection + self.v_lora(hidden).to(value_projection.dtype)
+            if self.q_lora.mode == "dora":
+                query_projection = query_projection * self.q_lora.dora_gain(self.q_proj.weight)
+                key_projection = key_projection * self.k_lora.dora_gain(self.k_proj.weight)
+                value_projection = value_projection * self.v_lora.dora_gain(self.v_proj.weight)
         query = query_projection.view(batch, length, self.num_heads, self.head_dim).transpose(1, 2)
         key = key_projection.view(batch, length, self.num_key_value_heads, self.head_dim).transpose(1, 2)
         value = value_projection.view(batch, length, self.num_key_value_heads, self.head_dim).transpose(1, 2)
@@ -577,6 +599,8 @@ class QwenSelfAttention(nn.Module):
         projected = self.o_proj(attended)
         if self.o_lora.enabled:
             projected = projected + self.o_lora(attended).to(projected.dtype)
+            if self.o_lora.mode == "dora":
+                projected = projected * self.o_lora.dora_gain(self.o_proj.weight)
         attended = projected
         query_valid = attention_mask[:, past_length:]
         attended = attended * query_valid.unsqueeze(-1).to(attended.dtype)
@@ -604,10 +628,12 @@ class LoRAResidual(nn.Module):
         dropout: float,
         *,
         nonzero_init: bool = False,
+        mode: str = "lora",
     ) -> None:
         super().__init__()
         self.enabled = rank > 0
         self.scale = float(alpha) / max(1, rank)
+        self.mode = mode if self.enabled else "lora"
         self.dropout = nn.Dropout(dropout)
         if self.enabled:
             self.down = nn.Linear(input_width, rank, bias=False)
@@ -620,12 +646,64 @@ class LoRAResidual(nn.Module):
         else:
             self.down = None
             self.up = None
+        if self.enabled and self.mode == "dora":
+            # DoRA magnitude (arXiv:2402.09353): one scalar per output row.
+            # 1-D, so the optimizer's no-decay group picks it up (the same
+            # exemption that protects the prefix gates), and it lives inside
+            # LoRAResidual so unfreeze_language_adapters unfreezes it.
+            # init_from_base() must run after the substrate transplant.
+            self.magnitude = nn.Parameter(torch.ones(output_width))
+        if self.enabled and self.mode == "pissa":
+            # Frozen principal-init reference (PiSSA, arXiv:2404.02948,
+            # residual-compatible variant): the sidecar contributes
+            # s*(BAx - B0A0x), exactly zero at init.
+            self.register_buffer("pissa_down0", torch.zeros(rank, input_width))
+            self.register_buffer("pissa_up0", torch.zeros(output_width, rank))
+
+    @torch.no_grad()
+    def init_from_base(self, base_weight: Tensor) -> None:
+        """Initialize decomposition state from the (transplanted) base weight."""
+        if not self.enabled or self.mode == "lora":
+            return
+        weight = base_weight.detach().float()
+        if self.mode == "dora":
+            delta = (self.up.weight.float() @ self.down.weight.float()) * self.scale
+            self.magnitude.copy_((weight + delta).norm(dim=1).clamp_min(1.0e-8))
+        elif self.mode == "pissa":
+            rank = self.down.weight.shape[0]
+            # Fast randomized top-r SVD (the PiSSA paper's practical variant).
+            u, sv, v = torch.svd_lowrank(weight, q=min(rank + 16, min(weight.shape)), niter=4)
+            u, sv, v = u[:, :rank], sv[:rank], v[:, :rank]
+            # s * B0 A0 must equal the principal part, so fold 1/s into the init.
+            root = (sv / self.scale).clamp_min(0.0).sqrt()
+            self.down.weight.copy_((root[:, None] * v.t()).to(self.down.weight.dtype))
+            self.up.weight.copy_((u * root[None, :]).to(self.up.weight.dtype))
+            self.pissa_down0.copy_(self.down.weight.detach())
+            self.pissa_up0.copy_(self.up.weight.detach())
+
+    def dora_gain(self, base_weight: Tensor) -> Tensor:
+        """m / ||W + s*BA||_row -- multiply the combined site output by this."""
+        delta = (self.up.weight.float() @ self.down.weight.float()) * self.scale
+        norm = (base_weight.detach().float() + delta).norm(dim=1).clamp_min(1.0e-8)
+        return (self.magnitude.float() / norm).to(base_weight.dtype)
 
     def forward(self, hidden: Tensor) -> Tensor:
         if not self.enabled or self.down is None or self.up is None:
             raise RuntimeError("disabled LoRA sidecar cannot execute")
         working = self.dropout(hidden).to(self.down.weight.dtype)
-        return self.up(self.down(working)) * self.scale
+        output = self.up(self.down(working))
+        if self.mode == "pissa":
+            # The frozen reference is a buffer, so a `model.to(bf16)` on the
+            # substrate casts it while the trainable factors are restored to
+            # fp32 (the runtime regime: reduced-precision base, fp32
+            # trainables). Match the working dtype at use rather than assume
+            # the buffer survived that split.
+            reference = F.linear(
+                F.linear(working, self.pissa_down0.to(working.dtype)),
+                self.pissa_up0.to(working.dtype),
+            )
+            output = output - reference
+        return output * self.scale
 
 
 class QwenMLP(nn.Module):
@@ -641,9 +719,10 @@ class QwenMLP(nn.Module):
             config.intermediate_size, config.hidden_size, bias=config.mlp_bias
         )
         rank = config.lora_rank if enable_lora else 0
-        self.gate_lora = LoRAResidual(config.hidden_size, config.intermediate_size, rank, config.lora_alpha, config.lora_dropout)
-        self.up_lora = LoRAResidual(config.hidden_size, config.intermediate_size, rank, config.lora_alpha, config.lora_dropout)
-        self.down_lora = LoRAResidual(config.intermediate_size, config.hidden_size, rank, config.lora_alpha, config.lora_dropout)
+        adapter_mode = getattr(config, "adapter_mode", "lora")
+        self.gate_lora = LoRAResidual(config.hidden_size, config.intermediate_size, rank, config.lora_alpha, config.lora_dropout, mode=adapter_mode)
+        self.up_lora = LoRAResidual(config.hidden_size, config.intermediate_size, rank, config.lora_alpha, config.lora_dropout, mode=adapter_mode)
+        self.down_lora = LoRAResidual(config.intermediate_size, config.hidden_size, rank, config.lora_alpha, config.lora_dropout, mode=adapter_mode)
         if config.mlp_expert_count > 0 and enable_lora:
             # Version 10.0 family-routed experts: sequence-level deterministic
             # routing from gold family labels, so collapse is impossible by
@@ -672,10 +751,15 @@ class QwenMLP(nn.Module):
         if self.gate_lora.enabled:
             gate = gate + self.gate_lora(hidden).to(gate.dtype)
             up = up + self.up_lora(hidden).to(up.dtype)
+            if self.gate_lora.mode == "dora":
+                gate = gate * self.gate_lora.dora_gain(self.gate_proj.weight)
+                up = up * self.up_lora.dora_gain(self.up_proj.weight)
         activated = F.silu(gate) * up
         output = self.down_proj(activated)
         if self.down_lora.enabled:
             output = output + self.down_lora(activated).to(output.dtype)
+            if self.down_lora.mode == "dora":
+                output = output * self.down_lora.dora_gain(self.down_proj.weight)
         if self.mlp_experts is not None and route_index is not None:
             if route_index.shape[0] != hidden.shape[0]:
                 raise ValueError("route_index must supply one expert id per row")
@@ -1519,6 +1603,7 @@ class HLWMForConditionalGeneration(nn.Module):
         self.commitment_head = nn.Sequential(
             nn.Linear(width * 2 + 2, width), nn.SiLU(), nn.Linear(width, 3)
         )
+        self.initialize_adapter_decomposition()
 
     def get_input_embeddings(self) -> nn.Embedding:
         return self.backbone.embed_tokens
@@ -1531,6 +1616,27 @@ class HLWMForConditionalGeneration(nn.Module):
 
     def gradient_checkpointing_disable(self) -> None:
         self.backbone.gradient_checkpointing_disable()
+
+    def initialize_adapter_decomposition(self) -> None:
+        """Set DoRA magnitudes / PiSSA principal inits from the current base.
+
+        Must run once after construction (random base: keeps tiny tests exact)
+        and AGAIN after the Qwen transplant (real base). Checkpoint loading
+        then overwrites the trainable state for resumes, and the PiSSA
+        reference buffers ride along in the state dict.
+        """
+        if getattr(self.config, "adapter_mode", "lora") == "lora":
+            return
+        for layer in self.backbone.layers:
+            attn, mlp = layer.self_attn, layer.mlp
+            for proj, lora in (
+                (attn.q_proj, attn.q_lora), (attn.k_proj, attn.k_lora),
+                (attn.v_proj, attn.v_lora), (attn.o_proj, attn.o_lora),
+                (mlp.gate_proj, mlp.gate_lora), (mlp.up_proj, mlp.up_lora),
+                (mlp.down_proj, mlp.down_lora),
+            ):
+                if lora.enabled:
+                    lora.init_from_base(proj.weight)
 
     def freeze_language_substrate(self) -> None:
         """Freeze transplanted Qwen weights while leaving HLWM modules trainable.
@@ -3914,6 +4020,7 @@ class HLWMForConditionalGeneration(nn.Module):
         cls._copy_parameter(
             model.lm_head.weight, output_embeddings.weight, "lm_head.weight"
         )
+        model.initialize_adapter_decomposition()
         return model
 
     @classmethod

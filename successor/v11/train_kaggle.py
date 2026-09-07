@@ -124,6 +124,12 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--vocab-thought-tau", type=float, default=1.0)
     parser.add_argument(
+        "--adapter", choices=("lora", "dora", "pissa"), default="lora",
+        help="Version 11.1 shared-sidecar family: DoRA (arXiv:2402.09353) or "
+        "PiSSA-init residual variant (arXiv:2404.02948). Routed family "
+        "experts stay plain LoRA in every mode. Default reproduces v10.",
+    )
+    parser.add_argument(
         "--incontext-decode-weight", type=float, default=0.5,
         help="Weight of the in-context aligned decode CE on the student's "
         "segment logits (frozen lm_head over thought positions in the masked "
@@ -2577,6 +2583,7 @@ def main() -> None:
         # Version 10.0 dense-supervision channel (all zero-default = v9).
         "latent_thoughts": args.latent_thoughts,
         "vocab_grounded_thoughts": bool(getattr(args, "vocab_grounded_thoughts", False)),
+        "adapter_mode": str(getattr(args, "adapter", "lora")),
         "vocab_thought_tau": float(getattr(args, "vocab_thought_tau", 1.0)),
         "kv_prefix_slots": args.kv_prefix_slots if args.latent_thoughts > 0 else 0,
         "kv_prefix_rank": args.kv_prefix_rank,
